@@ -1,0 +1,92 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+@font-face {
+  font-family: Metropolis;
+  src: url(/fonts/Metropolis-Regular.otf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url(/fonts/Metropolis-Medium.otf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url(/fonts/Metropolis-Bold.otf);
+  font-weight: 700;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,800;1,200;1,700;1,800&display=swap');
+
+html {
+  font-size: 14px
+}
+
+html,
+body {
+  @apply bg-background text-white;
+}
+
+body {
+  overflow-x: hidden;
+  /* @apply bg-image; */
+}
+
+
+input, textarea {
+  @apply rounded bg-gray px-6 py-3;
+}
+
+a {
+  @apply text-primary-500 hover:text-primary-400 hover:underline;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.transform-center {
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+
+@layer components {
+  .btn {
+    @apply uppercase px-6 py-3 font-bold text-gray-700 bg-white rounded hover:bg-gray-200 hover:no-underline hover:text-gray-700;
+  }
+  .btn-primary {
+    @apply text-white bg-primary-500 hover:bg-primary-600 hover:text-white;
+  }
+  .btn-error {
+    @apply text-white bg-red hover:opacity-75 hover:bg-red hover:text-white;
+  }
+  .error {
+    @apply block text-red text-sm;
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    @apply opacity-50;
+  }
+}
+
+.inset-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
