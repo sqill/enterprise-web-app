@@ -7,6 +7,17 @@ module.exports = {
       // serif: ['Merriweather', 'serif'],
     },
     extend: {
+      fontFamily: {
+        'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
+        'body': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
+        'mono': ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace']
+      },
+      transitionProperty: {
+        'width': 'width'
+      },
+      minWidth: {
+        '20': '20rem'
+      },
       colors: {
         'accent-1': '#333',
         primary: {
@@ -22,17 +33,10 @@ module.exports = {
           '900': '#146a4f'
         },
         green: '#28D8A1',
-        red: '#F9274D',
+        // red: '#F9274D',
         yellow: '#F6AA1C',
         textGray: '#868686',
         secondWhite: '#E3E3E3',
-        gray: {
-          // darkest: '#1f2d3d',
-          // dark: '#3c4858',
-          DEFAULT: '#29292C',
-          light: '#9D9DA4',
-          lightest: '#EBEBEB',
-        },
         background: '#121212',
         backgroundLight: '#F9F9F9'
       },
@@ -49,6 +53,9 @@ module.exports = {
   variants: {
     extend: {},
   },
+  plugins: [
+    require('@themesberg/flowbite/plugin')
+  ]
   // corePlugins: {
   //   container: false
   // },

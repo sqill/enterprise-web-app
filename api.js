@@ -1,7 +1,7 @@
 import denormalize from '@weareredlight/denormalize_json_api'
 
 import AppConsts from './constants'
-
+import { storeAccessToken, getAccessToken, deleteAuth } from './utils'
 
 const objectToQueryParams = params => params
   ? Object.keys(params).map(key => `${key}=${params[key]}`).join('&')
@@ -13,12 +13,23 @@ const objectToQueryParams = params => params
 // ##     Auth
 // ##
 
-export const login = async data => {
-  const res = await request('POST', 'v0/users/sign_in', data)
+export const login = async (email, password) => {
+  const data = {
+    api_enterprise_user: { email, password }
+  }
+  const res = await request('POST', 'enterprise/users/sign_in', data)
   if (res.success) {
-    await storeAccessToken({
-      token: res.data.authentication_token, email: data.api_v0_user.email
+    storeAccessToken({
+      token: res.data.authentication_token, email
     })
+  }
+  return res
+}
+
+export const logout = async () => {
+  const res = await request('DELETE', 'enterprise/users/sign_out', data)
+  if (res.success) {
+    deleteAuth()
   }
   return res
 }
@@ -31,11 +42,26 @@ export const updatePassword = (password, confirmation, reset_password_token) => 
       reset_password_token
     }
   }
-  return request('PUT', 'v0/users/password', data)
+  return request('PUT', 'enterprise/users/password', data)
 }
 
-export const requestPasswordReset = data => request('POST', 'v0/users/password', data, true)
+export const requestPasswordReset = data => request('POST', 'enterprise/users/password', data, true)
 
+export const getCurrentUser = () => request('GET', 'enterprise/users/me')
+
+
+// ##################################
+// ##
+// ##     Enterprise signup
+// ##
+export const signup = params => request('POST', 'enterprise/company', params)
+
+
+// ##################################
+// ##
+// ##     Finders
+// ##
+export const getFinders = id => request('GET', 'enterprise/finders')
 
 
 export const getPlayer = id => request('GET', `v0/players/${id}`)
@@ -65,6 +91,7 @@ export const getSportDetails = (sportId = 1) => request('GET', `v0/sports/${spor
 // ##
 
 const request = async (method, endpoint, body) => {
+  const authCreds = getAccessToken();
   const options = {
     headers: new Headers([
       ['Content-Type', 'application/json'],
@@ -72,6 +99,12 @@ const request = async (method, endpoint, body) => {
     ]),
     method,
   }
+
+  if (authCreds) {
+    options.headers.set('X-USER-EMAIL', authCreds.email)
+    options.headers.set('X-USER-TOKEN', authCreds.token)
+  }
+
   let queryParams = ''
   if (body && method !== 'GET') options.body = JSON.stringify(body)
   if (method === 'GET' && body) {

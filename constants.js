@@ -1,7 +1,5 @@
 export default {
   BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
-  MAX_LENGTH_VIDEO: 15,
-  VIDEO_WATCH_TIME_PERCENTAGE: 25,
   finderType: [
     { id: 1, value: 'coach', name: 'Coach' },
     { id: 2, value: 'sport_director', name: 'Sport director' },

@@ -28,10 +28,10 @@ export default function DownloadAppModal() {
             Or download directly from the stores:
           </p>
           <div className="flex flex-col justify-center mt-8 sm:flex-row mx-auto">
-            <a className="sm:mr-10 mb-4 mx-auto" href={AppConsts.PLAY_STORE_URL} target="_blank">
+            <a className="sm:mr-10 mb-4 mx-auto" href={AppConsts.PLAY_STORE_URL} target="_blank" rel="noreferrer">
               <img src="/images/google_play.png" />
             </a>
-            <a className="text-center mx-auto" href={AppConsts.APP_STORE_URL} target="_blank">
+            <a className="text-center mx-auto" href={AppConsts.APP_STORE_URL} target="_blank" rel="noreferrer">
               <img src="/images/app_store.svg" style={{ height: 46 }} />
             </a>
           </div>

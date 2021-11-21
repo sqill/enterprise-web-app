@@ -1,4 +1,3 @@
-import React from 'react'
 
 const options = { month: "long", day: "numeric", year: "numeric" };
 const locale = Intl.DateTimeFormat().resolvedOptions().locale;
@@ -21,4 +20,20 @@ export function isIos() {
 
 export function isBrowser() {
   return typeof window !== 'undefined'
+}
+
+export function deleteAuth() {
+  localStorage.removeItem('auth-creds')
+}
+
+export function storeAccessToken({ token, email }) {
+  localStorage.setItem('auth-creds', JSON.stringify({ token, email }));
+}
+
+export function getAccessToken() {
+  try {
+    return JSON.parse(localStorage.getItem('auth-creds'))
+  } catch(e) {
+    return null;
+  }
 }

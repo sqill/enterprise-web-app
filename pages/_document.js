@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+// import '@themesberg/flowbite';
 
-import { injectgTagScript, injectLfTracker } from '../gtag'
+import { injectgTagScript, injectLfTracker } from '../analytics'
 
 
 class MyDocument extends Document {
