@@ -1,32 +1,56 @@
+
 import Link from 'next/link'
 import Image from 'next/image'
-import FaTwitter from '@meronex/icons/fa/FaTwitter';
-import FaInstagram from '@meronex/icons/fa/FaInstagram';
-import FaGooglePlay from '@meronex/icons/fa/FaGooglePlay';
-import FaAppStore from '@meronex/icons/fa/FaAppStore';
-import ReactCountryFlag from 'react-country-flag'
 import { useRouter } from 'next/router'
 
-import AppConsts from '../../constants'
+import { useStore } from '../../lib/store'
+import React from 'react'
+import Popper from '../Popper';
 
-const links = [
-  // { href: '/', label: 'Home' },
-  // { href: '/athletes', label: 'athletes' },
-  // { href: '/finders', label: 'finders' },
-  // { href: '/fans', label: 'fans' },
-  // { href: '/about', label: 'about us' },
-  { href: 'https://twitter.com/sqill_app', label: 'Twitter', icon: FaTwitter },
-  { href: 'https://www.instagram.com/sqill_app', label: 'Instagram', icon: FaInstagram },
-  { href: AppConsts.PLAY_STORE_URL, label: 'Play Store', icon: FaGooglePlay },
-  { href: AppConsts.APP_STORE_URL, label: 'App Store', icon: FaAppStore }
-]
+import { logout } from '../../api'
+
+function Drop({ user, onLogout }) {
+  return (
+    <div className="block bg-white text-base list-none divide-y divide-gray-100 rounded shadow">
+      <div className="px-4 py-3">
+        <span className="block text-sm font-medium text-gray-900 font-bold">Company</span>
+        <span className="block text-sm">{user.entity.company.name}</span>
+      </div>
+      <div className="px-4 py-3">
+        <span className="block text-sm">{user.entity.full_name}</span>
+        <span className="block text-sm font-medium text-gray-900 truncate">{user.email}</span>
+      </div>
+      <ul className="py-1" aria-labelledby="dropdown">
+        <li>
+          <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Dashboard</a>
+        </li>
+        <li>
+          <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Settings</a>
+        </li>
+        <li>
+          <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Earnings</a>
+        </li>
+        <li>
+          <button onClick={onLogout} className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 w-full text-left">Sign out</button>
+        </li>
+      </ul>
+    </div>
+  )
+}
+
 
 export default function Nav() {
 	const router = useRouter()
+  const { auth: { user }, setCurrentUser } = useStore()
+
+  async function doLogout() {
+    await logout();
+    setCurrentUser(null)
+  }
 
   return (
-    <nav className="bg-white border-b border-gray-200 fixed z-30 w-full">
-      <div className="px-3 py-3 lg:px-5 lg:pl-3">
+    <nav className="bg-white border-b border-gray-200 fixed z-30 w-full h-16">
+      <div className="px-3 py-3 lg:px-5 lg:pl-3 h-16">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
             <button id="toggleSidebarMobile" aria-expanded="true" aria-controls="sidebar" className="lg:hidden mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded">
@@ -34,23 +58,19 @@ export default function Nav() {
               <svg id="toggleSidebarMobileClose" className="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
             </button>
             <a href="" className="text-xl font-bold flex items-center lg:ml-2.5">
-              <img src="/images/logo.svg" className="h-6 mr-2" alt="Windster Logo" />
-              <span className="self-center whitespace-nowrap">Windster</span>
+              <img src="/images/logo_circle.svg" className="h-6 mr-2" alt="Windster Logo" />
+              <span className="self-center whitespace-nowrap">Enterprise</span>
             </a>
           </div>
           <div className="flex items-center">
+            <Popper content={() => <Drop user={user} onLogout={doLogout} />}>
+              <div className="mr-3 md:mr-0 flex text-sm rounded-full p-1 items-center hover:bg-gray-100" aria-expanded="false">
+                <span className="ml-2">{user.entity.full_name}</span>
+                <img className="ml-2 h-8 w-8 rounded-full" src={user.entity.avatar?.thumb} alt="user photo" />
+              </div>
 
-              <button id="toggleSidebarMobileSearch" type="button" className="lg:hidden text-gray-500 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-lg">
-                <span className="sr-only">Search</span>
-
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
-              </button>
-
-              <a href="" className="hidden sm:inline-flex ml-5 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3">
-                  <svg className="svg-inline--fa fa-gem -ml-1 mr-2 h-4 w-4" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="gem" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M378.7 32H133.3L256 182.7L378.7 32zM512 192l-107.4-141.3L289.6 192H512zM107.4 50.67L0 192h222.4L107.4 50.67zM244.3 474.9C247.3 478.2 251.6 480 256 480s8.653-1.828 11.67-5.062L510.6 224H1.365L244.3 474.9z"></path></svg>
-                  Upgrade to Pro
-              </a>
-            </div>
+            </Popper>
+          </div>
         </div>
       </div>
     </nav>

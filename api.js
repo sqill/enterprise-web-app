@@ -27,7 +27,7 @@ export const login = async (email, password) => {
 }
 
 export const logout = async () => {
-  const res = await request('DELETE', 'enterprise/users/sign_out', data)
+  const res = await request('DELETE', 'enterprise/users/sign_out')
   if (res.success) {
     deleteAuth()
   }

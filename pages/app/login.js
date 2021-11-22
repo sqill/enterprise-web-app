@@ -29,7 +29,7 @@ export default function Login() {
     const res = await getCurrentUser();
 
     if (res?.success)
-      setCurrentUser(res)
+      setCurrentUser(res.data.data)
     else
       setCurrentUser(null)
 

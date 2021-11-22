@@ -9,6 +9,7 @@ import LoginWrapper from '../components/LoginWrapper'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
+
   useEffect(() => {
     router.events.on('routeChangeComplete', pageview)
     return () => {

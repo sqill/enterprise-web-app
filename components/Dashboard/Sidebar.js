@@ -1,5 +1,6 @@
-
 import React from 'react'
+import Link from 'next/link'
+
 
 export default function Sidebar() {
   return (
@@ -9,20 +10,26 @@ export default function Sidebar() {
           <div className="flex-1 px-3 bg-white divide-y space-y-1">
             <ul className="space-y-2 pb-2">
               <li>
-                <a href="" className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
+                <Link href="/app">
+                  <a className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
                     <span className="ml-3">Dashboard</span>
-                </a>
+                  </a>
+                </Link>
               </li>
               <li>
-                <a href="" className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                  <span className="ml-3 flex-1 whitespace-nowrap">Users</span>
-                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
-                </a>
+                <Link href="/app/users">
+                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                    <span className="ml-3 flex-1 whitespace-nowrap">Users</span>
+                    <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
+                  </a>
+                </Link>
               </li>
               <li>
-                <a href="" className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                  <span className="ml-3 flex-1 whitespace-nowrap">Products</span>
-                </a>
+                <Link href="/app/users">
+                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                    <span className="ml-3 flex-1 whitespace-nowrap">Products</span>
+                  </a>
+                </Link>
               </li>
             </ul>
             <div className="space-y-2 pt-2">
