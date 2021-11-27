@@ -44,7 +44,7 @@ const CustomInputComponent = ({ field, form: { touched, errors }, title, IconCla
         <input type="text" className={inputClassName} {...field} {...props} />
       </div>
 
-      {hasError && <p className="mt-2 text-sm text-red-600">{errors[field.name]}</p>}
+      {/* {hasError && <p className="mt-2 text-sm text-red-600">{errors[field.name]}</p>} */}
     </React.Fragment>
   );
 }
@@ -68,7 +68,7 @@ const CustomSelectComponent = ({ field, form: { touched, errors }, options, Icon
         </select>
       </div>
 
-      {hasError && <p className="mt-2 text-sm text-red-600">{errors[field.name]}</p>}
+      {/* {hasError && <p className="mt-2 text-sm text-red-600">{errors[field.name]}</p>} */}
     </React.Fragment>
   );
 }
