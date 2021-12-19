@@ -29,9 +29,6 @@ export default function IndexPage() {
       </Head>
       <div className="container">
         <div className="text-center">
-          {/* <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
-            Quick<span className="text-indigo-600">Toolz</span>
-          </h2> */}
           <Image  src="/images/logo_color.svg" alt="sqill logo" width="213" height="70" />
           <h5 className='text-xl md:text-3xl mt-1'>Enterprise</h5>
           <p className="text-md md:text-xl mt-10">

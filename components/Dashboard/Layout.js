@@ -14,7 +14,7 @@ export default function DashboardLayout(props) {
           <main>
             {props.children}
           </main>
-          <Footer />
+          {!props.hideFooter && <Footer />}
         </div>
       </div>
     </React.Fragment>

@@ -20,7 +20,7 @@ export default function Users() {
 
   return (
     <DashboardLayout>
-      <UsersHeader />
+      {/* <UsersHeader /> */}
       <UsersList list={list} />
       <UsersFooter list={list} />
     </DashboardLayout>

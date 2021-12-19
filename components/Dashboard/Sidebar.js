@@ -25,9 +25,9 @@ export default function Sidebar() {
                 </Link>
               </li>
               <li>
-                <Link href="/app/users">
+                <Link href="/app/send2sqill">
                   <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                    <span className="ml-3 flex-1 whitespace-nowrap">Products</span>
+                    <span className="ml-3 flex-1 whitespace-nowrap">send2sqill</span>
                   </a>
                 </Link>
               </li>

@@ -67,7 +67,25 @@ export const getFinders = id => request('GET', 'enterprise/finders')
 export const getPlayer = id => request('GET', `v0/players/${id}`)
 
 export const searchPlayers = (filters) => request('POST', 'v0/players/search', filters)
-export const autocompletePlayers = (q) => request('GET', 'v0/players/autocomplete', { q })
+export const autocompletePlayers = (q) => request('GET', 'search-players', { q })
+
+
+// ##################################
+// ##
+// ##     send2sqill
+// ##
+
+export const mediaFinder = (source_url, referer = null) =>
+  request('POST', 'send2sqill/media-finder/', { source_url, referer })
+
+export const generateDraft = (draft) =>
+  request('POST', 'send2sqill/drafts/', { draft })
+
+export const updateDraft = (id, draft) =>
+  request('PUT', `send2sqill/drafts/${id}`, { draft })
+
+export const generateDraftS3Upload = (id, filename) =>
+  request('POST', `send2sqill/drafts/${id}/generate_s3_upload`, { filename })
 
 
 // ##################################
