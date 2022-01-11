@@ -8,7 +8,7 @@ function UserRow({ avatar, user, full_name, finder_type, country_code, company_r
           <img className="h-10 w-10 rounded-full" src={avatar.thumb} alt="Name avatar" />
           <div className="text-sm font-normal text-gray-500">
               <div className="text-base font-semibold text-gray-900">{full_name}</div>
-              <div className="text-sm font-normal text-gray-500">{user.email}</div>
+              <div className="text-sm font-normal text-gray-500">{user?.email}</div>
           </div>
       </td>
       <td className="p-4 whitespace-nowrap text-base font-medium text-gray-900">{finder_type}</td>
@@ -17,10 +17,10 @@ function UserRow({ avatar, user, full_name, finder_type, country_code, company_r
       </td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{company_role}</td>
       <td className="p-4 whitespace-nowrap space-x-2">
-        <button type="button" data-modal-toggle="delete-user-modal" className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
+        {/* <button type="button" data-modal-toggle="delete-user-modal" className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
           <MdcTrashCanOutline className="text-xl mr-1" />
           Remove user
-        </button>
+        </button> */}
       </td>
     </tr>
   )

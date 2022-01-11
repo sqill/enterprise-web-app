@@ -19,7 +19,7 @@ export default function Users() {
   }, [])
 
   return (
-    <DashboardLayout>
+    <DashboardLayout hideFooter>
       {/* <UsersHeader /> */}
       <UsersList list={list} />
       <UsersFooter list={list} />

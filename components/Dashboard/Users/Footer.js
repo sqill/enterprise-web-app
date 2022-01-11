@@ -1,7 +1,9 @@
 import MdChevronRight from '@meronex/icons/md/MdChevronRight';
 import MdChevronLeft from '@meronex/icons/md/MdChevronLeft';
 
-export default function UsersHeader() {
+export default function UsersFooter() {
+  return null;
+
   return (
     <div className="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
         <div className="flex items-center mb-4 sm:mb-0">
