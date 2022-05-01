@@ -10,13 +10,6 @@ export default function Sidebar() {
           <div className="flex-1 px-3 bg-white divide-y space-y-1">
             <ul className="space-y-2 pb-2">
               <li>
-                <Link href="/app">
-                  <a className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
-                    <span className="ml-3">Dashboard</span>
-                  </a>
-                </Link>
-              </li>
-              <li>
                 <Link href="/app/users">
                   <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
                     <span className="ml-3 flex-1 whitespace-nowrap">Users</span>

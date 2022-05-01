@@ -6,6 +6,7 @@ import { useStore } from '../../lib/store'
 import { getCurrentUser } from '../../api'
 
 import LoginForm from '../../components/Auth/LoginForm';
+import Link from 'next/link'
 
 const authSelector = state => state.auth
 const setCurrentUserSelector = state => state.setCurrentUser
@@ -46,6 +47,11 @@ export default function Login() {
           </div>
           <div>
             <LoginForm onSuccess={handleSuccess} />
+          </div>
+          <div className="mt-4">
+            <p>
+              No account? Get access <Link href="/signup"><a className="font-bold text-primary-700">here</a></Link>.
+            </p>
           </div>
         </div>
       </div>

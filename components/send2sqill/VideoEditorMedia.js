@@ -29,7 +29,7 @@ export default function VideoEditorMedia({ file, afterComplete, foundMedia, mode
   const [duration, setDuration] = useState(DEFAULT_TRIM_DURATION)
   const videoPlayer = React.useRef(null);
   const [trims, setTrims] = useState([])
-  const [player, setPlayer] = useState()
+  const [user, setUser] = useState()
   const [progress, setProgress] = useState({})
   const [isFileUploaded, setFileUploaded] = useState(false)
   const [draft, setDraft] = useState()
@@ -94,8 +94,8 @@ export default function VideoEditorMedia({ file, afterComplete, foundMedia, mode
       return
     }
 
-    if (!player) {
-      alert("You must select a player to send the sqills to")
+    if (!user) {
+      alert("You must select a user to send the sqills to")
       return
     }
 
@@ -103,7 +103,7 @@ export default function VideoEditorMedia({ file, afterComplete, foundMedia, mode
     const trim_durations = trims.map(t => t.end - t.start)
     const { success, data, error } = await updateDraft(
       draft.id,
-      { player_id: player.id, trim_start_points, trim_durations }
+      { user_id: user, trim_start_points, trim_durations }
     )
 
     if (success) {
@@ -115,11 +115,11 @@ export default function VideoEditorMedia({ file, afterComplete, foundMedia, mode
     }
   }
 
-  function onPlayerSelect(player) {
-    setPlayer(player)
+  function onUserSelect(user_id) {
+    setUser(user_id)
   }
 
-  const submitEnabled = player && trims.length > 0 && (file ? isFileUploaded : true)
+  const submitEnabled = user && trims.length > 0 && (file ? isFileUploaded : true)
 
   if (mode === 'advanced') {
     return (
@@ -137,7 +137,7 @@ export default function VideoEditorMedia({ file, afterComplete, foundMedia, mode
         removeTrim={removeTrim}
         trims={trims}
         progress={progress}
-        onPlayerSelect={onPlayerSelect}
+        onUserSelect={onUserSelect}
         handleTrimPress={handleTrimPress}
         manualTrimStart={manualTrimStart}
         setManualTrimStart={setManualTrimStart}
@@ -163,7 +163,7 @@ export default function VideoEditorMedia({ file, afterComplete, foundMedia, mode
         removeTrim={removeTrim}
         trims={trims}
         progress={progress}
-        onPlayerSelect={onPlayerSelect}
+        onUserSelect={onUserSelect}
         handleTrimPress={handleTrimPress}
         manualTrimStart={manualTrimStart}
         setManualTrimStart={setManualTrimStart}

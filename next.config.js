@@ -2,5 +2,13 @@
 module.exports = {
   images: {
     domains: ['sqill.s3.eu-west-3.amazonaws.com', 'heysqill.com', 'sqill-dev.s3.eu-west-3.amazonaws.com'],
-  }
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/app',
+        destination: '/app/users'
+      }
+    ]
+  },
 }

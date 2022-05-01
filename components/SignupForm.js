@@ -83,7 +83,7 @@ export default function SignupForm() {
     identify({ email: values.email })
     setSubmitting(false)
     if (res?.success) setFormState("finished")
-    else setStatus('An error occurred')
+    else setStatus(res?.error || "An error occurred")
   }
 
   if (formState === "finished") {

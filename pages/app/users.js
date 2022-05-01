@@ -8,11 +8,7 @@ import UsersList from "../../components/Dashboard/Users/List"
 import usersStore from '../../stores/users'
 
 export default function Users() {
-
-  const {
-    list,
-    fetch,
-  } = usersStore()
+  const { list, fetch } = usersStore()
 
   useEffect(() => {
     fetch()

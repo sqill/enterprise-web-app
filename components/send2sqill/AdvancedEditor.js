@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { uploadS3 } from '../../utils'
 import { generateDraftS3Upload } from '../../api'
 import ProgressBar from "../ProgressBar";
-import PlayerSearch from "../player/Autocomplete";
+import usersStore from '../../stores/users'
 
 function Trim({ id, start, end, onRemove }) {
   return (
@@ -52,7 +52,29 @@ function UploadProgress({ file, onUpload, draft }) {
   )
 }
 
-export default function AdvancedEditor({ videoPlayer, speed, foundMedia, setProgress, file, isFileUploaded, onDurationChange, setFileUploaded, draft, clearTrims, removeTrim, trims, progress, onPlayerSelect, handleTrimPress, manualTrimStart, setManualTrimStart, duration, submitEnabled, submit }) {
+function UserSelect({ onSelect }) {
+  const { list, fetch } = usersStore()
+
+  useEffect(() => {
+    if (list.size === 0) {
+      fetch()
+    }
+  }, [])
+
+  return (
+    <select
+      // value={this.state.selectValue}
+      onChange={e => onSelect(e.target.value)}
+    >
+      <option value="" disabled>-- Choose user --</option>
+      {list.map(finder => (
+        <option value={finder.user.id}>{finder.full_name} ({finder.user.email})</option>
+      ))}
+    </select>
+  )
+}
+
+export default function AdvancedEditor({ videoPlayer, speed, foundMedia, setProgress, file, isFileUploaded, onDurationChange, setFileUploaded, draft, clearTrims, removeTrim, trims, progress, onUserSelect, handleTrimPress, manualTrimStart, setManualTrimStart, duration, submitEnabled, submit }) {
   return (
     <div className="container">
       <div className="flex flex-row">
@@ -89,7 +111,7 @@ export default function AdvancedEditor({ videoPlayer, speed, foundMedia, setProg
             <button className="btn p-1 text-xs flex-grow h-full" onClick={() => handleTrimPress(manualTrimStart, true)}>Insert trim</button>
           </div>
 
-          <PlayerSearch onSelect={onPlayerSelect} />
+          <UserSelect onSelect={onUserSelect} />
           <button disabled={!submitEnabled} onClick={submit} className="btn btn-primary mt-4 w-full">
             Send 2 sqill!
           </button>
