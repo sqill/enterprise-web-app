@@ -68,7 +68,7 @@ function UserSelect({ onSelect }) {
     >
       <option value="" disabled>-- Choose user --</option>
       {list.map(finder => (
-        <option value={finder.user.id}>{finder.full_name} ({finder.user.email})</option>
+        <option key={finder.user.id} value={finder.user.id}>{finder.full_name} ({finder.user.email})</option>
       ))}
     </select>
   )
