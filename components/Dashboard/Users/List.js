@@ -5,7 +5,7 @@ function UserRow({ avatar, user, full_name, finder_type, country_code, company_r
   return (
     <tr className="hover:bg-gray-100">
       <td className="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-          <img className="h-10 w-10 rounded-full" src={avatar.thumb} alt="Name avatar" />
+          {avatar && <img className="h-10 w-10 rounded-full" src={avatar.thumb} alt="Name avatar" />}
           <div className="text-sm font-normal text-gray-500">
               <div className="text-base font-semibold text-gray-900">{full_name}</div>
               <div className="text-sm font-normal text-gray-500">{user?.email}</div>
