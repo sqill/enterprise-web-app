@@ -56,7 +56,7 @@ function UserSelect({ onSelect }) {
   const { list, fetch } = usersStore()
 
   useEffect(() => {
-    if (list.size === 0) {
+    if (list.length === 0) {
       fetch()
     }
   }, [])
@@ -66,7 +66,7 @@ function UserSelect({ onSelect }) {
       // value={this.state.selectValue}
       onChange={e => onSelect(e.target.value)}
     >
-      <option value="" disabled>-- Choose user --</option>
+      <option value="" disabled selected>-- Choose user --</option>
       {list.map(finder => (
         <option key={finder.user.id} value={finder.user.id}>{finder.full_name} ({finder.user.email})</option>
       ))}
