@@ -1,10 +1,13 @@
 import MdcTrashCanOutline from '@meronex/icons/mdc/MdcTrashCanOutline';
 import BiLinkExternal from '@meronex/icons/bi/BiLinkExternal';
 
-function AssetRow({ id, name, category, asset_type, asset_url, company_id, is_default, onRemove }) {
+function AssetRow({ id, name, category, asset_type, asset_url, asset_thumb_url, company_id, is_default, onRemove }) {
   return (
     <tr className="hover:bg-gray-100">
       <td className="p-4 whitespace-nowrap text-base font-medium text-gray-900">{id}</td>
+      <td className="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
+        <img className="h-10 w-10 rounded-full" src={asset_thumb_url} alt="thumbnail" />
+      </td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{name}</td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{category}</td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{asset_type}</td>
@@ -40,6 +43,9 @@ export default function AssetsList({ list, remove }) {
                   </th> */}
                   <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                     ID
+                  </th>
+                  <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                    Thumbnail
                   </th>
                   <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                     Name
