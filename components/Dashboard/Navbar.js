@@ -48,6 +48,8 @@ export default function Nav() {
     setCurrentUser(null)
   }
 
+  const avatar = user.entity.avatar?.thumb
+
   return (
     <nav className="bg-white border-b border-gray-200 fixed z-30 w-full h-16">
       <div className="px-3 py-3 lg:px-5 lg:pl-3 h-16">
@@ -66,7 +68,7 @@ export default function Nav() {
             <Popper content={() => <Drop user={user} onLogout={doLogout} />}>
               <div className="mr-3 md:mr-0 flex text-sm rounded-full p-1 items-center hover:bg-gray-100" aria-expanded="false">
                 <span className="ml-2">{user.entity.full_name}</span>
-                <img className="ml-2 h-8 w-8 rounded-full" src={user.entity.avatar?.thumb} alt="user photo" />
+                {avatar && <img className="ml-2 h-8 w-8 rounded-full" src={avatar} alt="user photo" />}
               </div>
 
             </Popper>

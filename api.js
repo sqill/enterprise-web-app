@@ -64,6 +64,15 @@ export const signup = params => request('POST', 'enterprise/company', params)
 export const getFinders = id => request('GET', 'enterprise/finders')
 
 
+// ##################################
+// ##
+// ##     Video Assets
+// ##
+export const getVideoAssets = () => request('GET', 'enterprise/video_editor_assets')
+export const createVideoAsset = (data) => request('POST', 'enterprise/video_editor_assets', data, true)
+export const removeVideoAsset = (id) => request('DELETE', `enterprise/video_editor_assets/${id}`)
+
+
 export const getPlayer = id => request('GET', `v0/players/${id}`)
 
 export const searchPlayers = (filters) => request('POST', 'v0/players/search', filters)
@@ -108,11 +117,50 @@ export const getSportDetails = (sportId = 1) => request('GET', `v0/sports/${spor
 // ##     Main function
 // ##
 
-const request = async (method, endpoint, body) => {
+function objectToFormData(obj, rootName, ignoreList) {
+  var formData = new FormData();
+
+  function appendFormData(data, root) {
+      if (!ignore(root)) {
+          root = root || '';
+          if (data instanceof File) {
+              formData.append(root, data);
+          } else if (Array.isArray(data)) {
+              for (var i = 0; i < data.length; i++) {
+                  appendFormData(data[i], root + '[' + i + ']');
+              }
+          } else if (typeof data === 'object' && data) {
+              for (var key in data) {
+                  if (data.hasOwnProperty(key)) {
+                      if (root === '') {
+                          appendFormData(data[key], key);
+                      } else {
+                          appendFormData(data[key], root + '[' + key + ']');
+                      }
+                  }
+              }
+          } else {
+              if (data !== null && typeof data !== 'undefined') {
+                  formData.append(root, data);
+              }
+          }
+      }
+  }
+
+  function ignore(root){
+      return Array.isArray(ignoreList)
+          && ignoreList.some(function(x) { return x === root; });
+  }
+
+  appendFormData(obj, rootName);
+
+  return formData;
+}
+
+const request = async (method, endpoint, body, multipart = false) => {
   const authCreds = getAccessToken();
   const options = {
     headers: new Headers([
-      ['Content-Type', 'application/json'],
       ['Accept', 'application/json']
     ]),
     method,
@@ -122,11 +170,15 @@ const request = async (method, endpoint, body) => {
     options.headers.set('X-USER-EMAIL', authCreds.email)
     options.headers.set('X-USER-TOKEN', authCreds.token)
   }
+  if (!multipart) {
+    options.headers.set('Content-Type', 'application/json')
+  }
 
   let queryParams = ''
-  if (body && method !== 'GET') options.body = JSON.stringify(body)
   if (method === 'GET' && body) {
     queryParams = `?${objectToQueryParams(body)}`
+  } else if (body) {
+    options.body = multipart ? objectToFormData(body) : JSON.stringify(body)
   }
 
   let response = {}
