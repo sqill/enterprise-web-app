@@ -7,11 +7,12 @@ import CustomSelectComponent from '../../Select'
 
 import { createVideoAsset } from '../../../api'
 
-function validateForm({ name, category, asset }) {
+function validateForm({ name, category, asset, asset_type, assets, fps }) {
   const errors = {};
   if (!category) errors.category = 'Required'
-  if (!asset) errors.asset = 'Required'
-
+  if (!asset && asset_type === "image") errors.asset = 'Required'
+  if (!assets && asset_type === "animation") errors.assets = 'Required'
+  if (!fps && asset_type === "animation") errors.fps = 'Required'
 
   return errors;
 }
@@ -19,6 +20,11 @@ function validateForm({ name, category, asset }) {
 const CATEGORIES = [
   { label: "Background", value: "background" },
   { label: "Foreground", value: "foreground" }
+]
+
+const ASSET_TYPES = [
+  { label: "Image", value: "image" },
+  { label: "Animation", value: "animation" }
 ]
 
 export default function CreateForm({ create, onSuccess }) {
@@ -35,11 +41,11 @@ export default function CreateForm({ create, onSuccess }) {
 
   return (
     <Formik
-      initialValues={{ name: '', category: 'foreground', asset: '' }}
+      initialValues={{ name: '', category: 'foreground', asset: '', asset_type: 'image', assets: [], fps: null }}
       validate={validateForm}
       onSubmit={handleFormSubmit}
     >
-      {({ status, isValid, isSubmitting, setFieldValue }) => (
+      {({ status, isValid, isSubmitting, setFieldValue, values }) => (
         <Form>
           <div className="mb-6">
             <Field
@@ -51,13 +57,34 @@ export default function CreateForm({ create, onSuccess }) {
           </div>
           <div className="mb-6">
             <Field
-              name="category"
-              placeholder="Category"
+              name="asset_type"
+              placeholder="Asset type"
               required={true}
               component={CustomSelectComponent}
-              options={CATEGORIES}
+              options={ASSET_TYPES}
             />
           </div>
+          {values.asset_type === "animation" && (
+            <div className="mb-6">
+              <Field
+                name="fps"
+                component={CustomInputComponent}
+                placeholder="Animation FPS (30)"
+                required={true}
+              />
+            </div>
+          )}
+          {values.asset_type === "image" && (
+            <div className="mb-6">
+              <Field
+                name="category"
+                placeholder="Category"
+                required={true}
+                component={CustomSelectComponent}
+                options={CATEGORIES}
+              />
+            </div>
+          )}
           <div className="mb-6">
             {/* <Field
               name="asset"
@@ -66,8 +93,10 @@ export default function CreateForm({ create, onSuccess }) {
               accept="image/*"
             /> */}
             <Field name="image">
-              {() => (
+              {() => values.asset_type === "image" ? (
                 <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />
+              ) : (
+                <input name="asset" accept="image/*" type="file" multiple onChange={e => setFieldValue("assets", e.target.files)} />
               )}
             </Field>
           </div>
