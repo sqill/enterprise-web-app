@@ -1,23 +1,40 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { InstagramEmbed, TikTokEmbed } from 'react-social-media-embed';
 
-import { getSponsorPosts, getSponsorCompany } from '../../api'
+import { getSponsorPosts, getSponsorCompany, getSponsor } from '../../api'
+import { formatDate } from '../../utils';
 
-function AdPost(post) {
+function embedComponent(platform) {
+  switch (platform) {
+    case 'instagram':
+      return InstagramEmbed;
+
+    case 'tiktok':
+      return TikTokEmbed;
+
+    default:
+      return null;
+  }
+}
+
+function AdPost({ platform, id, url, created_at }) {
+  const Comp = embedComponent(platform);
+
+  if(!Comp) return;
+
   return (
-    <div className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full" >
-      <div className="md:flex w-full">
-        <div className=" py-10 px-5 md:px-10">
-          <div>
-            {JSON.stringify(post)}
-          </div>
+    <div className="md:flex w-full">
+      <div className="py-10 px-5 md:px-10">
+        <h3 className="text-primary-600 font-bold mb-4">{formatDate(created_at)}</h3>
+        <div>
+          <Comp url={url} />
         </div>
       </div>
     </div>
   )
 }
 
-export default function SponsorPage({ adPosts, company }) {
+export default function SponsorPage({ adPosts, company, sponsor }) {
   return (
     <div className="min-h-screen bg-gray-900 flex justify-center px-5 py-5">
       <Head>
@@ -27,12 +44,12 @@ export default function SponsorPage({ adPosts, company }) {
 
       <div className="flex flex-col w-full md:w-1/2">
         <div className="flex flex-col mb-10">
-          <h1 className="text-yellow text-3xl font-extrabold">{ company.name }</h1>
+          <h1 className="text-yellow text-3xl font-extrabold">{ sponsor.name } ↔ { company.name }</h1>
           <h3 className="text-primary-500">{ company.website }</h3>
         </div>
 
         <div className="">
-          {adPosts.map(post => <AdPost key={post.id} post={post} />)}
+          {adPosts.map(post => <AdPost key={post.id} {...post} />)}
         </div>
       </div>
     </div>
@@ -50,8 +67,11 @@ export async function getServerSideProps(context) {
       notFound: true,
     }
   }
+  const [{ data: postsData }, { data: sponsorData }] = await Promise.all([
+    getSponsorPosts(key),
+    getSponsor(key)
+  ]);
 
-  const { data } = await getSponsorPosts(key);
 
-  return { props: { adPosts: data.data, company: dataCompany.data } }
+  return { props: { adPosts: postsData.data, company: dataCompany.data, sponsor: sponsorData.data } }
 }
