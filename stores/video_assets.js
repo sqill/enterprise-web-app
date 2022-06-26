@@ -1,6 +1,6 @@
 import create from 'zustand'
 
-import { getVideoAssets, createVideoAsset, removeVideoAsset } from '../api'
+import { getVideoAssets, createVideoAsset, removeVideoAsset, updateVideoAsset } from '../api'
 
 async function fetchAssets(set) {
   set({ loading: true })
@@ -26,6 +26,16 @@ async function createAsset(data, reload) {
   return res
 }
 
+async function editAsset(id, data, reload) {
+  const res = await updateVideoAsset(id, data)
+
+  if (res?.success) {
+    reload()
+  }
+
+  return res
+}
+
 async function removeAsset(id, reload) {
   const res = await removeVideoAsset(id)
 
@@ -39,6 +49,7 @@ async function removeAsset(id, reload) {
 const createActions = (set, get) => ({
   fetch: () => fetchAssets(set),
   create: (data) => createAsset(data, get().fetch),
+  edit: (id, data) => editAsset(id, data, get().fetch),
   remove: (id) => removeAsset(id, get().fetch)
 })
 

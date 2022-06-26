@@ -14,7 +14,7 @@ export default function CheckboxComponent({ field, form: { touched, errors }, ti
   return  (
     <div className="flex items-start mb-6">
       <div className="flex items-center h-5">
-        <input id={field.name} type="checkbox" className={inputClassName} {...field} {...props} />
+        <input id={field.name} type="checkbox" className={inputClassName} {...field} {...props} checked={field.value} />
       </div>
       <label htmlFor={field.name} className="ml-2 text-sm font-medium text-gray-900">{title}</label>
 

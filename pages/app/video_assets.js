@@ -7,7 +7,7 @@ import AssetsHeader from "../../components/Dashboard/Assets/Header"
 import assetsStore from '../../stores/video_assets'
 
 export default function Users() {
-  const { list, fetch, create, remove } = assetsStore()
+  const { list, fetch, create, remove, edit } = assetsStore()
 
   useEffect(() => {
     fetch()
@@ -16,7 +16,7 @@ export default function Users() {
   return (
     <DashboardLayout hideFooter>
       <AssetsHeader create={create} />
-      <AssetsList list={list} remove={remove} />
+      <AssetsList list={list} remove={remove} edit={edit} />
     </DashboardLayout>
   )
 }

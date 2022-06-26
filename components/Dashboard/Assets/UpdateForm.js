@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import MdcWeb from '@meronex/icons/mdc/MdcWeb';
 import MdcFormatTitle from '@meronex/icons/mdc/MdcFormatTitle';
 import MdcShapeOutline from '@meronex/icons/mdc/MdcShapeOutline';
 
@@ -10,9 +11,6 @@ import CustomSelectComponent from '../../Select'
 function validateForm({ name, category, asset, asset_type, assets, fps, uploadTilesheet, rows, columns, count }) {
   const errors = {};
   if (!category) errors.category = 'Required'
-  if (!asset && asset_type === "image") errors.asset = 'Required'
-  if (!assets && asset_type === "animation") errors.assets = 'Required'
-  if (!fps && asset_type === "animation") errors.fps = 'Required'
 
   if(asset_type === "animation" && uploadTilesheet) {
     if (!rows) errors.rows = 'Required'
@@ -29,15 +27,10 @@ const CATEGORIES = [
   { label: "Foreground", value: "foreground" }
 ]
 
-const ASSET_TYPES = [
-  { label: "Image", value: "image" },
-  { label: "Animation", value: "animation" }
-]
-
-export default function CreateForm({ create, onSuccess }) {
+export default function UpdateForm({ asset, update, onSuccess }) {
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
     setSubmitting(true)
-    const res = await create({ video_asset: { ...values } })
+    const res = await update(asset.id, { video_asset: { ...values } })
     setSubmitting(false)
     if (res?.success) {
       onSuccess()
@@ -47,57 +40,28 @@ export default function CreateForm({ create, onSuccess }) {
 
   return (
     <Formik
-      initialValues={{
-        name: '',
-        category: 'foreground',
-        asset: '',
-        asset_type: 'image',
-        assets: [],
-        fps: null,
-        count: null,
-        columns: null,
-        rows: null,
-        loop: false,
-        uploadTilesheet: false
-      }}
+      initialValues={asset}
       validate={validateForm}
       onSubmit={handleFormSubmit}
     >
-      {({ status, isValid, isSubmitting, setFieldValue, values }) => (
+      {({ status, isValid, isSubmitting, values }) => (
         <Form>
           <div className="mb-6">
             <Field
               name="name"
               component={CustomInputComponent}
-              placeholder="Asset name"
+              title="Asset name"
               required={false}
               IconClass={MdcFormatTitle}
-            />
-          </div>
-          <div className="mb-6">
-            <Field
-              name="asset_type"
-              placeholder="Asset type"
-              required={true}
-              component={CustomSelectComponent}
-              options={ASSET_TYPES}
-              IconClass={MdcShapeOutline}
             />
           </div>
           {values.asset_type === "animation" && (
             <>
               <div className="mb-6">
                 <Field
-                  name="uploadTilesheet"
-                  component={CustomCheckboxComponent}
-                  title="Upload prebuilt tilesheet?"
-                />
-              </div>
-              <div className="mb-6">
-                <Field
                   name="fps"
                   component={CustomInputComponent}
-                  placeholder="Animation FPS"
+                  title="Animation FPS"
                   required={true}
                   type="number"
                   min="1"
@@ -110,15 +74,11 @@ export default function CreateForm({ create, onSuccess }) {
                   title="Loops?"
                 />
               </div>
-            </>
-          )}
-          {values["uploadTilesheet"] && (
-            <>
               <div className="mb-6">
                 <Field
                   name="columns"
                   component={CustomInputComponent}
-                  placeholder="Columns (5)"
+                  title="Columns"
                   required={true}
                   type="number"
                   min="1"
@@ -128,7 +88,7 @@ export default function CreateForm({ create, onSuccess }) {
                 <Field
                   name="rows"
                   component={CustomInputComponent}
-                  placeholder="Rows (5)"
+                  title="Rows"
                   required={true}
                   type="number"
                   min="1"
@@ -138,7 +98,7 @@ export default function CreateForm({ create, onSuccess }) {
                 <Field
                   name="count"
                   component={CustomInputComponent}
-                  placeholder="Number of tiles in tilesheet"
+                  title="Number of tiles in tilesheet"
                   required={true}
                   type="number"
                   min="1"
@@ -147,37 +107,25 @@ export default function CreateForm({ create, onSuccess }) {
               </div>
             </>
           )}
+
           {values.asset_type === "image" && (
             <div className="mb-6">
               <Field
                 name="category"
-                placeholder="Category"
+                title="Category"
                 required={true}
                 component={CustomSelectComponent}
                 options={CATEGORIES}
+                IconClass={MdcShapeOutline}
               />
             </div>
           )}
-          <div className="mb-6">
-            {/* <Field
-              name="asset"
-              type="file"
-              placeholder="Company address"
-              accept="image/*"
-            /> */}
-            <Field name="image">
-              {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
-                <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />
-              ) : (
-                <input name="asset" accept="image/*" type="file" multiple onChange={e => setFieldValue("assets", e.target.files)} />
-              )}
-            </Field>
-          </div>
+
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
           <button disabled={!isValid || isSubmitting} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" type="submit">
-            Create
+            Update
           </button>
         </Form>
       )}

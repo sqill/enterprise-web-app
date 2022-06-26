@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from "classnames";
 
-export default function InputComponent({ field, form: { touched, errors }, title, IconClass, ...props }) {
+export default function InputComponent({ field, form: { touched, errors }, title, IconClass, showError = false, ...props }) {
   const hasError = touched[field.name] && errors[field.name];
   const labelClassName = cx(
     "text-sm font-medium text-gray-900 block mb-2",
@@ -23,7 +23,7 @@ export default function InputComponent({ field, form: { touched, errors }, title
         <input type="text" className={inputClassName} {...field} {...props} />
       </div>
 
-      {/* {hasError && <p className="mt-2 text-sm text-red-600">{errors[field.name]}</p>} */}
+      {hasError && showError && <p className="mt-2 text-sm text-red-600">{errors[field.name]}</p>}
     </React.Fragment>
   );
 }

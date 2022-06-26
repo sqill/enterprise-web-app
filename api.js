@@ -70,7 +70,27 @@ export const getFinders = id => request('GET', 'enterprise/finders')
 // ##
 export const getVideoAssets = () => request('GET', 'enterprise/video_editor_assets')
 export const createVideoAsset = (data) => request('POST', 'enterprise/video_editor_assets', data, true)
+export const updateVideoAsset = (id, data) => request('PATCH', `enterprise/video_editor_assets/${id}`, data)
 export const removeVideoAsset = (id) => request('DELETE', `enterprise/video_editor_assets/${id}`)
+
+
+// ##################################
+// ##
+// ##     Sponsors
+// ##
+export const getSponsors = () => request('GET', 'enterprise/sponsors')
+export const createSponsor = (data) => request('POST', 'enterprise/sponsors', data)
+export const removeSponsor = (id) => request('DELETE', `enterprise/sponsors/${id}`)
+
+
+// ##################################
+// ##
+// ##     Ad Posts
+// ##
+export const getAdPosts = () => request('GET', 'enterprise/ad_posts')
+export const createAdPost = (data) => request('POST', 'enterprise/ad_posts', data)
+export const removeAdPost = (id) => request('DELETE', `enterprise/ad_posts/${id}`)
+
 
 
 export const getPlayer = id => request('GET', `v0/players/${id}`)
