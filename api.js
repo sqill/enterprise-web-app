@@ -81,6 +81,8 @@ export const removeVideoAsset = (id) => request('DELETE', `enterprise/video_edit
 export const getSponsors = () => request('GET', 'enterprise/sponsors')
 export const createSponsor = (data) => request('POST', 'enterprise/sponsors', data)
 export const removeSponsor = (id) => request('DELETE', `enterprise/sponsors/${id}`)
+export const getSponsorPosts = (key) => request('GET', `enterprise/sponsor-ad-posts/${key}/ad-posts`)
+export const getSponsorCompany = (key) => request('GET', `enterprise/sponsor-ad-posts/${key}/company`)
 
 
 // ##################################
