@@ -96,6 +96,15 @@ export const createAdPost = (data) => request('POST', 'enterprise/ad_posts', dat
 export const removeAdPost = (id) => request('DELETE', `enterprise/ad_posts/${id}`)
 
 
+// ##################################
+// ##
+// ##     Fonts
+// ##
+export const getFonts = () => request('GET', 'enterprise/fonts')
+export const createFont = (data) => request('POST', 'enterprise/fonts', data, true)
+export const removeFont = (id) => request('DELETE', `enterprise/fonts/${id}`)
+
+
 
 export const getPlayer = id => request('GET', `v0/players/${id}`)
 
