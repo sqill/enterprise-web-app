@@ -49,3 +49,33 @@ export function isValidHttpUrl(string) {
 
   return url.protocol === "http:" || url.protocol === "https:";
 }
+
+export function uploadS3(url, file, progressCallback) {
+  return new Promise(function (resolve, reject) {
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(xhr)
+        }
+        else {
+          reject(xhr)
+        }
+      }
+    };
+
+    if (progressCallback) {
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+          var percentComplete = (e.loaded / file.size) * 100;
+          progressCallback(percentComplete);
+        }
+      };
+    }
+
+    xhr.open("PUT", url);
+    xhr.send(file);
+  });
+}
