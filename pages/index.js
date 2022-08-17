@@ -32,7 +32,9 @@ export default function IndexPage() {
           <Image  src="/images/logo_color.svg" alt="sqill logo" width="213" height="70" />
           <h5 className='text-xl md:text-3xl mt-1'>Enterprise</h5>
           <p className="text-md md:text-xl mt-10">
-            Coming Soon<br/>Get pre-access <Link href="/signup"><a className="text-primary-500 hover:underline">here</a></Link>
+            <Link href="/app"><a className="text-primary-500 hover:underline">Login</a></Link>
+            {" | "}
+            <Link href="/signup"><a className="text-primary-500 hover:underline">Sign up</a></Link>
           </p>
         </div>
         <div className="flex flex-wrap mt-10 justify-center">
