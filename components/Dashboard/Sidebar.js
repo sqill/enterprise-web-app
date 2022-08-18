@@ -68,6 +68,15 @@ export default function Sidebar() {
                   </a>
                 </Link>
               </li>
+              <li>
+                <Link href="/app/curated_database">
+                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                    <MdcFormatFont className="text-gray-500" />
+                    <span className="ml-3 flex-1 whitespace-nowrap">Curated database</span>
+                    <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
+                  </a>
+                </Link>
+              </li>
             </ul>
             {/* <div className="space-y-2 pt-2">
               <a href="https://flowbite.com/docs/components/alerts/" target="_blank" className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2" rel="noreferrer">

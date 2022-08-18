@@ -18,6 +18,7 @@
     "lodash.orderby": "^4.6.0",
     "lodash.throttle": "^4.1.1",
     "next": "12",
+    "nuka-carousel": "^5.2.0",
     "react": "^18.1.0",
     "react-country-flag": "^3.0.2",
     "react-dom": "^18.1.0",
