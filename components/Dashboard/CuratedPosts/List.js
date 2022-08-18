@@ -3,12 +3,16 @@ import Carousel from 'nuka-carousel';
 import BiChevronLeft from '@meronex/icons/bi/BiChevronLeft';
 import BiChevronRight from '@meronex/icons/bi/BiChevronRight';
 
+const DEFAULT_IMAGE = "/images/testemunho.jpg"
+
 function Post({ post }) {
+  const style = {
+    backgroundImage: `url(${post.image?.url || DEFAULT_IMAGE})`
+  }
+
   return (
     <div className="bg-gray-200 rounded-lg p-5 pb-2">
-      <div className="bg-gray-400 h-80 rounded-lg mb-4">
-        z
-      </div>
+      <div className="bg-gray-400 h-80 rounded-lg mb-4 bg-cover bg-center" style={style} />
       <h3 className="font-bold truncate">{post.title}</h3>
     </div>
   )
@@ -30,8 +34,8 @@ function CategoryPosts({ posts }) {
         renderCenterLeftControls={({ currentSlide, previousSlide }) => (
           currentSlide > 0 && <Arrow Icon={BiChevronLeft} onClick={previousSlide} />
         )}
-        renderCenterRightControls={({ currentSlide, previousSlide, nextSlide }) => (
-          <Arrow Icon={BiChevronRight} onClick={nextSlide} />
+        renderCenterRightControls={({ currentSlide, nextSlide }) => (
+          (currentSlide < posts.length - 1) && <Arrow Icon={BiChevronRight} onClick={nextSlide} />
         )}
       >
         {posts.slice(0).reverse().map(p => <Post key={p.id} post={p} />)}
