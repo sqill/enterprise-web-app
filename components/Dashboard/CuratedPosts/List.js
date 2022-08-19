@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Carousel from 'nuka-carousel';
 
 import BiChevronLeft from '@meronex/icons/bi/BiChevronLeft';
@@ -5,13 +6,17 @@ import BiChevronRight from '@meronex/icons/bi/BiChevronRight';
 
 const DEFAULT_IMAGE = "/images/testemunho.jpg"
 
-function Post({ post }) {
+function PostPreview({ post, setOpenedPost }) {
   const style = {
     backgroundImage: `url(${post.image?.url || DEFAULT_IMAGE})`
   }
 
+  function open() {
+    setOpenedPost(post)
+  }
+
   return (
-    <div className="bg-gray-200 rounded-lg p-5 pb-2">
+    <div className="bg-gray-200 rounded-lg p-5 pb-2 cursor-pointer" onClick={open}>
       <div className="bg-gray-400 h-80 rounded-lg mb-4 bg-cover bg-center" style={style} />
       <h3 className="font-bold truncate">{post.title}</h3>
     </div>
@@ -24,7 +29,7 @@ const Arrow = ({ onClick, Icon }) => (
   </button>
 )
 
-function CategoryPosts({ posts }) {
+function CategoryPosts({ posts, setOpenedPost }) {
   return (
     <div className="">
       <Carousel
@@ -38,26 +43,66 @@ function CategoryPosts({ posts }) {
           (currentSlide < posts.length - 1) && <Arrow Icon={BiChevronRight} onClick={nextSlide} />
         )}
       >
-        {posts.slice(0).reverse().map(p => <Post key={p.id} post={p} />)}
+        {posts.slice(0).reverse().map(p => <PostPreview key={p.id} post={p} setOpenedPost={setOpenedPost} />)}
       </Carousel>
     </div>
   )
 }
 
-function Category({ category }) {
+function Category({ category, setOpenedPost }) {
   return (
     <div className="mb-20">
       <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
-      <CategoryPosts posts={category.curated_posts} />
+      <CategoryPosts posts={category.curated_posts} setOpenedPost={setOpenedPost} />
+    </div>
+  )
+}
+
+function PostModal({ post, onClose }) {
+  return (
+    <div className="fixed z-30 inset-0 overflow-y-auto font-montserrat" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+        <div onClick={onClose} className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-32 sm:align-middle sm:max-w-4xl sm:w-full">
+          <div className="bg-white px-6 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="sm:flex sm:items-start sm:flex-col">
+              <div className="flex flex-col sm:flex-row">
+                <div className="sm:w-1/2 pr-2">image/post</div>
+                <div className="flex flex-col sm:w-1/2 pl-2">
+                  <p className="mb-6">{post.description}</p>
+                  <div className="mb-6">
+                    <h4 className="font-bold">Platform</h4>
+                    <p>{post.platform}</p>
+                  </div>
+                  <div className="mb-6">
+                    <h4 className="font-bold">Level</h4>
+                    <p>{post.level}</p>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div className='ql-editor'>
+                <div dangerouslySetInnerHTML={{__html: post.content}} />
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
 
 export default function CuratedPostsList({ categories }) {
+  const [openedPost, setOpenedPost] = useState()
+
   return (
     <div className="p-8">
+      {openedPost && <PostModal post={openedPost} onClose={() => setOpenedPost(null)} />}
       <h1 className="text-5xl font-bold mb-8">Trends</h1>
-      {categories.map(c => <Category key={c.id} category={c} />)}
+      {categories.map(c => <Category key={c.id} category={c} setOpenedPost={setOpenedPost} />)}
     </div>
   )
 }
