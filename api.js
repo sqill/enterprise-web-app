@@ -105,6 +105,12 @@ export const createFont = (data) => request('POST', 'enterprise/fonts', data, tr
 export const removeFont = (id) => request('DELETE', `enterprise/fonts/${id}`)
 
 
+// ##################################
+// ##
+// ##     Curated database
+// ##
+export const getCuratedCategories = () => request('GET', 'enterprise/curated_categories')
+
 
 export const getPlayer = id => request('GET', `v0/players/${id}`)
 

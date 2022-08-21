@@ -1,5 +1,7 @@
 import '../styles/index.css'
 import '../styles/dashboard.css'
+import '../styles/curated_database.css'
+
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
