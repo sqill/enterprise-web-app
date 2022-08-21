@@ -1,10 +1,27 @@
 import { useState } from 'react'
 import Carousel from 'nuka-carousel';
+import { InstagramEmbed, TikTokEmbed } from 'react-social-media-embed';
+import Image from 'next/image'
+
 
 import BiChevronLeft from '@meronex/icons/bi/BiChevronLeft';
 import BiChevronRight from '@meronex/icons/bi/BiChevronRight';
 
 const DEFAULT_IMAGE = "/images/testemunho.jpg"
+
+
+function embedComponent(platform) {
+  switch (platform) {
+    case 'instagram':
+      return InstagramEmbed;
+
+    case 'tiktok':
+      return TikTokEmbed;
+
+    default:
+      return null;
+  }
+}
 
 function PostPreview({ post, setOpenedPost }) {
   const style = {
@@ -59,6 +76,8 @@ function Category({ category, setOpenedPost }) {
 }
 
 function PostModal({ post, onClose }) {
+  const SocialComp = embedComponent(post.platform)
+
   return (
     <div className="fixed z-30 inset-0 overflow-y-auto font-montserrat" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -69,7 +88,13 @@ function PostModal({ post, onClose }) {
           <div className="bg-white px-6 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="sm:flex sm:items-start sm:flex-col">
               <div className="flex flex-col sm:flex-row">
-                <div className="sm:w-1/2 pr-2">image/post</div>
+                <div className="sm:w-1/2 pr-2">
+                  {post.url && SocialComp ? (
+                    <SocialComp url={post.url} width="100%" />
+                  ) : (
+                    <Image src={post.image?.url || DEFAULT_IMAGE }/>
+                  )}
+                </div>
                 <div className="flex flex-col sm:w-1/2 pl-2">
                   <p className="mb-6">{post.description}</p>
                   <div className="mb-6">
@@ -83,7 +108,7 @@ function PostModal({ post, onClose }) {
                 </div>
               </div>
               <hr />
-              <div className='ql-editor'>
+              <div className='ql-editor mt-6'>
                 <div dangerouslySetInnerHTML={{__html: post.content}} />
 
               </div>
