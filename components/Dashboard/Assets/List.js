@@ -29,7 +29,9 @@ function AssetRow({ asset, onRemove, onEdit }) {
     <tr className="hover:bg-gray-100">
       <td className="p-4 whitespace-nowrap text-base font-medium text-gray-900">{id}</td>
       <td className="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
-        <img className="h-10 w-10 rounded-full" src={asset_thumb_url} alt="thumbnail" />
+        {asset_thumb_url &&
+          <img className="h-10 w-10 rounded-full" src={asset_thumb_url} alt="thumbnail" />
+        }
       </td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{name}</td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{category}</td>
