@@ -7,12 +7,15 @@ import { getCuratedCategories } from "../../api"
 export default function CuratedDatabase() {
   const [categories, setCategories] = useState([])
 
-  useEffect(async () => {
-    const { success, data } = await getCuratedCategories()
+  useEffect(() => {
+    async function work() {
+      const { success, data } = await getCuratedCategories()
 
-    if (success) {
-      setCategories(data.data)
+      if (success) {
+        setCategories(data.data)
+      }
     }
+    work()
   }, [])
 
   return (

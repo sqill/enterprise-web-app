@@ -15,7 +15,7 @@ export default function LoginWrapper({ Component, pageProps }) {
   const { user, loading } = store(authSelector)
   const setCurrentUser = store(setCurrentUserSelector)
 
-  useEffect( () => {
+  useEffect(() => {
     async function fetchData() {
       const res = await getCurrentUser();
 
