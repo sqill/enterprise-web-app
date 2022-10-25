@@ -7,9 +7,9 @@ import CustomInputComponent from '../../Input'
 import CustomCheckboxComponent from '../../Checkbox'
 import CustomSelectComponent from '../../Select'
 
-function validateForm({ name, category, asset, asset_type, assets, fps, uploadTilesheet, rows, columns, count }) {
+function validateForm({ name, bundle_type, asset, asset_type, assets, fps, uploadTilesheet, rows, columns, count }) {
   const errors = {};
-  if (!category) errors.category = 'Required'
+  if (!bundle_type) errors.bundle_type = 'Required'
   if (!asset && asset_type === "image") errors.asset = 'Required'
   if (!assets && asset_type === "animation") errors.assets = 'Required'
   if (!fps && asset_type === "animation") errors.fps = 'Required'
@@ -24,9 +24,11 @@ function validateForm({ name, category, asset, asset_type, assets, fps, uploadTi
   return errors;
 }
 
-const CATEGORIES = [
-  { label: "Background", value: "background" },
-  { label: "Foreground", value: "foreground" }
+const BUNDLE_TYPES = [
+  { label: "Overlay", value: "overlay" },
+  { label: "Foreground", value: "foreground" },
+  { label: "Logos", value: "logos" },
+  { label: "Effects", value: "effects" }
 ]
 
 const ASSET_TYPES = [
@@ -49,7 +51,7 @@ export default function CreateForm({ create, onSuccess }) {
     <Formik
       initialValues={{
         name: '',
-        category: 'foreground',
+        bundle_type: 'foreground',
         asset: '',
         asset_type: 'image',
         assets: [],
@@ -150,11 +152,11 @@ export default function CreateForm({ create, onSuccess }) {
           {values.asset_type === "image" && (
             <div className="mb-6">
               <Field
-                name="category"
-                placeholder="Category"
+                name="bundle_type"
+                placeholder="Bundle type"
                 required={true}
                 component={CustomSelectComponent}
-                options={CATEGORIES}
+                options={BUNDLE_TYPES}
               />
             </div>
           )}

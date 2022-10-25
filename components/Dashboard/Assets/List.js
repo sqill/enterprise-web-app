@@ -23,7 +23,7 @@ function UpdateForm({ asset, setEditAsset, update }) {
 }
 
 function AssetRow({ asset, onRemove, onEdit }) {
-  const { id, name, category, asset_type, asset_url, asset_thumb_url, company_id, is_default } = asset;
+  const { id, name, bundle_type, asset_type, asset_url, asset_thumb_url, company_id, is_default } = asset;
 
   return (
     <tr className="hover:bg-gray-100">
@@ -34,7 +34,7 @@ function AssetRow({ asset, onRemove, onEdit }) {
         }
       </td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{name}</td>
-      <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{category}</td>
+      <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{bundle_type}</td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{asset_type}</td>
       <td className="p-4 whitespace-nowrap space-x-2">
         <a href={asset_url} target='_blank' className="text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center" rel="noreferrer">
