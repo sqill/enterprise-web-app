@@ -127,7 +127,7 @@ export default function CuratedPostsList({ categories }) {
     <div className="p-8">
       {openedPost && <PostModal post={openedPost} onClose={() => setOpenedPost(null)} />}
       <h1 className="text-5xl font-bold mb-8">Trends</h1>
-      {categories.map(c => <Category key={c.id} category={c} setOpenedPost={setOpenedPost} />)}
+      {categories?.map(c => <Category key={c.id} category={c} setOpenedPost={setOpenedPost} />)}
     </div>
   )
 }

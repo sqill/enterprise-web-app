@@ -55,7 +55,7 @@ export default function UsersList({ list }) {
                             </tr>
                         </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
-                        {list.map(finder => <UserRow key={finder.id} {...finder} />)}
+                        {list?.map(finder => <UserRow key={finder.id} {...finder} />)}
                       </tbody>
                     </table>
                 </div>

@@ -51,7 +51,7 @@ export default function SponsorsList({ list, remove }) {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {list.map(sponsor => <SponsorRow key={sponsor.id} {...sponsor} onRemove={handleRemove} />)}
+                {list?.map(sponsor => <SponsorRow key={sponsor.id} {...sponsor} onRemove={handleRemove} />)}
               </tbody>
             </table>
           </div>

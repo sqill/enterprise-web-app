@@ -100,7 +100,7 @@ export default function AssetsList({ list, remove, edit }) {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {list.filter(a => !a.is_default).map(asset => <AssetRow key={asset.id} asset={asset} onRemove={handleRemove} onEdit={handleEdit} />)}
+                  {list?.filter(a => !a.is_default).map(asset => <AssetRow key={asset.id} asset={asset} onRemove={handleRemove} onEdit={handleEdit} />)}
                 </tbody>
               </table>
             </div>
