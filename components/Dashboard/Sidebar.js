@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import cx from "classnames";
 
 import FiUser from '@meronex/icons/fi/FiUser';
 import MdOndemandVideo from '@meronex/icons/md/MdOndemandVideo';
@@ -9,9 +10,14 @@ import TiSocialInstagram from '@meronex/icons/ti/TiSocialInstagram';
 import MdcFormatFont from '@meronex/icons/mdc/MdcFormatFont';
 import HiFire from '@meronex/icons/hi/HiFire';
 
-export default function Sidebar() {
+export default function Sidebar({ opened = false }) {
+  const className = cx(
+    "fixed z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75",
+    { "hidden": !opened }
+  );
+
   return (
-    <aside id="sidebar" className="fixed hidden z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75" >
+    <aside id="sidebar" className={className} >
       <div className="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
           <div className="flex-1 px-3 bg-white divide-y space-y-1">
