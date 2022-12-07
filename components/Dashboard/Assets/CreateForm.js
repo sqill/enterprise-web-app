@@ -9,6 +9,7 @@ import CustomSelectComponent from '../../Select'
 
 function validateForm({ name, bundle_type, asset, asset_type, assets, fps, uploadTilesheet, rows, columns, count }) {
   const errors = {};
+  if (!name) errors.name = 'Required'
   if (!bundle_type) errors.bundle_type = 'Required'
   if (!asset && asset_type === "image") errors.asset = 'Required'
   if (!assets && asset_type === "animation") errors.assets = 'Required'
@@ -157,6 +158,7 @@ export default function CreateForm({ create, onSuccess }) {
                 required={true}
                 component={CustomSelectComponent}
                 options={BUNDLE_TYPES}
+                IconClass={MdcShapeOutline}
               />
             </div>
           )}
