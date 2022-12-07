@@ -87,6 +87,16 @@ export default function CreateForm({ create, onSuccess }) {
               IconClass={MdcShapeOutline}
             />
           </div>
+          <div className="mb-6">
+            <Field
+              name="bundle_type"
+              placeholder="Bundle type"
+              required={true}
+              component={CustomSelectComponent}
+              options={BUNDLE_TYPES}
+              IconClass={MdcShapeOutline}
+            />
+          </div>
           {values.asset_type === "animation" && (
             <>
               <div className="mb-6">
@@ -149,18 +159,6 @@ export default function CreateForm({ create, onSuccess }) {
                 />
               </div>
             </>
-          )}
-          {values.asset_type === "image" && (
-            <div className="mb-6">
-              <Field
-                name="bundle_type"
-                placeholder="Bundle type"
-                required={true}
-                component={CustomSelectComponent}
-                options={BUNDLE_TYPES}
-                IconClass={MdcShapeOutline}
-              />
-            </div>
           )}
           <div className="mb-6">
             {/* <Field

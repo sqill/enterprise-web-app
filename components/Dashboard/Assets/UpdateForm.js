@@ -59,6 +59,16 @@ export default function UpdateForm({ asset, update, onSuccess }) {
               IconClass={MdcFormatTitle}
             />
           </div>
+          <div className="mb-6">
+            <Field
+              name="bundle_type"
+              title="Bundle type"
+              required={true}
+              component={CustomSelectComponent}
+              options={BUNDLE_TYPES}
+              IconClass={MdcShapeOutline}
+            />
+          </div>
           {values.asset_type === "animation" && (
             <>
               <div className="mb-6">
@@ -111,20 +121,6 @@ export default function UpdateForm({ asset, update, onSuccess }) {
               </div>
             </>
           )}
-
-          {values.asset_type === "image" && (
-            <div className="mb-6">
-              <Field
-                name="bundle_type"
-                title="Bundle type"
-                required={true}
-                component={CustomSelectComponent}
-                options={BUNDLE_TYPES}
-                IconClass={MdcShapeOutline}
-              />
-            </div>
-          )}
-
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
