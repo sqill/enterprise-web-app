@@ -10,31 +10,31 @@ function Links({ filled = false }) {
 
   return (
     <React.Fragment>
-      <Link href="#">
-        <a className={linkClass}>
+      <Link href="#" className={linkClass}>
+        
           Solutions
-        </a>
+        
       </Link>
 
-      <Link href="#">
-        <a className={linkClass}>
+      <Link href="#" className={linkClass}>
+        
           Solutions
-        </a>
+        
       </Link>
 
-      <Link href="#">
-        <a className={linkClass}>
+      <Link href="#" className={linkClass}>
+        
           Solutions
-        </a>
+        
       </Link>
 
-      <Link href="#">
-        <a className={linkClass}>
+      <Link href="#" className={linkClass}>
+        
           Solutions
-        </a>
+        
       </Link>
     </React.Fragment>
-  )
+  );
 }
 
 export default function Header({ filled = false }) {
@@ -44,23 +44,27 @@ export default function Header({ filled = false }) {
         <div className="w-full py-6 flex items-center justify-between border-b border-primary-500 lg:border-none">
           <div className="flex items-center">
             <Link href="/">
-              <a>
-                <span className="sr-only">Workflow</span>
-                <img className="h-10 w-auto" src="/images/logo_color.svg" alt=""/>
-              </a>
+
+              <span className="sr-only">Workflow</span>
+              <img className="h-10 w-auto" src="/images/logo_color.svg" alt=""/>
+
             </Link>
             <div className="hidden ml-10 space-x-8 lg:block">
               <Links filled={filled} />
             </div>
           </div>
           <div className="ml-10 space-x-4">
-            <Link href="/app/login">
-              <a className="inline-block bg-primary-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75">Login</a>
+            <Link
+              href="/app/login"
+              className="inline-block bg-primary-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75">
+              Login
             </Link>
-            <Link href="/signup">
-              <a className="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-primary-600 hover:bg-primary-50">
+            <Link
+              href="/signup"
+              className="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-primary-600 hover:bg-primary-50">
+              
                 Sign up
-              </a>
+              
             </Link>
           </div>
         </div>
@@ -69,5 +73,5 @@ export default function Header({ filled = false }) {
         </div>
       </nav>
     </header>
-  )
+  );
 }

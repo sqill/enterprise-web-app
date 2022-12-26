@@ -50,11 +50,11 @@ export default function Login() {
           </div>
           <div className="mt-4">
             <p>
-              No account? Get access <Link href="/signup"><a className="font-bold text-primary-700">here</a></Link>.
+              No account? Get access <Link href="/signup" className="font-bold text-primary-700">here</Link>.
             </p>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

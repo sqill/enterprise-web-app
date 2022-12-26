@@ -7,15 +7,15 @@ export function formatDate(date) {
 }
 
 export function isMobile() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 export function isAndroid() {
-  return /Android/i.test(navigator.userAgent)
+  return /Android/i.test(navigator.userAgent);
 }
 
 export function isIos() {
-  return /iPad|iPhone|iPod/i.test(navigator.userAgent)
+  return /iPad|iPhone|iPod/i.test(navigator.userAgent);
 }
 
 export function isBrowser() {

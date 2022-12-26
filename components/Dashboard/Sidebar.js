@@ -23,64 +23,78 @@ export default function Sidebar({ opened = false }) {
           <div className="flex-1 px-3 bg-white divide-y space-y-1">
             <ul className="space-y-2 pb-2">
               <li>
-                <Link href="/app/users">
-                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                    <FiUser className="text-gray-500" />
-                    <span className="ml-3 flex-1 whitespace-nowrap">Users</span>
-                  </a>
+                <Link
+                  href="/app/users"
+                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+
+                  <FiUser className="text-gray-500" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Users</span>
+
                 </Link>
               </li>
               <li>
-                <Link href="/app/send2sqill">
-                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                    <MdOndemandVideo className="text-gray-500" />
-                    <span className="ml-3 flex-1 whitespace-nowrap">send2sqill</span>
-                    <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
-                  </a>
+                <Link
+                  href="/app/send2sqill"
+                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+
+                  <MdOndemandVideo className="text-gray-500" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">send2sqill</span>
+                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
+
                 </Link>
               </li>
               <li>
-                <Link href="/app/video_assets">
-                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                    <GoFileMedia className="text-gray-500" />
-                    <span className="ml-3 flex-1 whitespace-nowrap">Editor assets</span>
-                    <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
-                  </a>
+                <Link
+                  href="/app/video_assets"
+                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+
+                  <GoFileMedia className="text-gray-500" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Editor assets</span>
+                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
+
                 </Link>
               </li>
               <li>
-                <Link href="/app/sponsors">
-                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                    <MdcTagOutline className="text-gray-500" />
-                    <span className="ml-3 flex-1 whitespace-nowrap">Sponsors</span>
-                    <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
-                  </a>
+                <Link
+                  href="/app/sponsors"
+                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+
+                  <MdcTagOutline className="text-gray-500" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Sponsors</span>
+                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
+
                 </Link>
               </li>
               <li>
-                <Link href="/app/ad_posts">
-                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                    <TiSocialInstagram className="text-gray-500" />
-                    <span className="ml-3 flex-1 whitespace-nowrap">Ad Posts</span>
-                    <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
-                  </a>
+                <Link
+                  href="/app/ad_posts"
+                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+
+                  <TiSocialInstagram className="text-gray-500" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Ad Posts</span>
+                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
+
                 </Link>
               </li>
               <li>
-                <Link href="/app/fonts">
-                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                    <MdcFormatFont className="text-gray-500" />
-                    <span className="ml-3 flex-1 whitespace-nowrap">Fonts</span>
-                    <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
-                  </a>
+                <Link
+                  href="/app/fonts"
+                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+
+                  <MdcFormatFont className="text-gray-500" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Fonts</span>
+                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
+
                 </Link>
               </li>
               <li>
-                <Link href="/app/curated_database">
-                  <a className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                    <HiFire className="text-gray-500" />
-                    <span className="ml-3 flex-1 whitespace-nowrap">Curated database</span>
-                  </a>
+                <Link
+                  href="/app/curated_database"
+                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+
+                  <HiFire className="text-gray-500" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Curated database</span>
+
                 </Link>
               </li>
             </ul>
@@ -98,5 +112,5 @@ export default function Sidebar({ opened = false }) {
         </div>
       </div>
     </aside>
-  )
+  );
 }
