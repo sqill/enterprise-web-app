@@ -88,12 +88,12 @@ function PostModal({ post, onClose }) {
           <div className="bg-white px-6 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="sm:flex sm:items-start sm:flex-col">
               <div className="flex flex-col sm:flex-row">
-                <div className="sm:w-1/2 pr-2">
-                  {post.url && SocialComp ? (
-                    <SocialComp url={post.url} width="100%" />
-                  ) : (
-                    <Image src={post.image?.url || DEFAULT_IMAGE }/>
-                  )}
+                <div className="sm:w-1/2 pr-2 relative">
+                    {post.image?.url ? (
+                      <Image src={post.image?.url} fill />
+                    ) : (post.url && SocialComp ? (
+                      <SocialComp url={post.url} width="100%" />
+                    ) : <Image src={DEFAULT_IMAGE} fill />)}
                 </div>
                 <div className="flex flex-col sm:w-1/2 pl-2">
                   <p className="mb-6">{post.description}</p>
