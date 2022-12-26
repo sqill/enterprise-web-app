@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Carousel from 'nuka-carousel';
 import { InstagramEmbed, TikTokEmbed } from 'react-social-media-embed';
 import Image from 'next/image'
+import Link from 'next/link'
 
 
 import BiChevronLeft from '@meronex/icons/bi/BiChevronLeft';
@@ -90,7 +91,9 @@ function PostModal({ post, onClose }) {
               <div className="flex flex-col sm:flex-row">
                 <div className="sm:w-1/2 pr-2 relative">
                     {post.image?.url ? (
-                      <Image src={post.image?.url} fill className='object-contain' />
+                      <Link href={post.image?.url} target="_blank">
+                        <Image src={post.image?.url} fill className='object-contain' />
+                      </Link>
                     ) : (post.url && SocialComp ? (
                       <SocialComp url={post.url} width="100%" />
                     ) : <Image src={DEFAULT_IMAGE} fill className='object-contain' />)}
