@@ -60,7 +60,7 @@ function CategoryPosts({ posts, setOpenedPost }) {
           (currentSlide < posts.length - 1) && <Arrow Icon={BiChevronRight} onClick={nextSlide} />
         )}
       >
-        {posts.slice(0).reverse().map(p => <PostPreview key={p.id} post={p} setOpenedPost={setOpenedPost} />)}
+        {posts.map(p => <PostPreview key={p.id} post={p} setOpenedPost={setOpenedPost} />)}
       </Carousel>
     </div>
   )
