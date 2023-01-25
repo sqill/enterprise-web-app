@@ -70,8 +70,9 @@ export const getFinders = id => request('GET', 'enterprise/finders')
 // ##
 export const getVideoAssets = (noBundles = true) => request('GET', 'enterprise/video_editor_assets', { no_bundles: noBundles })
 export const createVideoAsset = (data) => request('POST', 'enterprise/video_editor_assets', data, true)
-export const updateVideoAsset = (id, data) => request('PATCH', `enterprise/video_editor_assets/${id}`, data)
+export const updateVideoAsset = (id, data) => request('PATCH', `enterprise/video_editor_assets/${id}`, data, Boolean(data.video_asset.asset))
 export const removeVideoAsset = (id) => request('DELETE', `enterprise/video_editor_assets/${id}`)
+export const getAssetFolders = () => request('GET', `enterprise/video_editor_assets/folders`)
 
 
 // ##################################

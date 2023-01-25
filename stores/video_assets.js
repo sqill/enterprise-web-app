@@ -1,6 +1,6 @@
 import create from 'zustand'
 
-import { getVideoAssets, createVideoAsset, removeVideoAsset, updateVideoAsset } from '../api'
+import { getVideoAssets, createVideoAsset, removeVideoAsset, updateVideoAsset, getAssetFolders } from '../api'
 
 async function fetchAssets(set) {
   set({ loading: true })
@@ -11,6 +11,18 @@ async function fetchAssets(set) {
 
   if (success) {
     state.list = data.data
+  }
+
+  set(state)
+}
+
+async function fetchFolders(set) {
+  const { success, data } = await getAssetFolders()
+
+  const state = {}
+
+  if (success) {
+    state.folders = data.data
   }
 
   set(state)
@@ -46,15 +58,23 @@ async function removeAsset(id, reload) {
   return res
 }
 
+async function reload(get) {
+  get().fetch()
+  get().fetchFolders()
+}
+
 const createActions = (set, get) => ({
   fetch: () => fetchAssets(set),
-  create: (data) => createAsset(data, get().fetch),
-  edit: (id, data) => editAsset(id, data, get().fetch),
-  remove: (id) => removeAsset(id, get().fetch)
-})
+  create: (data) => createAsset(data, get().reload),
+  edit: (id, data) => editAsset(id, data, get().reload),
+  remove: (id) => removeAsset(id, get().reload),
+  fetchFolders: () => fetchFolders(set),
+  reload: () => reload(get)
+});
 
 const useStore = create((set, get) => ({
   list: [],
+  folders: [],
   loading: false,
   ...createActions(set, get)
 }))

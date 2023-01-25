@@ -23,7 +23,7 @@ function UpdateForm({ asset, setEditAsset, update }) {
 }
 
 function AssetRow({ asset, onRemove, onEdit }) {
-  const { id, name, bundle_type, asset_type, asset_url, asset_thumb_url, company_id, is_default } = asset;
+  const { id, name, bundle_type, asset_type, asset_url, asset_thumb_url, company_id, is_default, folder } = asset;
 
   return (
     <tr className="hover:bg-gray-100">
@@ -34,6 +34,7 @@ function AssetRow({ asset, onRemove, onEdit }) {
         }
       </td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{name}</td>
+      <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{folder}</td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{bundle_type}</td>
       <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">{asset_type}</td>
       <td className="p-4 whitespace-nowrap space-x-2">
@@ -88,6 +89,9 @@ export default function AssetsList({ list, remove, edit }) {
                     </th>
                     <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                       Name
+                    </th>
+                    <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                      Folder
                     </th>
                     <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                       Category

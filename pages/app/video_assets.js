@@ -7,10 +7,11 @@ import AssetsHeader from "../../components/Dashboard/Assets/Header"
 import assetsStore from '../../stores/video_assets'
 
 export default function Users() {
-  const { list, fetch, create, remove, edit } = assetsStore()
+  const { list, fetch, create, remove, edit, fetchFolders } = assetsStore()
 
   useEffect(() => {
     fetch()
+    fetchFolders()
   }, [])
 
   return (

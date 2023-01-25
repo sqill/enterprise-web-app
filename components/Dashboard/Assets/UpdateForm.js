@@ -3,10 +3,13 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import MdcWeb from '@meronex/icons/mdc/MdcWeb';
 import MdcFormatTitle from '@meronex/icons/mdc/MdcFormatTitle';
 import MdcShapeOutline from '@meronex/icons/mdc/MdcShapeOutline';
+import MdcFolderImage from '@meronex/icons/mdc/MdcFolderImage';
 
 import CustomInputComponent from '../../Input'
 import CustomCheckboxComponent from '../../Checkbox'
 import CustomSelectComponent from '../../Select'
+
+import assetsStore from '../../../stores/video_assets'
 
 function validateForm({ name, bundle_type, asset, asset_type, fps, uploadTilesheet, rows, columns, count }) {
   const errors = {};
@@ -16,7 +19,6 @@ function validateForm({ name, bundle_type, asset, asset_type, fps, uploadTileshe
   if(asset_type === "animation" && uploadTilesheet) {
     if (!rows) errors.rows = 'Required'
     if (!columns) errors.columns = 'Required'
-    if (!asset) errors.asset = 'Required'
     if (!count) errors.count = 'Required'
   }
 
@@ -32,9 +34,16 @@ const BUNDLE_TYPES = [
 
 
 export default function UpdateForm({ asset, update, onSuccess }) {
+  const { folders } = assetsStore()
+  const foldersDropdown = folders.map(f => ({ label: f.name, value: f.name }));
+
+
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
     setSubmitting(true)
-    const res = await update(asset.id, { video_asset: { ...values } })
+    const res = await update(
+      asset.id,
+      { video_asset: { ...values, folder: values.folder == "" ? null : values.folder } }
+      )
     setSubmitting(false)
     if (res?.success) {
       onSuccess()
@@ -44,12 +53,34 @@ export default function UpdateForm({ asset, update, onSuccess }) {
 
   return (
     <Formik
-      initialValues={asset}
+      initialValues={{ ...asset, replaceAsset: false, folder: asset.folder == null ? "" : asset.folder }}
       validate={validateForm}
       onSubmit={handleFormSubmit}
     >
-      {({ status, isValid, isSubmitting, values }) => (
+      {({ status, isValid, isSubmitting, values, setFieldValue }) => (
         <Form>
+          <div className="mb-6 grid grid-cols-6 gap-6">
+            {(values.folder == "" || values.folder == null || folders.some(f => f.name == values.folder)) && (
+              <div className="col-span-6 sm:col-span-3">
+                <Field
+                  name="folder"
+                  placeholder="Folder"
+                  component={CustomSelectComponent}
+                  options={foldersDropdown}
+                  IconClass={MdcFolderImage}
+                />
+              </div>
+            )}
+            <div className="col-span-6 sm:col-span-3">
+              <Field
+                name="folder"
+                placeholder="New Folder Name"
+                component={CustomInputComponent}
+                required={false}
+                IconClass={MdcFolderImage}
+              />
+            </div>
+          </div>
           <div className="mb-6">
             <Field
               name="name"
@@ -120,6 +151,21 @@ export default function UpdateForm({ asset, update, onSuccess }) {
                 />
               </div>
             </>
+          )}
+
+          <Field
+            name="replaceAsset"
+            component={CustomCheckboxComponent}
+            title="Replace asset?"
+          />
+
+          {values.replaceAsset && (
+            <div className="mb-6">
+              <p className="mb-2 text-xs text-red-600">Warning! All templates using this asset will be updated with the new uploaded asset</p>
+              <Field name="image">
+                {() => <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />}
+              </Field>
+            </div>
           )}
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
