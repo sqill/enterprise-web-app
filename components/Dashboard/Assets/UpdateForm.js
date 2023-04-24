@@ -43,7 +43,7 @@ export default function UpdateForm({ asset, update, onSuccess }) {
     const res = await update(
       asset.id,
       { video_asset: { ...values, folder: values.folder == "" ? null : values.folder } }
-      )
+    )
     setSubmitting(false)
     if (res?.success) {
       onSuccess()

@@ -9,6 +9,7 @@ import MdcTagOutline from '@meronex/icons/mdc/MdcTagOutline';
 import TiSocialInstagram from '@meronex/icons/ti/TiSocialInstagram';
 import MdcFormatFont from '@meronex/icons/mdc/MdcFormatFont';
 import HiFire from '@meronex/icons/hi/HiFire';
+import MdSettings from '@meronex/icons/ios/MdSettings';
 
 export default function Sidebar({ opened = false }) {
   const className = cx(
@@ -89,11 +90,32 @@ export default function Sidebar({ opened = false }) {
               </li>
               <li>
                 <Link
+                  href="/app/subtitle_colors"
+                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+
+                  <MdcFormatFont className="text-gray-500" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Subtitle colors</span>
+                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
+
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/app/curated_database"
                   className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
 
                   <HiFire className="text-gray-500" />
                   <span className="ml-3 flex-1 whitespace-nowrap">Curated database</span>
+
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/app/company/settings"
+                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+
+                  <MdSettings className="text-gray-500" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Company settings</span>
 
                 </Link>
               </li>

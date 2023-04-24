@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useRouter } from 'next/router'
 
 import VideoEditor from '../../components/send2sqill/VideoEditor'
 import UploadVideoOrLink from '../../components/send2sqill/UploadVideoOrLink'
 
 import DashboardLayout from "../../components/Dashboard/Layout"
-import UsersHeader from "../../components/Dashboard/Users/Header"
 
-
-import usersStore from '../../stores/users'
-
-export default function Users() {
+export default function Send2Sqill() {
   const router = useRouter()
 
   const { url, referer, timestamps, mode = 'advanced' } = router.query

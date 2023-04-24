@@ -52,9 +52,10 @@ export const getCurrentUser = () => request('GET', 'enterprise/users/me')
 
 // ##################################
 // ##
-// ##     Enterprise signup
+// ##     Enterprise company
 // ##
 export const signup = params => request('POST', 'enterprise/company', params)
+export const updateCompany = params => request('PATCH', 'enterprise/company', params)
 
 
 // ##################################
@@ -104,6 +105,16 @@ export const removeAdPost = (id) => request('DELETE', `enterprise/ad_posts/${id}
 export const getFonts = () => request('GET', 'enterprise/fonts')
 export const createFont = (data) => request('POST', 'enterprise/fonts', data, true)
 export const removeFont = (id) => request('DELETE', `enterprise/fonts/${id}`)
+
+
+// ##################################
+// ##
+// ##     SubtitleColors
+// ##
+export const getSubtitleColors = () => request('GET', 'enterprise/subtitle_colors')
+export const createSubtitleColor = (data) => request('POST', 'enterprise/subtitle_colors', data)
+export const updateSubtitleColor = (id, data) => request('PATCH', `enterprise/subtitle_colors/${id}`, data)
+export const removeSubtitleColor = (id) => request('DELETE', `enterprise/subtitle_colors/${id}`)
 
 
 // ##################################
