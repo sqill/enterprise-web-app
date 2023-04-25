@@ -1,10 +1,12 @@
-import React, { useState, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 
 import BsFonts from '@meronex/icons/bs/BsFonts';
-import MdAttachFile from '@meronex/icons/md/MdAttachFile';
+import MdcFormatFont from '@meronex/icons/mdc/MdcFormatFont';
 
+import CustomSelectComponent from '../../Select'
 import CustomInputComponent from '../../Input'
+import fontsStore from '../../../stores/fonts'
 
 function validateForm({ background, foreground }) {
   const errors = {};
@@ -16,6 +18,14 @@ function validateForm({ background, foreground }) {
 
 
 export default function CreateForm({ create, onSuccess }) {
+  const { list, fetch: fetchFonts } = fontsStore()
+
+  useEffect(() => {
+    fetchFonts()
+  }, [])
+
+  const fontsDropdown = list.map(f => ({ label: f.name, value: f.id }));
+
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
     setSubmitting(true)
     const res = await create({ subtitle_color: { ...values } })
@@ -29,8 +39,9 @@ export default function CreateForm({ create, onSuccess }) {
   return (
     <Formik
       initialValues={{
-        name: '',
-        font: null
+        background: null,
+        foreground: null,
+        company_font_id: ''
       }}
       validate={validateForm}
       onSubmit={handleFormSubmit}
@@ -53,6 +64,16 @@ export default function CreateForm({ create, onSuccess }) {
               placeholder="Font color"
               required={true}
               IconClass={BsFonts}
+            />
+          </div>
+
+          <div className="mb-6">
+            <Field
+              name="company_font_id"
+              placeholder="Font"
+              component={CustomSelectComponent}
+              options={fontsDropdown}
+              IconClass={MdcFormatFont}
             />
           </div>
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}

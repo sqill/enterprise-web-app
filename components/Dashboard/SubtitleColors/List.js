@@ -34,6 +34,9 @@ function SubtitleColorsRow({ color, onRemove, onEdit }) {
         {color.background}
         <div className="w-12 h-12 rounded-full" style={{ backgroundColor: color.background }}></div>
       </td>
+      <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">
+      {color.company_font?.id} - {color.company_font?.name}
+      </td>
       <td className="p-4 whitespace-nowrap space-x-2">
         <button onClick={() => onEdit(color)} type="button" className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
           <MdcPencilOutline className="text-xl mr-1" />
@@ -82,6 +85,9 @@ export default function SubtitleColorsList({ list, remove, update }) {
                     </th>
                     <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                       Background color
+                    </th>
+                    <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+                      Font
                     </th>
                     <th scope="col" className="p-4">
                     </th>
