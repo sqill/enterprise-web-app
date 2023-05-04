@@ -10,7 +10,6 @@ import fontsStore from '../../../stores/fonts'
 
 function validateForm({ background, foreground }) {
   const errors = {};
-  if (!background) errors.background = 'Required'
   if (!foreground) errors.foreground = 'Required'
 
   return errors;
@@ -53,7 +52,6 @@ export default function CreateForm({ create, onSuccess }) {
               name="background"
               component={CustomInputComponent}
               placeholder="Background color"
-              required={true}
               IconClass={BsFonts}
             />
           </div>

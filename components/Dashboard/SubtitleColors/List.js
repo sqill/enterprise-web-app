@@ -81,7 +81,7 @@ export default function SubtitleColorsList({ list, remove, update }) {
                       ID
                     </th>
                     <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                      Foreground color
+                      Font color
                     </th>
                     <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                       Background color
