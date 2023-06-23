@@ -1,4 +1,3 @@
-
 import Image from 'next/image'
 import Link from 'next/link'
 import Head from 'next/head'
@@ -22,14 +21,14 @@ const linksSocial = [
 
 export default function IndexPage() {
   return (
-    <div className="flex items-center justify-center h-screen bg-background text-white font-montserrat">
+    <div className="flex items-center justify-center h-screen bg-background text-white font-poppins">
       <Head>
         <title>sqill enterprise</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="container">
         <div className="text-center">
-          <Image  src="/images/logo_color.svg" alt="sqill logo" width="213" height="70" />
+          <Image src="/images/logo_color.svg" alt="sqill logo" width="213" height="70" />
           <h5 className='text-xl md:text-3xl mt-1'>Enterprise</h5>
           <p className="text-md md:text-xl mt-10">
             <Link href="/app" className="text-primary-500 hover:underline">Login</Link>

@@ -16,7 +16,7 @@ function validateForm({ name, bundle_type, asset, asset_type, fps, uploadTileshe
   if (!bundle_type) errors.bundle_type = 'Required'
   if (!name) errors.name = 'Required'
 
-  if(asset_type === "animation" && uploadTilesheet) {
+  if (asset_type === "animation" && uploadTilesheet) {
     if (!rows) errors.rows = 'Required'
     if (!columns) errors.columns = 'Required'
     if (!count) errors.count = 'Required'
@@ -85,7 +85,6 @@ export default function UpdateForm({ asset, update, onSuccess }) {
             <Field
               name="name"
               component={CustomInputComponent}
-              title="Asset name"
               required={false}
               IconClass={MdcFormatTitle}
             />
@@ -153,11 +152,13 @@ export default function UpdateForm({ asset, update, onSuccess }) {
             </>
           )}
 
-          <Field
-            name="replaceAsset"
-            component={CustomCheckboxComponent}
-            title="Replace asset?"
-          />
+          <div>
+            <Field
+              name="replaceAsset"
+              component={CustomCheckboxComponent}
+              title="Replace asset?"
+            />
+          </div>
 
           {values.replaceAsset && (
             <div className="mb-6">

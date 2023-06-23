@@ -2,14 +2,16 @@ import React from 'react'
 import Link from 'next/link'
 import cx from "classnames";
 
-import FiUser from '@meronex/icons/fi/FiUser';
-import MdOndemandVideo from '@meronex/icons/md/MdOndemandVideo';
 import GoFileMedia from '@meronex/icons/go/GoFileMedia';
+import BsHouseDoor from '@meronex/icons/bs/BsHouseDoor';
 import MdcTagOutline from '@meronex/icons/mdc/MdcTagOutline';
 import TiSocialInstagram from '@meronex/icons/ti/TiSocialInstagram';
 import MdcFormatFont from '@meronex/icons/mdc/MdcFormatFont';
-import HiFire from '@meronex/icons/hi/HiFire';
+import BsUpload from '@meronex/icons/bs/BsUpload';
 import MdSettings from '@meronex/icons/ios/MdSettings';
+import BsHeart from '@meronex/icons/bs/BsHeart';
+import AiOutlineSetting from '@meronex/icons/ai/AiOutlineSetting';
+import BsGearWide from '@meronex/icons/bs/BsGearWide';
 
 export default function Sidebar({ opened = false }) {
   const className = cx(
@@ -17,108 +19,118 @@ export default function Sidebar({ opened = false }) {
     { "hidden": !opened }
   );
 
+
+
   return (
     <aside id="sidebar" className={className} >
-      <div className="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
+      <div className="relative flex-1 flex flex-col min-h-0 bg-white pl-5">
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-          <div className="flex-1 px-3 bg-white divide-y space-y-1">
+          <div className="flex-1 bg-gray-100 rounded-xl divide-y space-y-1 pt-5">
             <ul className="space-y-2 pb-2">
               <li>
                 <Link
                   href="/app/users"
-                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
 
-                  <FiUser className="text-gray-500" />
-                  <span className="ml-3 flex-1 whitespace-nowrap">Users</span>
+                  <BsHouseDoor className="text-gray-900" />
+                  <span className="ml-3 flex-1 whitespace-nowrap"> Cockpit </span>
 
                 </Link>
               </li>
               <li>
                 <Link
                   href="/app/send2sqill"
-                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                  className="text-xs font-light text-gray-900  hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
 
-                  <MdOndemandVideo className="text-gray-500" />
-                  <span className="ml-3 flex-1 whitespace-nowrap">send2sqill</span>
-                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
+                  <BsUpload className="text-gray-900" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Video & Image</span>
+
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  href="/app/curated_database"
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
+
+                  <BsHeart className="text-gray-900" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Inspiration</span>
+
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  href="/app/settings"
+                  className="text-xs text-gray-900  font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10"
+                >
+
+                  <AiOutlineSetting className="text-gray-900" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Settings</span>
+
+                </Link>
+              </li>
+              {/* <li>
+                <Link
+                  href="/app/sponsors"
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10" >
+
+                  <MdcTagOutline className="text-gray-900" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Sponsors</span>
 
                 </Link>
               </li>
               <li>
                 <Link
                   href="/app/video_assets"
-                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
 
-                  <GoFileMedia className="text-gray-500" />
+                  <GoFileMedia className="text-gray-900" />
                   <span className="ml-3 flex-1 whitespace-nowrap">Editor assets</span>
-                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
-
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/app/sponsors"
-                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-
-                  <MdcTagOutline className="text-gray-500" />
-                  <span className="ml-3 flex-1 whitespace-nowrap">Sponsors</span>
-                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
 
                 </Link>
               </li>
               <li>
                 <Link
                   href="/app/ad_posts"
-                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
 
-                  <TiSocialInstagram className="text-gray-500" />
+                  <TiSocialInstagram className="text-gray-900" />
                   <span className="ml-3 flex-1 whitespace-nowrap">Ad Posts</span>
-                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
 
                 </Link>
               </li>
               <li>
                 <Link
                   href="/app/fonts"
-                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
 
-                  <MdcFormatFont className="text-gray-500" />
+                  <MdcFormatFont className="text-gray-900" />
                   <span className="ml-3 flex-1 whitespace-nowrap">Fonts</span>
-                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
 
                 </Link>
               </li>
               <li>
                 <Link
                   href="/app/subtitle_colors"
-                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
 
-                  <MdcFormatFont className="text-gray-500" />
+                  <MdcFormatFont className="text-gray-900" />
                   <span className="ml-3 flex-1 whitespace-nowrap">Subtitle colors</span>
-                  <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
-
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/app/curated_database"
-                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-
-                  <HiFire className="text-gray-500" />
-                  <span className="ml-3 flex-1 whitespace-nowrap">Curated database</span>
 
                 </Link>
               </li>
               <li>
                 <Link
                   href="/app/company/settings"
-                  className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10"
+                  >
 
-                  <MdSettings className="text-gray-500" />
+                  <MdSettings className="text-gray-900" />
                   <span className="ml-3 flex-1 whitespace-nowrap">Company settings</span>
 
                 </Link>
-              </li>
+              </li> */}
             </ul>
             {/* <div className="space-y-2 pt-2">
               <a href="https://flowbite.com/docs/components/alerts/" target="_blank" className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2" rel="noreferrer">

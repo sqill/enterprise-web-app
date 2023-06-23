@@ -1,4 +1,3 @@
-
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -40,7 +39,7 @@ function Drop({ user, onLogout }) {
 
 
 export default function Nav({ onClick }) {
-	const router = useRouter()
+  const router = useRouter()
   const { auth: { user }, setCurrentUser } = useStore()
 
   async function doLogout() {
@@ -51,7 +50,7 @@ export default function Nav({ onClick }) {
   const avatar = user.entity.avatar?.thumb
 
   return (
-    <nav className="bg-white border-b border-gray-200 fixed z-30 w-full h-16">
+    <nav className="bg-white fixed z-30 w-full h-20 py-1">
       <div className="px-3 py-3 lg:px-5 lg:pl-3 h-16">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
@@ -59,15 +58,15 @@ export default function Nav({ onClick }) {
               <svg id="toggleSidebarMobileHamburger" className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
               <svg id="toggleSidebarMobileClose" className="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
             </button>
-            <a href="" className="text-xl font-bold flex items-center lg:ml-2.5">
-              <img src="/images/logo_circle.svg" className="h-6 mr-2" alt="Windster Logo" />
-              <span className="self-center whitespace-nowrap">Enterprise</span>
+            <a href="" className="text-xl flex items-center  px-12">
+              <img src="/images/cutLogo.png" alt="Login Image" className='max-h-7 px-3' />
+              <span className='self-center whitespace-nowrap'>Brand Lab</span>
             </a>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center px-10">
             <Popper content={() => <Drop user={user} onLogout={doLogout} />}>
-              <div className="mr-3 md:mr-0 flex text-sm rounded-full p-1 items-center hover:bg-gray-100" aria-expanded="false">
-                <span className="ml-2">{user.entity.full_name}</span>
+              <div className="mr-3 md:mr-0 flex text-xs rounded-full p-1 items-center hover:bg-gray-100" aria-expanded="false">
+                <span className="ml-2 font-light text-textGray">{user.entity.full_name}</span>
                 {avatar && <img className="ml-2 h-8 w-8 rounded-full" src={avatar} alt="user photo" />}
               </div>
 

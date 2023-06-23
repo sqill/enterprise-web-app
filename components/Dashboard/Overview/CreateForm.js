@@ -30,7 +30,7 @@ function validateForm({ name, bundle_type, asset, asset_type, assets, fps, uploa
 
 const BUNDLE_TYPES = [
   { label: "Overlay", value: "overlay" },
-  { label: "Banner", value: "foreground" },
+  { label: "Foreground", value: "foreground" },
   { label: "Logos", value: "logos" },
   { label: "Effects", value: "effects" }
 ]
@@ -40,15 +40,9 @@ const ASSET_TYPES = [
   { label: "Animation", value: "animation" }
 ]
 
-export default function CreateForm({ create, onSuccess, props }) {
+export default function CreateForm({ create, onSuccess }) {
   const { folders } = assetsStore()
   const foldersDropdown = folders.map(f => ({ label: f.name, value: f.name }));
-  const [previewUrl, setPreviewUrl] = useState('');
-
-
-  function handleOnChange(e) {
-
-  }
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
     setSubmitting(true)
@@ -64,9 +58,9 @@ export default function CreateForm({ create, onSuccess, props }) {
     <Formik
       initialValues={{
         name: '',
-        bundle_type: props[0],
+        bundle_type: 'foreground',
         asset: '',
-        asset_type: props[1],
+        asset_type: 'image',
         assets: [],
         fps: null,
         count: null,
@@ -81,7 +75,7 @@ export default function CreateForm({ create, onSuccess, props }) {
     >
       {({ status, isValid, isSubmitting, setFieldValue, values }) => (
         <Form>
-          {/* <div className="mb-6 grid grid-cols-6 gap-6">
+          <div className="mb-6 grid grid-cols-6 gap-6">
             {(values.folder == "" || folders.some(f => f.name == values.folder)) && (
               <div className="col-span-6 sm:col-span-3">
                 <Field
@@ -102,8 +96,8 @@ export default function CreateForm({ create, onSuccess, props }) {
                 IconClass={MdcFolderImage}
               />
             </div>
-          </div> */}
-          <div className="mb-6 mx-10">
+          </div>
+          <div className="mb-6">
             <Field
               name="name"
               component={CustomInputComponent}
@@ -112,7 +106,7 @@ export default function CreateForm({ create, onSuccess, props }) {
               IconClass={MdcFormatTitle}
             />
           </div>
-          {/* <div className="mb-6">
+          <div className="mb-6">
             <Field
               name="asset_type"
               placeholder="Asset type"
@@ -131,7 +125,7 @@ export default function CreateForm({ create, onSuccess, props }) {
               options={BUNDLE_TYPES}
               IconClass={MdcShapeOutline}
             />
-          </div> */}
+          </div>
           {values.asset_type === "animation" && (
             <>
               <div className="mb-6">
@@ -141,7 +135,7 @@ export default function CreateForm({ create, onSuccess, props }) {
                   title="Upload prebuilt tilesheet?"
                 />
               </div>
-              <div className="mb-6 mx-10">
+              <div className="mb-6">
                 <Field
                   name="fps"
                   component={CustomInputComponent}
@@ -162,7 +156,7 @@ export default function CreateForm({ create, onSuccess, props }) {
           )}
           {values["uploadTilesheet"] && (
             <>
-              <div className="mb-6 mx-10">
+              <div className="mb-6">
                 <Field
                   name="columns"
                   component={CustomInputComponent}
@@ -172,7 +166,7 @@ export default function CreateForm({ create, onSuccess, props }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6 mx-10">
+              <div className="mb-6">
                 <Field
                   name="rows"
                   component={CustomInputComponent}
@@ -182,7 +176,7 @@ export default function CreateForm({ create, onSuccess, props }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6 mx-10">
+              <div className="mb-6">
                 <Field
                   name="count"
                   component={CustomInputComponent}
@@ -213,7 +207,7 @@ export default function CreateForm({ create, onSuccess, props }) {
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
-          <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center max-w-20" type="submit">
+          <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" type="submit">
             Create
           </button>
         </Form>

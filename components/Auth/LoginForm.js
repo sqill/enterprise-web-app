@@ -8,7 +8,7 @@ import { login } from '../../api'
 
 
 const CustomInputComponent = ({ field, form, title, IconClass, ...props }) => {
-  return  (
+  return (
     <React.Fragment>
       <div className="mt-1 relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -39,30 +39,38 @@ export default function LoginForm({ onSuccess }) {
     <Formik initialValues={{ email: null, password: null }} onSubmit={handleFormSubmit}>
       {({ status, isValid, isSubmitting }) => (
         <Form>
-          <div className="mb-6">
+          <div className="mb-6 py-2 rounded-full">
+            <p>
+              Email
+            </p>
             <Field
               name="email"
               component={CustomInputComponent}
-              placeholder="Email"
+              placeholder="test1@gmail.com"
               IconClass={MdEmail}
               required={true}
               type="email"
+              value={undefined}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-6 py-3">
+            <p>
+              Password
+            </p>
             <Field
               name="password"
               component={CustomInputComponent}
-              placeholder="Password"
+              placeholder="************"
               IconClass={MdcFormTextboxPassword}
               required={true}
               type="password"
+              value={undefined}
             />
           </div>
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
-          <button disabled={!isValid || isSubmitting} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" type="submit">
+          <button disabled={!isValid || isSubmitting} className="text-white gradient hover:opacity-70 transition-opacity duration-300 font-medium rounded-full text-sm px-5 py-2.5 text-center w-1/3 mx-auto flex justify-center" type="submit">
             Login
           </button>
         </Form>

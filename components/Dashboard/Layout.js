@@ -1,4 +1,3 @@
-
 import React from 'react'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
@@ -14,9 +13,9 @@ export default function DashboardLayout(props) {
   return (
     <React.Fragment>
       <Navbar onClick={toggleSidebar} />
-      <div className="flex overflow-hidden bg-white pt-16">
+      <div className="flex overflow-hidden bg-white pt-20">
         <Sidebar opened={sidebarOpened} />
-        <div id="main-content" className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
+        <div id="main-content" className="h-full w-full relative overflow-y-auto pl-5 lg:ml-64">
           <main>
             {props.children}
           </main>

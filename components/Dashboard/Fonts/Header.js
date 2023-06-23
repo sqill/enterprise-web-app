@@ -9,7 +9,7 @@ function CreateForm({ isOpen, setIsOpen, create }) {
     <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
       <div className="flex-row w-full">
         <h3 className="text-xl font-semibold mb-6">
-          Create new Sponsor
+          Create new Font
         </h3>
 
         <Form create={create} onSuccess={() => setIsOpen(false)} />

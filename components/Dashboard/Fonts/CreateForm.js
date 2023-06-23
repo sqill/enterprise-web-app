@@ -37,25 +37,24 @@ export default function CreateForm({ create, onSuccess }) {
     >
       {({ status, isValid, isSubmitting, setFieldValue, values }) => (
         <Form>
-          <div className="mb-6">
+          <div className="mb-6 mx-10">
             <Field
               name="name"
               component={CustomInputComponent}
               placeholder="Font name"
               required={true}
-              IconClass={BsFonts}
             />
           </div>
           <div className="mb-6">
             {/* <Field name="font"> */}
-              <input name="font" type="file" onChange={e => setFieldValue("font", e.target.files[0])} />
+            <input name="font" type="file" onChange={e => setFieldValue("font", e.target.files[0])} />
             {/* </Field> */}
 
           </div>
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
-          <button disabled={!isValid || isSubmitting} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" type="submit">
+          <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center max-w-20" type="submit">
             Create
           </button>
         </Form>

@@ -44,7 +44,7 @@ export default function SignupForm() {
     return (
       <div className="text-center">
         <FiCheckCircle className="text-6xl m-auto text-primary-500" />
-        <h2>Thanks for your interest in <em>sqill</em>! We&apos;ll contact you soon.</h2>
+        <h2>Thanks for your interest in <em> sqill </em>! We&apos;ll contact you soon.</h2>
       </div>
     )
   }
@@ -57,63 +57,69 @@ export default function SignupForm() {
     >
       {({ status, isValid, isSubmitting }) => (
         <Form>
-          <div className="mb-6">
+          <div className="mb-4 font-light">
+            Company name
             <Field
               name="name"
               component={CustomInputComponent}
-              placeholder="Company name"
+              placeholder="Enter your company name"
               IconClass={MdcBriefcaseAccount}
               required={true}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4 font-light">
+            Company email
             <Field
               name="email"
               component={CustomInputComponent}
-              placeholder="Company email"
+              placeholder="Enter your company email"
               IconClass={MdEmail}
               required={true}
               type="email"
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4 font-light">
+            Company country
             <Field
               name="country_code"
-              placeholder="Company country"
+              placeholder="Enter your company country"
               required={true}
               component={CustomSelectComponent}
               options={options}
               IconClass={MdcCity}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4 font-light">
+            Company address
             <Field
               name="address"
               component={CustomInputComponent}
-              placeholder="Company address"
+              placeholder="Enter your company address"
               IconClass={MdcCity}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4 font-light">
+            Company website
             <Field
               name="website"
               component={CustomInputComponent}
-              placeholder="Company website"
+              placeholder="Enter your company website"
               IconClass={MdcWeb}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4 font-light">
+            Company VAT Number
             <Field
               name="vat_number"
               component={CustomInputComponent}
-              placeholder="Company VAT number"
+              placeholder="Enter your company VAT number"
               IconClass={MdcLabelPercent}
             />
           </div>
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
-          <button disabled={!isValid || isSubmitting} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" type="submit">
+          <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center max-w-20" type="submit">
             Register your company
           </button>
         </Form>

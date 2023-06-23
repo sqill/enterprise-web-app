@@ -1,24 +1,36 @@
 import { useEffect } from "react"
+import { useStore } from '../../lib/store'
 
 import DashboardLayout from "../../components/Dashboard/Layout"
-import UsersHeader from "../../components/Dashboard/Users/Header"
-import UsersFooter from "../../components/Dashboard/Users/Footer"
-import UsersList from "../../components/Dashboard/Users/List"
+import OverviewList from "../../components/Dashboard/Overview/List"
+import AssetsHeader from "../../components/Dashboard/Overview/Header"
 
-import usersStore from '../../stores/users'
+import assetsStore from '../../stores/video_assets'
+import fontStore from '../../stores/fonts'
+import subtitleColorsStore from '../../stores/subtitle_colors'
+import { updateCompany } from '../../api'
 
-export default function Users() {
-  const { list, fetch } = usersStore()
+
+export default function Cockpit() {
+  const { list: fontList, fetch: fetchFonts, create: createFont, remove: removeFont } = fontStore()
+  const { list: assetlist, fetch: fetchAssets, create: createAsset, remove: removeAsset, edit: editAsset, fetchFolders } = assetsStore()
+  const { list: subtitleList, fetch: fetchSubtitle, create: createSubtitle, remove: removeSubtitle, edit: editSubtitle } = subtitleColorsStore()
+  const { auth: { user } } = useStore()
 
   useEffect(() => {
-    fetch()
+    fetchFonts()
+    fetchAssets()
+    fetchFolders()
+    fetchSubtitle();
   }, [])
 
   return (
     <DashboardLayout hideFooter>
-      {/* <UsersHeader /> */}
-      <UsersList list={list} />
-      <UsersFooter list={list} />
+      {/* <AssetsHeader create={createAsset} /> */}
+      <OverviewList company={user.entity.company} updateCompany={updateCompany}
+        assetlist={assetlist} assetCreate={createAsset} assetRemove={removeAsset} assetEdit={editAsset}
+        fontList={fontList} fontCreate={createFont} fontRemove={removeFont}
+        subtitleList={subtitleList} subtitleCreate={createSubtitle} subtitleEdit={editSubtitle} subtitleRemove={removeSubtitle} />
     </DashboardLayout>
   )
 }
