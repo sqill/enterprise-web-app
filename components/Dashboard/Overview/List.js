@@ -55,14 +55,11 @@ function AssetRow({ asset, onRemove, onEdit }) {
   return (
 
     <div className="hover:bg-gray-100  min-w-max p-5 flex-row items-center justify-center">
-      {/* <div className="p-4 flex items-center "> */}
       <div className="flex items-center">
         {asset_thumb_url &&
           <img onClick={() => onEdit(asset)} className="max-h-20" src={asset_thumb_url} alt="thumbnail" />
         }
       </div>
-      {/* </div> */}
-
     </div>
   )
 }
@@ -76,14 +73,10 @@ function OverlayRow({ asset, onRemove, onEdit }) {
   };
 
   return (
-
     <div className="hover:bg-gray-100 p-5 pr-8 min-w-max flex justify-center items-center">
-      {/* <div className="p-4 flex items-center "> */}
       {asset_thumb_url &&
         <img onClick={() => onEdit(asset)} style={overlayStyle} src={asset_thumb_url} alt="thumbnail" />
       }
-      {/* </div> */}
-
     </div>
   )
 }
@@ -116,10 +109,6 @@ function AssetListRow({ asset, onRemove, onEdit }) {
 function SubtitleColorsRow({ color, onRemove, onEdit, fontFamily }) {
   return (
     <div className="hover:bg-gray-100 pt-5 pl-5 flex justify-left">
-      {/* <td className="p-4 whitespace-nowrap text-base font-normal text-gray-900">
-        {color.background}
-        <div className="w-12 h-12 rounded-full" ></div>
-      </td> */}
       <div className="px-2 py-1 whitespace-nowrap text-base font-normal text-gray-900 rounded" onClick={() => onEdit(color)} style={{ fontFamily: fontFamily, backgroundColor: color.background, color: color.foreground }}>
         {color.company_font?.name}
       </div>
@@ -267,7 +256,6 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
   }, [])
 
   async function RemoveColorCompany(colorToRemove) {
-    // company.colors = updatedColors;
     const updatedColors = colors.filter((color) => color !== colorToRemove);
     company.colors = updatedColors;
     setColors(updatedColors);
@@ -294,30 +282,20 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
     RemoveColorCompany(color);
   }
 
-  // function handleAssetRemove(id) {
-  //   remove(id)
-  // }
-
   function handleEdit(asset) {
     setEditAsset(asset)
-    // edit(id)
   }
   function handleSubtitleEdit(subtitle) {
     setEditSubtitle(subtitle)
-    // edit(id)
   }
 
   return (
     <React.Fragment>
       <UpdateForm asset={editAsset} update={assetEdit} setEditAsset={setEditAsset} />
       <UpdateSubtitleForm subtitle={editSubtitle} update={subtitleEdit} setEditAsset={setEditSubtitle} />
-      <div className='pt-2 text-xs font-medium text-textGray'>
-        User Cockpit
-      </div>
       <div className='py-5 font-bold text-textGray'>
         Overview
       </div>
-      {/* <div className="flex-col"> */}
       <div className="flex flex-wrap mb-5">
         <div className='pr-5 w-2/6 max-w-full '>
           <Container
@@ -367,7 +345,6 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             handleRemove={handleAssetRemove}
             handleEdit={handleEdit}
             handleCreate={assetCreate}
-            formProps={['logos', 'image']}
             renderRows={assets => assets.map(asset => (
               <AssetRow key={asset.id} asset={asset} onRemove={handleAssetRemove} onEdit={handleEdit} />
             ))}
@@ -376,6 +353,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             ))}
             columns={["Element ID", "Name", "Thumbnail", "Delete"]}
             FormComponent={AssetForm}
+            formProps={{ type: 'logos', format: 'image' }}
             containerClass={"overflow-x-auto h-40 grid grid-rows-1 grid-flow-col gap-4 content-start"}
             parentClass={''}
           />
@@ -397,7 +375,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             ))}
             columns={["Element ID", "Name", "Thumbnail", "Delete"]}
             FormComponent={AssetForm}
-            formProps={['foreground', 'image']}
+            formProps={{ type: 'foreground', format: 'image' }}
             containerClass={"py-5 overflow-x-auto h-80 grid grid grid-rows-2 grid-flow-col gap-4 content-start"}
             parentClass={''}
           />
@@ -417,7 +395,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             ))}
             columns={["Element ID", "Name", "Thumbnail", "Delete"]}
             FormComponent={AssetForm}
-            formProps={['overlay', 'image']}
+            formProps={{ type: 'overlay', format: 'image' }} 
             containerClass={"overflow-x-auto h-80 grid grid-rows-1 grid-flow-col gap-4 content-start"}
             parentClass={''}
           />
@@ -462,7 +440,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
           ))}
           columns={["Element ID", "Name", "Thumbnail", "Delete"]}
           FormComponent={AssetForm}
-          formProps={['effects', 'animation']}
+          formProps={{ type: 'effects', format: 'animation' }} 
           containerClass={"overflow-x-auto h-80 grid grid-rows-1 grid-flow-col gap-4 content-start"}
           parentClass={''}
         />

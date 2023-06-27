@@ -12,7 +12,7 @@ export default function Modal({ isOpen, onRequestClose, children, color = "white
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
 
-        <div className={`inline-block rounded-xl justify-center text-left transform transition-all max-h-200  overflow-y-auto sm:my-8 sm:align-middle sm:min-w-${minWidth} sm:w-${width} sm:max-w-${maxWidth}`}>
+        <div className={`inline-block rounded-xl justify-center text-left transform transition-all max-h-200  overflow-y-auto sm:my-8 sm:align-middle sm:min-w-${minWidth} w-${width} max-w-${maxWidth}`}>
           <div className={`px-6 pt-5 pb-4 sm:p-6 sm:pb-4 shadow-md rounded-xl mx-${mx} bg-${color}`}>
             <div className="sm:flex sm:items-start flex justify-center  text-center">
               {children}

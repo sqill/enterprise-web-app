@@ -60,7 +60,6 @@ export default function SubtitleColorsList({ list, remove, update }) {
 
   function handleEdit(color) {
     setEditColor(color)
-    // edit(id)
   }
 
   return (

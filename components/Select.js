@@ -11,11 +11,6 @@ export default function SelectComponent({ field, form: { touched, errors }, opti
   return (
     <React.Fragment>
       <div className="mt-1 relative">
-        {/* {IconClass && (
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <IconClass className="text-gray-400 text-lg" />
-          </div>
-        )} */}
         <select className={inputClassName} {...field} {...props}>
           <option value="" disabled default>Choose {props.placeholder}</option>
           {options.map(({ label, value }) => (
@@ -23,8 +18,6 @@ export default function SelectComponent({ field, form: { touched, errors }, opti
           ))}
         </select>
       </div>
-
-      {/* {hasError && <p className="mt-2 text-sm text-red-600">{errors[field.name]}</p>} */}
     </React.Fragment>
   );
 }

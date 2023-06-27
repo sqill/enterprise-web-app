@@ -17,8 +17,6 @@ export default function CheckboxComponent({ field, form: { touched, errors }, ti
         <input id={field.name} type="checkbox" className={inputClassName} {...field} {...props} checked={field.value} />
       </div>
       <label htmlFor={field.name} className="ml-2 text-sm font-medium text-containerGray">{title}</label>
-
-      {/* {hasError && <p className="mt-2 text-sm text-red-600">{errors[field.name]}</p>} */}
     </div>
   );
 }

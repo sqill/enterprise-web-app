@@ -3,8 +3,6 @@ import Modal from './Modal'
 import Form from './Dashboard/Assets/CreateForm'
 import Input from './Input'
 
-{/* <div className={`flex grid grid-rows-1 grid-flow-col gap-4 ${variable}`}> */ }
-
 
 function PopupList({ isOpen, setIsOpen, list, renderRows, columns, title, create }) {
     const [searchQuery, setSearchQuery] = useState('');

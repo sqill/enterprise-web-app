@@ -4,18 +4,13 @@ import React from 'react';
 
 function UserRow({ avatar, user, full_name, finder_type, country_code, company_role }) {
   return (
-    <div className="p-2 ml-5 bg-white rounded-xl w-52 flex flex-col text-center items-center content-center">
+    <div className="p-2 ml-5 bg-white rounded-xl w-52 h-52 flex flex-col justify-center text-center items-center content-center">
       {avatar && <img className="h-20 w-20 my-3 rounded-full" src={avatar.thumb} alt="Name avatar" />}
       <div className="text-sm font-normal text-gray-500">
         <div className="font-bold text-containerGray">{full_name}</div>
         <div className="text-sm font-ligth text-containerGray">{user?.email}</div>
       </div>
-      {/* <div className="p-4 whitespace-nowrap text-base font-medium text-gray-900">{finder_type}</div>
-      <div className="p-4 whitespace-nowrap text-base font-medium text-gray-900">
-        <CountryFlag code={country_code} />
-      </div> */}
       <div className="p-2 mt-1 whitespace-nowrap text-base font-bold text-containerGray">{company_role}</div>
-
     </div>
   )
 }
@@ -24,13 +19,9 @@ export default function UsersList({ list, avatar, company }) {
 
   return (
     <React.Fragment>
-      <div className='pt-2 text-xs font-medium text-textGray'>
-        User Settings
-      </div>
       <div className='py-5 font-bold text-textGray'>
         Overview
       </div>
-      {/* <div className="flex-col"> */}
       <div className="flex flex-wrap h-max mb-5">
         <div className="flex min-w-full min-h-full mb-4">
           <div className='pr-5 w-2/6 rounded-xl bg-gray-100 mr-5'>
@@ -78,39 +69,5 @@ export default function UsersList({ list, avatar, company }) {
         </div>
       </div>
     </React.Fragment>
-    // <div className="flex flex-col">
-    //     <div className="overflow-x-auto">
-    //         <div className="align-middle inline-block min-w-full">
-    //             <div className="shadow overflow-hidden">
-    //                 <table className="table-fixed min-w-full divide-y divide-gray-200">
-    //                     <thead className="bg-gray-100">
-    //                         <tr>
-    //                             {/* <th scope="col" className="p-4">
-
-    //                             </th> */}
-    //                             <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-    //                                 Name
-    //                             </th>
-    //                             <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-    //                                 Type
-    //                             </th>
-    //                             <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-    //                                 Country
-    //                             </th>
-    //                             <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-    //                                 Role
-    //                             </th>
-    //                             <th scope="col" className="p-4">
-    //                             </th>
-    //                         </tr>
-    //                     </thead>
-    //                   <tbody className="bg-white divide-y divide-gray-200">
-    //                     {list?.map(finder => <UserRow key={finder.id} {...finder} />)}
-    //                   </tbody>
-    //                 </table>
-    //             </div>
-    //         </div>
-    //     </div>
-    // </div>
   )
 }

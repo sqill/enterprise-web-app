@@ -190,12 +190,6 @@ export default function CreateForm({ create, onSuccess }) {
             </>
           )}
           <div className="mb-6">
-            {/* <Field
-              name="asset"
-              type="file"
-              placeholder="Company address"
-              accept="image/*"
-            /> */}
             <Field name="image">
               {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
                 <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />

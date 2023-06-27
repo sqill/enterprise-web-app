@@ -20,15 +20,6 @@ function Drop({ user, onLogout }) {
         <span className="block text-sm font-medium text-gray-900 truncate">{user.email}</span>
       </div>
       <ul className="py-1" aria-labelledby="dropdown">
-        {/* <li>
-          <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Dashboard</a>
-        </li>
-        <li>
-          <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Settings</a>
-        </li>
-        <li>
-          <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Earnings</a>
-        </li> */}
         <li>
           <button onClick={onLogout} className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 w-full text-left">Sign out</button>
         </li>
@@ -36,7 +27,6 @@ function Drop({ user, onLogout }) {
     </div>
   )
 }
-
 
 export default function Nav({ onClick }) {
   const router = useRouter()

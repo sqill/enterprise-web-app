@@ -4,7 +4,7 @@ import Form from './Dashboard/Assets/CreateForm'
 
 
 
-function AssetForm({ isOpen, setIsOpen, create, props }) {
+function AssetForm({ isOpen, setIsOpen, create, props : {type, format} }) {
   const labels = {
     logos: 'Logo',
     foreground: 'Banner',
@@ -16,10 +16,10 @@ function AssetForm({ isOpen, setIsOpen, create, props }) {
     <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} z="40">
       <div className="flex-row w-full">
         <h3 className="text-sm text-textGray font-bold mb-6">
-          Add a new {labels[props[0]]}
+          Add a new {labels[type]}
         </h3>
 
-        <Form create={create} onSuccess={() => setIsOpen(false)} props={props} />
+        <Form create={create} onSuccess={() => setIsOpen(false)} props={{type, format}} />
       </div>
     </Modal>
   )

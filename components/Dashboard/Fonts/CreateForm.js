@@ -46,10 +46,7 @@ export default function CreateForm({ create, onSuccess }) {
             />
           </div>
           <div className="mb-6">
-            {/* <Field name="font"> */}
             <input name="font" type="file" onChange={e => setFieldValue("font", e.target.files[0])} />
-            {/* </Field> */}
-
           </div>
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}

@@ -44,8 +44,6 @@ export default function CreateForm({ company, create, onSuccess }) {
         >
             {({ status, isValid, isSubmitting, setFieldValue, values }) => (
                 <Form>
-                    {/* <div className='h-20 w-20 self-center' style={style}>
-        </div> */}
                     <div className="mb-6 mx-10">
                         <Field
                             name="color"

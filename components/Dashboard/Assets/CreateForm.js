@@ -40,7 +40,7 @@ const ASSET_TYPES = [
   { label: "Animation", value: "animation" }
 ]
 
-export default function CreateForm({ create, onSuccess, props }) {
+export default function CreateForm({ create, onSuccess, props : {type, format}  }) {
   const { folders } = assetsStore()
   const foldersDropdown = folders.map(f => ({ label: f.name, value: f.name }));
   const [previewUrl, setPreviewUrl] = useState('');
@@ -64,9 +64,9 @@ export default function CreateForm({ create, onSuccess, props }) {
     <Formik
       initialValues={{
         name: '',
-        bundle_type: props[0],
+        bundle_type: type,
         asset: '',
-        asset_type: props[1],
+        asset_type: format,
         assets: [],
         fps: null,
         count: null,
@@ -81,28 +81,6 @@ export default function CreateForm({ create, onSuccess, props }) {
     >
       {({ status, isValid, isSubmitting, setFieldValue, values }) => (
         <Form>
-          {/* <div className="mb-6 grid grid-cols-6 gap-6">
-            {(values.folder == "" || folders.some(f => f.name == values.folder)) && (
-              <div className="col-span-6 sm:col-span-3">
-                <Field
-                  name="folder"
-                  placeholder="Folder"
-                  component={CustomSelectComponent}
-                  options={foldersDropdown}
-                  IconClass={MdcFolderImage}
-                />
-              </div>
-            )}
-            <div className="col-span-6 sm:col-span-3">
-              <Field
-                name="folder"
-                placeholder="New Folder Name"
-                component={CustomInputComponent}
-                required={false}
-                IconClass={MdcFolderImage}
-              />
-            </div>
-          </div> */}
           <div className="mb-6 mx-10">
             <Field
               name="name"
@@ -112,26 +90,6 @@ export default function CreateForm({ create, onSuccess, props }) {
               IconClass={MdcFormatTitle}
             />
           </div>
-          {/* <div className="mb-6">
-            <Field
-              name="asset_type"
-              placeholder="Asset type"
-              required={true}
-              component={CustomSelectComponent}
-              options={ASSET_TYPES}
-              IconClass={MdcShapeOutline}
-            />
-          </div>
-          <div className="mb-6">
-            <Field
-              name="bundle_type"
-              placeholder="Bundle type"
-              required={true}
-              component={CustomSelectComponent}
-              options={BUNDLE_TYPES}
-              IconClass={MdcShapeOutline}
-            />
-          </div> */}
           {values.asset_type === "animation" && (
             <>
               <div className="mb-6">
@@ -196,12 +154,6 @@ export default function CreateForm({ create, onSuccess, props }) {
             </>
           )}
           <div className="mb-6">
-            {/* <Field
-              name="asset"
-              type="file"
-              placeholder="Company address"
-              accept="image/*"
-            /> */}
             <Field name="image">
               {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
                 <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />
