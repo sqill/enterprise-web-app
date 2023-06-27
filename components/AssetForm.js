@@ -4,7 +4,7 @@ import Form from './Dashboard/Assets/CreateForm'
 
 
 
-function AssetForm({ isOpen, setIsOpen, create, props : {type, format} }) {
+function AssetForm({ isOpen, setIsOpen, create, formProps : {type, format} }) {
   const labels = {
     logos: 'Logo',
     foreground: 'Banner',
@@ -19,7 +19,7 @@ function AssetForm({ isOpen, setIsOpen, create, props : {type, format} }) {
           Add a new {labels[type]}
         </h3>
 
-        <Form create={create} onSuccess={() => setIsOpen(false)} props={{type, format}} />
+        <Form create={create} onSuccess={() => setIsOpen(false)} formProps={{type, format}} />
       </div>
     </Modal>
   )

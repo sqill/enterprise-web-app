@@ -30,7 +30,7 @@ function ContainerComponent({ title, list, handleRemove, handleEdit, handleCreat
 
       </div>
       {FormComponent && (
-        <FormComponent isOpen={isOpen} setIsOpen={setIsOpen} create={handleCreate} props={formProps} />
+        <FormComponent isOpen={isOpen} setIsOpen={setIsOpen} create={handleCreate} formProps={formProps} />
       )}
       <PopupList
         isOpen={expanded}

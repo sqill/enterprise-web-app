@@ -40,7 +40,7 @@ const ASSET_TYPES = [
   { label: "Animation", value: "animation" }
 ]
 
-export default function CreateForm({ create, onSuccess, props : {type, format}  }) {
+export default function CreateForm({ create, onSuccess, formProps : {type, format}  }) {
   const { folders } = assetsStore()
   const foldersDropdown = folders.map(f => ({ label: f.name, value: f.name }));
   const [previewUrl, setPreviewUrl] = useState('');
