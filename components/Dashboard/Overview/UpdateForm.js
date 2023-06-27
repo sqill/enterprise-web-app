@@ -59,28 +59,6 @@ export default function UpdateForm({ asset, update, onSuccess }) {
     >
       {({ status, isValid, isSubmitting, values, setFieldValue }) => (
         <Form>
-          {/* <div className="mb-6 grid grid-cols-6 gap-6">
-            {(values.folder == "" || values.folder == null || folders.some(f => f.name == values.folder)) && (
-              <div className="col-span-6 sm:col-span-3">
-                <Field
-                  name="folder"
-                  placeholder="Folder"
-                  component={CustomSelectComponent}
-                  options={foldersDropdown}
-                  IconClass={MdcFolderImage}
-                />
-              </div>
-            )}
-            <div className="col-span-6 sm:col-span-3">
-              <Field
-                name="folder"
-                placeholder="New Folder Name"
-                component={CustomInputComponent}
-                required={false}
-                IconClass={MdcFolderImage}
-              />
-            </div>
-          </div> */}
           <div className="mb-6 mx-10">
             <Field
               name="name"
@@ -89,16 +67,6 @@ export default function UpdateForm({ asset, update, onSuccess }) {
               IconClass={MdcFormatTitle}
             />
           </div>
-          {/* <div className="mb-6">
-            <Field
-              name="bundle_type"
-              title="Bundle type"
-              required={true}
-              component={CustomSelectComponent}
-              options={BUNDLE_TYPES}
-              IconClass={MdcShapeOutline}
-            />
-          </div> */}
           {values.asset_type === "animation" && (
             <>
               <div className="mb-6 mx-10">
