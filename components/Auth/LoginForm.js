@@ -46,7 +46,7 @@ export default function LoginForm({ onSuccess }) {
             <Field
               name="email"
               component={CustomInputComponent}
-              placeholder="test1@gmail.com"
+              placeholder="your@email.com"
               IconClass={MdEmail}
               required={true}
               type="email"
