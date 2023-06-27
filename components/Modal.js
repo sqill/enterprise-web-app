@@ -5,7 +5,7 @@ export default function Modal({ isOpen, onRequestClose, children, color = "white
 
   return (
     <div className={`fixed z-${z} inset-x-0 top-0 bottom-0 overflow-y-auto`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
-      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center roun sm:block sm:p-0">
+      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center round sm:block sm:p-0">
 
         <div onClick={onRequestClose} className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 

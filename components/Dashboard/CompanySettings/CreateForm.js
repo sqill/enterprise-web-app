@@ -15,7 +15,6 @@ function validateForm({ color }) {
 
 export default function CreateForm({ company, create, onSuccess }) {
 
-    let currentColor = "#000000";
     async function handleFormSubmit(values, { setSubmitting, setStatus }) {
         values.colors.push(values.color);
         console.log(values);
@@ -29,11 +28,6 @@ export default function CreateForm({ company, create, onSuccess }) {
             values.colors.pop();
             setStatus(res?.error || "An error occurred")
         }
-    }
-
-    const style =
-    {
-        background: currentColor
     }
 
     return (

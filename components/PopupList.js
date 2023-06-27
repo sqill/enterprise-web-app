@@ -8,21 +8,17 @@ function PopupList({ isOpen, setIsOpen, list, renderRows, columns, title, create
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleSearchQueryChange = (event) => {
-        setSearchQuery(event.target.value);
+        setSearchQuery(event.target.value.toLowerCase());
     };
 
     const filteredList = searchQuery
         ? list.filter((item) => {
-            if (typeof item === 'string') {
-                return item.toLowerCase().includes(searchQuery.toLowerCase());
-            } else {
-                if (item.name !== undefined) {
-                    if (typeof item.name === 'string')
-                        return item.name.toLowerCase().includes(searchQuery.toLowerCase());
-                }
-                else
-                    return item.id.toLowerCase().includes(searchQuery.toLowerCase());
-            }
+            if (typeof item === 'string')
+                return item.toLowerCase().includes(searchQuery);
+            else if (typeof item.name === 'string')
+                return item.name.toLowerCase().includes(searchQuery);
+            else 
+                return item.id.toLowerCase().includes(searchQuery);
         })
         : list;
 
