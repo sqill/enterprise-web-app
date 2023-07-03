@@ -40,7 +40,7 @@ export default function Nav({ onClick }) {
   const avatar = user.entity.avatar?.thumb
 
   return (
-    <nav className="bg-white fixed z-30 w-full h-20 py-1">
+    <nav className="bg-white fixed z-10 w-full h-20 py-1">
       <div className="px-3 py-3 lg:px-5 lg:pl-3 h-16">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">

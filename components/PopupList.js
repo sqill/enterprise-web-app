@@ -46,7 +46,7 @@ function PopupList({ isOpen, setIsOpen, list, renderRows, columns, title, create
                             <h3 className={`w-1/${columns.length} text-xs font-medium text-textGray`} key={column}>{column}</h3>
                         ))}
                     </div>
-                    {renderRows(filteredList)}
+                    {renderRows && (renderRows(filteredList))}
                     <div>
                     </div>
                 </div>
