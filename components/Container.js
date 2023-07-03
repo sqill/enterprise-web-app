@@ -25,7 +25,7 @@ function ContainerComponent({ title, list, handleRemove, handleEdit, handleCreat
           </div>
         </div>
         <div className={containerClass}>
-          {renderRows(list)}
+          {renderRows && (renderRows(list))}
         </div>
 
       </div>

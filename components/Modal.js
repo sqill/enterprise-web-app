@@ -1,6 +1,6 @@
 // import onClickOutside from "react-onclickoutside"
 
-export default function Modal({ isOpen, onRequestClose, children, color = "white", minWidth = "lg", width = "1/3", maxWidth = "full", mx = "0", height = "fit", z = "30" }) {
+export default function Modal({ isOpen, onRequestClose, children, color = "white", minWidth = "lg", width = "1/3", maxWidth = "full", mx = "0", height = "fit", z = "20" }) {
   if (!isOpen) return null;
 
   return (
