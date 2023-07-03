@@ -60,13 +60,11 @@ export default function SubtitleColorsList({ list, remove, update }) {
 
   function handleEdit(color) {
     setEditColor(color)
-    // edit(id)
   }
 
   return (
     <React.Fragment>
       <UpdateForm color={editColor} update={update} setEditColor={setEditColor} />
-
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="align-middle inline-block min-w-full">
@@ -74,9 +72,6 @@ export default function SubtitleColorsList({ list, remove, update }) {
               <table className="table-fixed min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-100">
                   <tr>
-                    {/* <th scope="col" className="p-4">
-
-                    </th> */}
                     <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase">
                       ID
                     </th>

@@ -27,7 +27,7 @@ export default function UpdateForm({ company }) {
 
   return (
     <Formik
-      initialValues={{...company}}
+      initialValues={{ ...company }}
       validate={validateForm}
       onSubmit={handleFormSubmit}
     >
@@ -74,7 +74,7 @@ export default function UpdateForm({ company }) {
                 <button type="button" className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center" onClick={() => arrayHelpers.push('')}>Add a color</button>
               </div>
             )}
-           />
+          />
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
