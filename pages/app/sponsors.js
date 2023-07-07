@@ -5,18 +5,24 @@ import SponsorsList from "../../components/Dashboard/Sponsors/List"
 import SponsorsHeader from "../../components/Dashboard/Sponsors/Header"
 
 import sponsorsStore from '../../stores/sponsors'
+import assetsStore from '../../stores/video_assets'
 
 export default function Sponsors() {
-  const { list, fetch, create, remove } = sponsorsStore()
+  const { list: sponsorList, fetch: fetchSponsors, create:createSponsors, remove:removeSponsor } = sponsorsStore()
+  const { list: assetlist, fetch: fetchAssets, create: createAsset, remove: removeAsset, edit: editAsset, fetchFolders } = assetsStore()
 
   useEffect(() => {
-    fetch()
+    fetchSponsors()
+    fetchAssets()
+    fetchFolders()
   }, [])
 
   return (
     <DashboardLayout hideFooter>
-      <SponsorsHeader create={create} />
-      <SponsorsList list={list} remove={remove} />
+      <SponsorsHeader create={createSponsors} />
+      <SponsorsList list={sponsorList} remove={removeSponsor}
+      assetlist={assetlist} assetCreate={createAsset} assetRemove={removeAsset} assetEdit={editAsset}
+      />
     </DashboardLayout>
   )
 }

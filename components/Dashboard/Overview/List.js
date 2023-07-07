@@ -5,7 +5,7 @@ import BiLinkExternal from '@meronex/icons/bi/BiLinkExternal';
 import MdcPencilOutline from '@meronex/icons/mdc/MdcPencilOutline';
 
 import Modal from '../../Modal'
-import Form from './UpdateForm'
+import UAssetForm from '../Assets/UpdateForm'
 import USubtitleForm from '../SubtitleColors/UpdateForm'
 
 import Container from '../../Container'
@@ -28,7 +28,7 @@ function UpdateForm({ asset, setEditAsset, update }) {
           Update Asset
         </h3>
 
-        <Form asset={asset} update={update} onSuccess={() => setEditAsset(null)} />
+        <UAssetForm asset={asset} update={update} onSuccess={() => setEditAsset(null)} />
       </div>
     </Modal>
   )
@@ -225,11 +225,11 @@ function generateDynamicStyle(fontUrl) {
 
 
 
-export default function OverviewList({ company, updateCompany, assetlist, assetCreate, assetRemove, assetEdit, fontList, fontCreate, fontRemove, subtitleList, subtitleCreate, subtitleEdit, subtitleRemove }) {
+export default function OverviewList({ company, updateCompany, assetlist, assetCreate, assetRemove, assetEdit, fontList, fontCreate, fontFamilies, fontRemove, subtitleList, subtitleCreate, subtitleEdit, subtitleRemove }) {
   const [editAsset, setEditAsset] = React.useState(null)
   const [editSubtitle, setEditSubtitle] = React.useState(null)
-  const [loadedFonts, setLoadedFonts] = React.useState([]);
-  const [fontFamilies, setFontFamilies] = React.useState([]);
+  // const [loadedFonts, setLoadedFonts] = React.useState([]);
+  // const [fontFamilies, setFontFamilies] = React.useState([]);
   const [colors, setColors] = React.useState(company.colors);
 
   const getFontFamily = (fontURL) => {
@@ -238,21 +238,21 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
   };
 
   useEffect(() => {
-    fontList.map(sponsor => {
-      const fontURL = sponsor.font_url;
-      const fontKey = generateFontKey(fontURL)
+    // fontList.map(sponsor => {
+    //   const fontURL = sponsor.font_url;
+    //   const fontKey = generateFontKey(fontURL)
 
-      if (!loadedFonts.includes(fontKey)) {
-        const { style, fontName } = generateDynamicStyle(fontURL)
+    //   if (!loadedFonts.includes(fontKey)) {
+    //     const { style, fontName } = generateDynamicStyle(fontURL)
 
-        const styleElement = document.createElement('style')
-        styleElement.innerHTML = style
-        document.head.appendChild(styleElement)
+    //     const styleElement = document.createElement('style')
+    //     styleElement.innerHTML = style
+    //     document.head.appendChild(styleElement)
 
-        setLoadedFonts((prevLoadedFonts) => [...prevLoadedFonts, fontKey])
-        setFontFamilies((prevFontFamilies) => [...prevFontFamilies, { fontURL, fontName }])
-      }
-    })
+    //     setLoadedFonts((prevLoadedFonts) => [...prevLoadedFonts, fontKey])
+    //     setFontFamilies((prevFontFamilies) => [...prevFontFamilies, { fontURL, fontName }])
+    //   }
+    // })
   }, [])
 
   async function RemoveColorCompany(colorToRemove) {
@@ -441,7 +441,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
           columns={["Element ID", "Name", "Thumbnail", "Delete"]}
           FormComponent={AssetForm}
           formProps={{ type: 'effects', format: 'animation' }} 
-          containerClass={"overflow-x-auto h-80 grid grid-rows-1 grid-flow-col gap-4 content-start"}
+          containerClass={"py-5 overflow-x-auto h-80 grid grid grid-rows-2 grid-flow-col gap-4 content-start"}
           parentClass={''}
         />
       </div>

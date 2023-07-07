@@ -40,13 +40,13 @@ const ASSET_TYPES = [
   { label: "Animation", value: "animation" }
 ]
 
-export default function CreateForm({ create, onSuccess }) {
+export default function CreateForm({ create, onSuccess, sponsor }) {
   const { folders } = assetsStore()
   const foldersDropdown = folders.map(f => ({ label: f.name, value: f.name }));
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
     setSubmitting(true)
-    const res = await create({ video_asset: { ...values, folder: values.folder == "" ? null : values.folder } })
+    const res = await create({ video_asset: { ...values} })
     setSubmitting(false)
     if (res?.success) {
       onSuccess()
@@ -68,35 +68,13 @@ export default function CreateForm({ create, onSuccess }) {
         rows: null,
         loop: false,
         uploadTilesheet: false,
-        folder: ""
+        folder: sponsor
       }}
       validate={validateForm}
       onSubmit={handleFormSubmit}
     >
       {({ status, isValid, isSubmitting, setFieldValue, values }) => (
         <Form>
-          <div className="mb-6 grid grid-cols-6 gap-6">
-            {(values.folder == "" || folders.some(f => f.name == values.folder)) && (
-              <div className="col-span-6 sm:col-span-3">
-                <Field
-                  name="folder"
-                  placeholder="Folder"
-                  component={CustomSelectComponent}
-                  options={foldersDropdown}
-                  IconClass={MdcFolderImage}
-                />
-              </div>
-            )}
-            <div className="col-span-6 sm:col-span-3">
-              <Field
-                name="folder"
-                placeholder="New Folder Name"
-                component={CustomInputComponent}
-                required={false}
-                IconClass={MdcFolderImage}
-              />
-            </div>
-          </div>
           <div className="mb-6">
             <Field
               name="name"

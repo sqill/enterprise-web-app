@@ -59,7 +59,29 @@ export default function UpdateForm({ asset, update, onSuccess }) {
     >
       {({ status, isValid, isSubmitting, values, setFieldValue }) => (
         <Form>
-          <div className="mb-6 mx-10">
+          <div className="mb-6 grid grid-cols-6 gap-6">
+            {(values.folder == "" || values.folder == null || folders.some(f => f.name == values.folder)) && (
+              <div className="col-span-6 sm:col-span-3">
+                <Field
+                  name="folder"
+                  placeholder="Folder"
+                  component={CustomSelectComponent}
+                  options={foldersDropdown}
+                  IconClass={MdcFolderImage}
+                />
+              </div>
+            )}
+            <div className="col-span-6 sm:col-span-3">
+              <Field
+                name="folder"
+                placeholder="New Folder Name"
+                component={CustomInputComponent}
+                required={false}
+                IconClass={MdcFolderImage}
+              />
+            </div>
+          </div>
+          <div className="mb-6">
             <Field
               name="name"
               component={CustomInputComponent}
@@ -67,9 +89,19 @@ export default function UpdateForm({ asset, update, onSuccess }) {
               IconClass={MdcFormatTitle}
             />
           </div>
+          <div className="mb-6">
+            <Field
+              name="bundle_type"
+              title="Bundle type"
+              required={true}
+              component={CustomSelectComponent}
+              options={BUNDLE_TYPES}
+              IconClass={MdcShapeOutline}
+            />
+          </div>
           {values.asset_type === "animation" && (
             <>
-              <div className="mb-6 mx-10">
+              <div className="mb-6">
                 <Field
                   name="fps"
                   component={CustomInputComponent}
@@ -86,7 +118,7 @@ export default function UpdateForm({ asset, update, onSuccess }) {
                   title="Loops?"
                 />
               </div>
-              <div className="mb-6 mx-10">
+              <div className="mb-6">
                 <Field
                   name="columns"
                   component={CustomInputComponent}
@@ -96,7 +128,7 @@ export default function UpdateForm({ asset, update, onSuccess }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6 mx-10">
+              <div className="mb-6">
                 <Field
                   name="rows"
                   component={CustomInputComponent}
@@ -106,7 +138,7 @@ export default function UpdateForm({ asset, update, onSuccess }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6 mx-10">
+              <div className="mb-6">
                 <Field
                   name="count"
                   component={CustomInputComponent}
@@ -120,11 +152,13 @@ export default function UpdateForm({ asset, update, onSuccess }) {
             </>
           )}
 
-          <Field
-            name="replaceAsset"
-            component={CustomCheckboxComponent}
-            title="Replace asset?"
-          />
+          <div>
+            <Field
+              name="replaceAsset"
+              component={CustomCheckboxComponent}
+              title="Replace asset?"
+            />
+          </div>
 
           {values.replaceAsset && (
             <div className="mb-6">
@@ -137,7 +171,7 @@ export default function UpdateForm({ asset, update, onSuccess }) {
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
-          <button disabled={!isValid || isSubmitting} className="text-white gradient hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-center max-w-20" type="submit">
+          <button disabled={!isValid || isSubmitting} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" type="submit">
             Update
           </button>
         </Form>
