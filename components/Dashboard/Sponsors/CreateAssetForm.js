@@ -68,7 +68,8 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
         rows: null,
         loop: false,
         uploadTilesheet: false,
-        folder: sponsor
+        folder: "",
+        sponsor_id: sponsor.id,
       }}
       validate={validateForm}
       onSubmit={handleFormSubmit}

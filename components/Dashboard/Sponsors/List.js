@@ -63,7 +63,7 @@ function AssetListRow({ asset, onRemove, onEdit }) {
 }
 
 
-function SponsorRow({ id, name, email, url, onRemove, onCreateAsset, onRemoveAsset, onEditAsset, list }) {
+function SponsorRow({ id, name, email, url, sponsor, onRemove, onCreateAsset, onRemoveAsset, onEditAsset, list }) {
   return (
     <div className='mr-5'>
     <Container
@@ -80,7 +80,7 @@ function SponsorRow({ id, name, email, url, onRemove, onCreateAsset, onRemoveAss
     ))}
     columns={["Element ID", "Name", "Thumbnail", "Delete"]}
     FormComponent={AssetForm}
-    formProps={{name}}
+    formProps={{sponsor}}
     containerClass={"py-5 overflow-x-auto h-96 w-96 grid grid grid-rows-2 grid-flow-col gap-4 content-start"}
     parentClass={'max-w-min'}
   />
@@ -104,7 +104,7 @@ export default function SponsorsList({ list, remove, assetlist, assetCreate, ass
         Overview
       </div>
       <div className="overflow-x-auto flex mb-5">
-        {list?.map(sponsor => <SponsorRow key={sponsor.id} {...sponsor} onRemove={handleRemove} onCreateAsset={assetCreate} onRemoveAsset={assetRemove} onEditAsset={handleEdit} list={assetlist.filter(asset => asset.folder === sponsor.name && !asset.is_default)} />)}
+        {list?.map(sponsor => <SponsorRow key={sponsor.id} sponsor={sponsor} {...sponsor} onRemove={handleRemove} onCreateAsset={assetCreate} onRemoveAsset={assetRemove} onEditAsset={handleEdit} list={assetlist.filter(asset => asset.is_sponsor_asset && asset.sponsor.id === sponsor.id)} />)}
       </div>
     </React.Fragment>
   )
