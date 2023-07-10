@@ -19,9 +19,10 @@ export default function Sponsors() {
 
   return (
     <DashboardLayout hideFooter>
-      <SponsorsHeader create={createSponsors} />
+      {/* <SponsorsHeader create={createSponsors} /> */}
       <SponsorsList list={sponsorList} remove={removeSponsor}
       assetlist={assetlist} assetCreate={createAsset} assetRemove={removeAsset} assetEdit={editAsset}
+      create={createSponsors}
       />
     </DashboardLayout>
   )

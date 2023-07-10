@@ -22,7 +22,7 @@ import { userAgent } from 'next/server';
 
 function UpdateForm({ asset, setEditAsset, update }) {
   return (
-    <Modal isOpen={Boolean(asset)} onRequestClose={() => setEditAsset(null)} z="40">
+    <Modal isOpen={Boolean(asset)} onRequestClose={() => setEditAsset(null)} z="30">
       <div className="flex-row w-full">
         <h3 className="text-sm text-textGray font-bold mb-6">
           Update Asset
@@ -37,7 +37,7 @@ function UpdateForm({ asset, setEditAsset, update }) {
 
 function UpdateSubtitleForm({ subtitle, setEditAsset, update }) {
   return (
-    <Modal isOpen={Boolean(subtitle)} onRequestClose={() => setEditAsset(null)} z="40">
+    <Modal isOpen={Boolean(subtitle)} onRequestClose={() => setEditAsset(null)} z="30">
       <div className="flex-row w-full">
         <h3 className="text-sm text-textGray font-bold mb-6">
           Update Subtitle Color
