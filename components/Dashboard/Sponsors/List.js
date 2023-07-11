@@ -131,7 +131,7 @@ export default function SponsorsList({ list, remove, assetlist, assetCreate, ass
       </button>
       </div>
       </div>
-      <div className="overflow-x-auto flex mb-5">
+      <div className="overflow-x-auto flex mb-5 pr-5 pb-10">
         {list?.map(sponsor => <SponsorRow key={sponsor.id} sponsor={sponsor} {...sponsor} onRemove={handleRemove} onCreateAsset={assetCreate} onRemoveAsset={assetRemove} onEditAsset={handleEdit} list={assetlist.filter(asset => asset.is_sponsor_asset && asset.sponsor.id === sponsor.id)} />)}
       </div>
       <CreateForm isOpen={isOpen} setIsOpen={setIsOpen} create={create} />
