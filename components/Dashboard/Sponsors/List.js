@@ -125,7 +125,7 @@ export default function SponsorsList({ list, remove, assetlist, assetCreate, ass
       <div>
       </div>
       <div className='pr-5 content-center justify-center'>
-      <button onClick={() => setIsOpen(true)} type="button" className="w-1/2 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
+      <button onClick={() => setIsOpen(true)} type="button" className="w-1/2 gradient text-white bg-primary-600 hover:bg-primary-700 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
         <MdcPlus className="text-xl" />
         Create Sponsor
       </button>

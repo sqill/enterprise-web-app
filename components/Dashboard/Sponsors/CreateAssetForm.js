@@ -76,7 +76,7 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
     >
       {({ status, isValid, isSubmitting, setFieldValue, values }) => (
         <Form>
-          <div className="mb-6">
+          <div className="mb-6 mx-10">
             <Field
               name="name"
               component={CustomInputComponent}
@@ -85,7 +85,7 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
               IconClass={MdcFormatTitle}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-6 mx-10">
             <Field
               name="asset_type"
               placeholder="Asset type"
@@ -95,7 +95,7 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
               IconClass={MdcShapeOutline}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-6 mx-10">
             <Field
               name="bundle_type"
               placeholder="Bundle type"
@@ -107,14 +107,14 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
           </div>
           {values.asset_type === "animation" && (
             <>
-              <div className="mb-6">
+          <div className="mb-6 mx-10">
                 <Field
                   name="uploadTilesheet"
                   component={CustomCheckboxComponent}
                   title="Upload prebuilt tilesheet?"
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 mx-10">
                 <Field
                   name="fps"
                   component={CustomInputComponent}
@@ -124,7 +124,7 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 mx-10">
                 <Field
                   name="loop"
                   component={CustomCheckboxComponent}
@@ -135,7 +135,7 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
           )}
           {values["uploadTilesheet"] && (
             <>
-              <div className="mb-6">
+          <div className="mb-6 mx-10">
                 <Field
                   name="columns"
                   component={CustomInputComponent}
@@ -145,7 +145,7 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 mx-10">
                 <Field
                   name="rows"
                   component={CustomInputComponent}
@@ -155,7 +155,7 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 mx-10">
                 <Field
                   name="count"
                   component={CustomInputComponent}
@@ -168,7 +168,7 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
               </div>
             </>
           )}
-          <div className="mb-6">
+          <div className="mb-6 mx-10">
             <Field name="image">
               {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
                 <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />
@@ -180,7 +180,7 @@ export default function CreateForm({ create, onSuccess, sponsor }) {
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
-          <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" type="submit">
+          <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center max-w-20" type="submit">
             Create
           </button>
         </Form>

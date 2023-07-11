@@ -341,7 +341,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
           />
           <Container
             title="Logos"
-            list={assetlist.filter(asset => asset.bundle_type === 'logos' && !asset.is_default)}
+            list={assetlist.filter(asset => asset.bundle_type === 'logos' && !asset.is_default && !asset.is_sponsor_asset)}
             handleRemove={handleAssetRemove}
             handleEdit={handleEdit}
             handleCreate={assetCreate}
@@ -363,7 +363,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
         <div className='pr-5 w-1/2 max-w-full '>
           <Container
             title="Banner"
-            list={assetlist.filter(asset => asset.bundle_type === 'foreground' && !asset.is_default)}
+            list={assetlist.filter(asset => asset.bundle_type === 'foreground' && !asset.is_default && !asset.is_sponsor_asset)}
             handleRemove={handleAssetRemove}
             handleEdit={handleEdit}
             handleCreate={assetCreate}
@@ -383,7 +383,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
         <div className='pr-5 w-1/2 max-w-full '>
           <Container
             title="Overlay"
-            list={assetlist.filter(asset => asset.bundle_type === 'overlay' && !asset.is_default)}
+            list={assetlist.filter(asset => asset.bundle_type === 'overlay' && !asset.is_default && !asset.is_sponsor_asset)}
             handleRemove={handleAssetRemove}
             handleEdit={handleEdit}
             handleCreate={assetCreate}
@@ -428,7 +428,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
       <div className='pr-5 max-w-full rounded-xl bg-gray-100 mr-5 mb-4'>
         <Container
           title="Effects"
-          list={assetlist.filter(asset => asset.asset_type === 'animation' && !asset.is_default)}
+          list={assetlist.filter(asset => asset.asset_type === 'animation' && !asset.is_default && !asset.is_sponsor_asset)}
           handleRemove={handleAssetRemove}
           handleEdit={handleEdit}
           handleCreate={assetCreate}
