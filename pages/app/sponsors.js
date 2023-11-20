@@ -14,7 +14,7 @@ export default function Sponsors() {
   }, [])
 
   return (
-    <DashboardLayout hideFooter>
+    <DashboardLayout hideFooter selectedPage={"sponsors"}>
       <SponsorsHeader create={create} />
       <SponsorsList list={list} remove={remove} />
     </DashboardLayout>

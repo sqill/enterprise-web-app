@@ -327,13 +327,13 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             handleRemove={handleAssetRemove}
             handleEdit={handleEdit}
             handleCreate={updateCompany}
-            renderRows={colors => colors.map((color, index) => (
+            renderRows={colors !== null ? colors => colors.map((color, index) => (
               <ColorRow key={index} name={color} onRemove={handleColorRemove} onEdit={handleEdit} />
-            ))}
+            )) : null }
             renderList={
-              colors => colors.map((color, index) => (
+              colors !== null ? colors => colors.map((color, index) => (
                 <ColorListRow key={index} id={index} name={color} onRemove={handleColorRemove} onEdit={handleEdit} />
-              ))}
+              )) : null}
             columns={["Element ID", "Hex", "Preview", "Delete"]}
             FormComponent={ColorForm}
             containerClass={"overflow-x-auto h-40 grid grid-rows-1 grid-flow-col gap-4 content-start"}

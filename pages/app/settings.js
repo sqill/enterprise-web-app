@@ -18,7 +18,7 @@ export default function Settings() {
   }, [])
 
   return (
-    <DashboardLayout hideFooter>
+    <DashboardLayout hideFooter selectedPage={"settings"}>
       {/* <UsersHeader /> */}
       <UsersList list={list} avatar={user.entity.avatar?.thumb} company={user.entity.company} />
       <UsersFooter list={list} />
