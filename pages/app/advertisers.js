@@ -68,8 +68,8 @@ const Advertisers = () => {
             </div>
            
         </DashboardLayout>
-         {createHandlePopup ? <CreateHandlePopup createHandleFunction={createHandle} /> : null}
-         {createAdvertiserPopup ? <CreateAdvertiserPopup createAdvertiserFunction={createAdvertiser} createAdvertiser= {createAdvertiser}/> : null}
+         {createHandlePopup ? <CreateHandlePopup createHandle={createHandle} /> : null}
+         {createAdvertiserPopup ? <CreateAdvertiserPopup  createAdvertiser= {createAdvertiser}/> : null}
          </div>
     )
 }
