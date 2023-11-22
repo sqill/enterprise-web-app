@@ -46,7 +46,8 @@ export const AdvertiserTables = (props) => {
             </div>
             <div className="flex justify-end">
                 {props.tableName=="Handles" ? <button onClick={() => props.createHandle()} className="flex items-center w-11 h-11 gradient text-white bg-primary-600 hover:bg-primary-700  items-center justify-center rounded-full text-4xl  text-center cursor-pointer"><span>+</span></button>
-                : <button  onClick={() => props.createAdvertiser()}className="flex items-center w-11 h-11 gradient text-white bg-primary-600 hover:bg-primary-700  items-center justify-center rounded-full text-4xl  text-center cursor-pointer "><span>+</span></button>}
+                : props.tableName=="Advertisers" ? <button  onClick={() => props.createAdvertiser()}className="flex items-center w-11 h-11 gradient text-white bg-primary-600 hover:bg-primary-700  items-center justify-center rounded-full text-4xl  text-center cursor-pointer "><span>+</span></button> 
+                : <button  onClick={() => props.createAssets()}className="flex items-center w-11 h-11 gradient text-white bg-primary-600 hover:bg-primary-700  items-center justify-center rounded-full text-4xl  text-center cursor-pointer "><span>+</span></button>}
                 
             </div>
        
