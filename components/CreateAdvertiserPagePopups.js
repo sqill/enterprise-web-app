@@ -10,7 +10,7 @@ const CreateHandlePopup = (props) => {
     return (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center 	
         bg-white bg-opacity-60 z-20">
-            <div className="w-1/3 min-w-min h-3/5 flex items-center justify-center bg-white border-2 p-4 shadow-2xl rounded-3xl" >
+            <div className="w-1/3 min-w-min h-4/6 flex items-center justify-center bg-white border-2 p-4 shadow-2xl rounded-3xl" >
                 <div className="flex flex-col w-full p-4 h-full justify-between">  
                     
                     <div>
@@ -134,7 +134,7 @@ const ListAssetsPopup = (props) => {
                             <div><span onClick={() => props.listAssets()} className="text-gray-500  w-full flex justify-end w-3.5 h-3.5 cursor-pointer"><RxCross2 /></span></div>
                         </div>
 
-                        <div className="flex w-full gap-6 flex-col items-center px-2  ">
+                        <div className="flex h-5/6 gap-6 flex-col items-center px-2 ">
                             <div className="flex px-2 w-4/5 items-center">
                                 <h1 className="w-1/6 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Element ID</h1>
                                 <h1 className="w-1/5 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Type</h1>
@@ -145,6 +145,12 @@ const ListAssetsPopup = (props) => {
                             <div className="flex w-full justify-center items-center">
                                 <AssetsRow/>
                             </div>
+                        </div>
+                        <div className="flex items-center justify-center w-full">
+                        <button   onClick={(e) => {e.stopPropagation(); // Stop the event propagation
+                                                    props.createAssets();
+                                                    }}className="z-20 flex items-center w-11 h-11 gradient text-white bg-primary-600 hover:bg-primary-700  items-center justify-center rounded-full text-center cursor-pointer text-2xl">+</button>
+
                         </div>
 
                     </div>

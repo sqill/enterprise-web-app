@@ -59,12 +59,12 @@ const Advertisers = () => {
         <div>
         <DashboardLayout hideFooter selectedPage={"advertisers"}>
             <div className="flex flex-col gap-8 pr-10">
-                <h2 className="text-gray-600 font-bold text-xs font-poppins">User Sponsors</h2>
+                <h2 className="text-gray-400 font-bold text-xs font-poppins">User Sponsors</h2>
                 <div className="flex flex-col gap-8">
-                    <h1 className="text-gray-600 font-bold text-base font-poppins">Overview</h1>
+                    <h1 className="text-gray-500 font-bold text-base font-poppins">Overview</h1>
                     <div className="flex flex-row gap-6">
-                        <AdvertiserTables tableSize = {"small"} tableName={"Handles"} list ={handleList} createHandle={createHandle} createAdvertiser={createAdvertiser} />
-                        <AdvertiserTables tableSize = {"big"} tableName={"Advertisers"} list ={advertiserList} createHandle={createHandle} createAdvertiser={createAdvertiser}/>
+                        <AdvertiserTables tableSize = {"small"} tableName={"Handles"} list ={handleList} tableHeader={"Handles"} createHandle={createHandle} createAdvertiser={createAdvertiser} />
+                        <AdvertiserTables tableSize = {"big"} tableName={"Advertisers"} list ={advertiserList} tableHeader={"Advertisers"} createHandle={createHandle} createAdvertiser={createAdvertiser}/>
                     </div>
                     
                 </div>
@@ -81,7 +81,7 @@ const Advertisers = () => {
          {createHandlePopup ? <CreateHandlePopup createHandle={createHandle} /> : null}
          {createAdvertiserPopup ? <CreateAdvertiserPopup  createAdvertiser= {createAdvertiser}/> : null}
          {createAssetsPopup ? <CreateAssetsPopup createAssets= {createAssets}/> : null}
-         {listAssetsPopup ? <ListAssetsPopup listAssets={listAssets} /> : null}
+         {listAssetsPopup ? <ListAssetsPopup listAssets={listAssets} createAssets={createAssets}/> : null}
          </div>
     )
 }
