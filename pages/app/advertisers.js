@@ -48,6 +48,7 @@ const Advertisers = () => {
     }
 
     const createAssets = () => {
+        (listAssetsPopup ? setListAssetsPopup(!listAssetsPopup) : null)
         setCreateAssetsPopup(!createAssetsPopup)
     }
 

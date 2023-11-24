@@ -27,22 +27,22 @@ const CreateHandlePopup = (props) => {
                               
                             )}
                         </span>
-                        <h1 className="text-xs font-poppins text-gray-500 font-bold">{props.type === "assets" ? "Add a New Asset"   : "Add a New Handle" }</h1>
+                        <h1 className="text-sm font-poppins text-gray-400 font-bold">{props.type === "assets" ? "Add a New Asset"   : "Add a New Handle" }</h1>
                         <div className="flex flex-col items-start w-9/12">
-                            <label className="text-gray-500 font-poppins text-base font-normal  tracking-wide">{props.type === "assets" ? "Asset name"   : "Handle name" }</label>
+                            <label className="text-gray-400 font-poppins text-base font-normal  tracking-wide">{props.type === "assets" ? "Asset name"   : "Handle name" }</label>
                             <input type="text" className="border border-gray-200 rounded-3xl w-full h-10 px-5 border-1 text-gray-900 sm:text-sm  focus:ring-greenSqill-500 focus:border-greenSqill-500 block" />
                         </div>
                             {props.type ==="assets" ? (
                                 <div className="flex flex-col items-start  w-9/12">
-                                    <label className="text-gray-500 font-poppins text-base font-normal  tracking-wide">Asset Type</label>
+                                    <label className="text-gray-400 font-poppins text-base font-normal  tracking-wide">Asset Type</label>
                                     <input type="text" className="border border-gray-200 rounded-3xl w-full h-10 px-5 border-1 text-gray-900 sm:text-sm  focus:ring-greenSqill-500 focus:border-greenSqill-500 block" />
 
                                 </div>
                             ) : (<div className="flex flex-col items-start gap-4 w-9/12">
-                                    <label className="text-gray-500 font-poppins text-base font-normal  tracking-wide">Engagement Potential</label>
+                                    <label className="text-gray-400 font-poppins text-base font-normal  tracking-wide">Engagement Potential</label>
                                     <div className="flex gap-2 w-full flex justify-between">
                                     <div className="flex gap-2 items-center" >
-                                        <label className="text-gray-500 font-poppins text-base font-normal  tracking-tighter"for="minValue">Min</label>
+                                        <label className="text-gray-400 font-poppins text-base font-normal  tracking-tighter"for="minValue">Min</label>
                                         <select className=" border border-gray-200 rounded-3xl border-1 text-gray-900 sm:text-sm  focus:ring-greenSqill-500 focus:border-greenSqill-500 block" id="minValue">             
                                             <option className="font-poppins text-base font-normal"  value="0">0</option>
                                             <option className="font-poppins text-base font-normal"  value="5000">5000</option>
@@ -52,7 +52,7 @@ const CreateHandlePopup = (props) => {
                                         </div>
 
                                         <div className="flex items-center gap-2">
-                                        <label className="text-gray-500 font-poppins text-base font-normal  tracking-tighter" for="maxValue">Max</label>
+                                        <label className="text-gray-400 font-poppins text-base font-normal  tracking-tighter" for="maxValue">Max</label>
                                         <select className="border border-gray-200 rounded-3xl text-base font-poppins border-1 text-gray-900 sm:text-sm  focus:ring-greenSqill-500 focus:border-greenSqill-500 block" id="maxValue">     
                                             <option className="font-poppins text-base font-normal" value="0">0</option>
                                             <option className="font-poppins text-base font-normal"  value="10000">10000</option>
@@ -64,13 +64,13 @@ const CreateHandlePopup = (props) => {
                             </div> )}
                         <div className="flex flex-col gap-2 w-9/12">
                             
-                            <h1 className="font-poppins text-base font-normal text-gray-500 ">{props.type === "assets" ? "Asset File"   : "Handle Avatar" }</h1>
+                            <h1 className="font-poppins text-base font-normal text-gray-400 ">{props.type === "assets" ? "Asset File"   : "Handle Avatar" }</h1>
                             
                             <div className="flex gap-2 w-full h-16 items-center">
                                 <img className="w-16" src="/images/add_image.png"></img>
                                 <div className=" flex flex-col items-center border border-gray-200 rounded-3xl p-4 justify-center text-center">
-                                    <p className="text-xs font-poppins text-gray-500 font-normal"><span className="text-black">Click to Upload</span> or drag and drop</p>
-                                    <p className=" text-xs font-poppins text-gray-500 font-normal ">PNG files with transparent background (max. 1080X1080px)</p>
+                                    <p className="text-xs font-poppins text-gray-400 font-normal"><span className="text-black">Click to Upload</span> or drag and drop</p>
+                                    <p className=" text-xs font-poppins text-gray-400 font-normal ">PNG files with transparent background (max. 1080X1080px)</p>
                                 </div>
                             </div>
                         </div>
@@ -91,14 +91,14 @@ const CreateAdvertiserPopup = (props) => {
                 <div className="flex flex-col w-full p-4 h-full justify-between">
                     <div><span onClick={() => props.createAdvertiser()} className="text-gray-500  w-full flex justify-end w-3.5 h-3.5 cursor-pointer"><RxCross2 /></span></div>
                     <div className="flex flex-col items-center justify-between h-full">
-                        <h1>Create Advertiser</h1>
+                        <h1 className="text-gray-400 font-bold text-sm  font-poppins">Create Advertiser</h1>
                         
                         <div className='flex flex-col w-9/12'>
-                            <label className="text-gray-500 font-poppins text-base font-normal  tracking-wide">Advertiser Name</label>
+                            <label className="text-gray-400 font-poppins text-base font-normal  tracking-wide">Advertiser Name</label>
                             <input type="text" className="border border-gray-200 rounded-3xl w-full h-10 px-5 border-1 text-gray-900 sm:text-sm  focus:ring-greenSqill-500 focus:border-greenSqill-500 block " />
                         </div>
                         <div className="flex flex-col w-9/12">
-                            <label className="text-gray-500 font-poppins text-base font-normal  tracking-wide">Advertiser Email</label>
+                            <label className="text-gray-400 font-poppins text-base font-normal  tracking-wide">Advertiser Email</label>
                             <input type="text" className="border border-gray-200 rounded-3xl w-full h-10 px-5border-1 text-gray-900 sm:text-sm  focus:ring-greenSqill-500 focus:border-greenSqill-500 block" />
                         </div>
                         <button className="w-2/5 min-w-min font-poppins text-xs font-normal  flex items-center w-40 h-11 gradient text-white bg-primary-600 hover:bg-primary-700  items-center justify-center rounded-3xl   text-white text-center font-poppins text-xs font-normal cursor-pointer ">Add Advertiser</button>
@@ -124,7 +124,7 @@ const ListAssetsPopup = (props) => {
                     <div className="flex flex-col gap-8 w-full h-full p-4 ">
                         <div className="flex items-center justify-between ">
                             <div className="flex items-center gap-4">
-                                <h1>{props.advertiserName}</h1>
+                                <h1 className="text-gray-400 font-bold text-base  font-poppins">{props.advertiserName} Assets</h1>
                                 <span className="rounded-full bg-gray-400 w-4 h-4 flex items-center justify-center text-white text-center font-roboto text-xs font-bold leading-normal tracking-tight">i</span>
                             </div>
                             <div className="border border-green-600 w-1/4 rounded-3xl bg-white h-10 flex items-center z-40" >
@@ -162,14 +162,34 @@ ja a
 }
 
 const AssetsRow = (props) => {
+
+    const [kebabPopupOpen, setKebabPopupOpen] = useState(false);
+    
+    const handleKebabPopup = () => {
+        setKebabPopupOpen(!kebabPopupOpen);
+        console.log(kebabPopupOpen)
+    }
+
     return (
         <div className="flex justify-between w-4/5 bg-white rounded-full px-2 h-16 ">
             <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">1</span>
             <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image</span>
             <span className="w-1/3 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
             <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
-            <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold"><GoKebabHorizontal className="text-gray-500 " /></span>
+            <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold "  >
+                <span className="relative text-gray-500 cursor-pointer"  ><GoKebabHorizontal onClick={() => {handleKebabPopup()}}  /> 
+                {kebabPopupOpen && (
+                    <div className="absolute z-50 top-full left-full transform -translate-x-full bg-white shadow-md pl-2 pr-5 py-2 rounded-md">
+                        <div className="w-full h-full flex flex-col text-left gap-2 ">
+                            <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">View</span>
+                            <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Edit</span>
+                            <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Delete</span>
+                        </div>
+                    </div>
+            )}</span>
+                </span>
         </div>
+      
     )
 
 }
