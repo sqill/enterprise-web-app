@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { GoKebabHorizontal } from "react-icons/go";
 
+
 const CreateHandlePopup = (props) => {
 
     const [chosenHandleImage, setChosenHandleImage] = useState(null);
@@ -142,8 +143,8 @@ const ListAssetsPopup = (props) => {
                                 <h1 className="w-1/5 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Thumbnail</h1>
                                 <h1 className="w-1/6 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold" >Action</h1>
                             </div>
-                            <div className="flex w-full justify-center items-center">
-                                <AssetsRow/>
+                            <div className="flex w-4/5 justify-center items-center">
+                                <AssetsRow rowType="assets" />
                             </div>
                         </div>
                         <div className="flex items-center justify-center w-full">
@@ -171,25 +172,41 @@ const AssetsRow = (props) => {
     }
 
     return (
-        <div className="flex justify-between w-4/5 bg-white rounded-full px-2 h-16 ">
-            <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">1</span>
-            <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image</span>
-            <span className="w-1/3 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
-            <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
-            <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold "  >
-                <span className="relative text-gray-500 cursor-pointer"  ><GoKebabHorizontal onClick={() => {handleKebabPopup()}}  /> 
-                {kebabPopupOpen && (
-                    <div className="absolute z-50 top-full left-full transform -translate-x-full bg-white shadow-md pl-2 pr-5 py-2 rounded-md">
-                        <div className="w-full h-full flex flex-col text-left gap-2 ">
-                            <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">View</span>
-                            <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Edit</span>
-                            <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Delete</span>
-                        </div>
-                    </div>
-            )}</span>
-                </span>
+        <div className="w-full">
+            {props.rowType === "assets" ? (
+            <div className="flex justify-between bg-white w-full rounded-full px-2 h-16 ">
+            
+                    
+                        <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">1</span>
+                        <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image</span>
+                        <span className="w-1/3 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
+                        <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
+                        <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold "  >
+                            <span className="relative text-gray-500 cursor-pointer"  ><GoKebabHorizontal onClick={() => {handleKebabPopup()}}  /> 
+                            {kebabPopupOpen && (
+                                <div className="absolute z-50 top-full left-full transform -translate-x-full bg-white shadow-md pl-2 pr-5 py-2 rounded-md">
+                                    <div className="w-full h-full flex flex-col text-left gap-2 ">
+                                        <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">View</span>
+                                        <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Edit</span>
+                                        <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Delete</span>
+                                    </div>
+                                </div>
+                    
+                        )}</span>
+                        </span>
+            </div>
+            ) : props.rowType === "ads" ? (
+            <div className="flex items-center bg-white w-full rounded-full px-8 h-16">
+                <div className="flex justify-between w-3/4 items-center">
+                    <span className="h-8 w-8 rounded-full gradient"></span>
+                    <span className="text-gray-400 text-center font-poppins text-sm font-bold">pantene</span>
+                    <span className="text-gray-400 text-center font-poppins text-sm font-base">pantene@gmail.com</span>
+                    <span className="text-gray-400 text-center font-poppins text-sm font-base">assetName</span>
+                </div>
+            </div>
+            ) : null
+            }
         </div>
-      
     )
 
 }

@@ -59,7 +59,7 @@ const Advertisers = () => {
     return (
         <div>
         <DashboardLayout hideFooter selectedPage={"advertisers"}>
-            <div className="flex flex-col gap-8 pr-10">
+            <div className="flex flex-col gap-8 pr-10 pb-4">
                 <h2 className="text-gray-400 font-bold text-xs font-poppins">User Sponsors</h2>
                 <div className="flex flex-col gap-8">
                     <h1 className="text-gray-500 font-bold text-base font-poppins">Overview</h1>

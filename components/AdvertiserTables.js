@@ -1,5 +1,6 @@
 import react, {useState} from "react"
-import { GoKebabHorizontal } from "react-icons/go";
+
+import TablesHeader from "./TablesHeader";
 
 
 export const AdvertiserTables = (props) => {
@@ -16,12 +17,8 @@ export const AdvertiserTables = (props) => {
                 }
             }}>
            <div className="flex flex-col gap-4 ">
-           <div className="flex justify-between items-center ">
-                <div className="flex gap-4 items-center">
-                    <h1 className="text-gray-400 font-bold text-base  font-poppins">{props.tableHeader}</h1>
-                    <span className="rounded-full bg-gray-400 w-4 h-4 flex items-center justify-center text-white text-center font-roboto text-xs font-bold leading-normal tracking-tight">i</span>
-                </div>
-                <GoKebabHorizontal className="text-gray-500"/>
+            <div>
+                <TablesHeader title={props.tableName}/>
             </div>
             { props.tableName=="Handles" ? (
             <div className="flex flex-wrap">

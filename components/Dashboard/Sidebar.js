@@ -12,6 +12,7 @@ import MdSettings from '@meronex/icons/ios/MdSettings';
 import BsHeart from '@meronex/icons/bs/BsHeart';
 import AiOutlineSetting from '@meronex/icons/ai/AiOutlineSetting';
 import BsGearWide from '@meronex/icons/bs/BsGearWide';
+import { BsMegaphone } from "react-icons/bs";
 
 export default function Sidebar({ opened = false, ...props } ) {
   const className = cx(
@@ -45,6 +46,14 @@ export default function Sidebar({ opened = false, ...props } ) {
                   <BsUpload className="text-gray-900" />
                   <span className="ml-3 flex-1 whitespace-nowrap">Video & Image</span>
 
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/app/ads"
+                  className= {`text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10 ${selectedPage=="ads" ? 'bg-greenSqill-500 gradient' : ''}`} >
+                    <BsMegaphone  className="text-gray-900" />
+                    <span className="ml-3 flex-1 whitespace-nowrap">Ads</span>             
                 </Link>
               </li>
               <li>
