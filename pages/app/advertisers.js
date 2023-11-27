@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from 'react';
 import DashboardLayout from '../../components/Dashboard/Layout';
 import { AdvertiserTables } from '../../components/AdvertiserTables';
-import { CreateAdvertiserPopup,CreateHandlePopup, CreateAssetsPopup, ListAssetsPopup } from '../../components/CreateAdvertiserPagePopups';
+import { CreateAdvertiserPopup,CreateHandlePopup, CreateAssetsPopup, ListAssetsPopup } from '../../components/AdvertisersAdsPagesPopups';
 
 
 const Advertisers = () => {
@@ -29,7 +29,7 @@ const Advertisers = () => {
         "id": 3,
         "name": "pantene",
         "image": "https://i.imgur.com/Hq0R0gs.png",
-        "email": ""
+        "email": "pantene@gmail.com"
     }]
 
     const [createHandlePopup, setCreateHandlePopup] =useState(false)
@@ -43,7 +43,7 @@ const Advertisers = () => {
     const createAdvertiser = () => {
         setCreateAdvertiserPopup(!createAdvertiserPopup)
     }
-    const listAssets = () => {
+    const listAssetsFunction = () => {
         setListAssetsPopup(!listAssetsPopup)	
     }
 
@@ -72,7 +72,7 @@ const Advertisers = () => {
                 <div className="grid grid-cols-2 gap-4">
                     {advertiserList.map((item) => (
                         <div key={item.id} className=" ">
-                        <AdvertiserTables tableSize = {"medium"} tableName={"Assets"} tableHeader={item.name} list ={advertiserList} createAssets={createAssets} listAssets={listAssets} />
+                        <AdvertiserTables tableSize = {"medium"} tableName={"Assets"} tableHeader={item.name} list ={advertiserList} createAssets={createAssets} listAssets={listAssetsFunction} />
                         </div>
                     ))}
                 </div>
@@ -82,7 +82,7 @@ const Advertisers = () => {
          {createHandlePopup ? <CreateHandlePopup createHandle={createHandle} /> : null}
          {createAdvertiserPopup ? <CreateAdvertiserPopup  createAdvertiser= {createAdvertiser}/> : null}
          {createAssetsPopup ? <CreateAssetsPopup createAssets= {createAssets}/> : null}
-         {listAssetsPopup ? <ListAssetsPopup listAssets={listAssets} createAssets={createAssets}/> : null}
+         {listAssetsPopup ? <ListAssetsPopup listAssets={listAssetsFunction} createAssets={createAssets} type="assetsList"/> : null}
          </div>
     )
 }

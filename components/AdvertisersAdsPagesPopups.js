@@ -125,17 +125,18 @@ const ListAssetsPopup = (props) => {
                     <div className="flex flex-col gap-8 w-full h-full p-4 ">
                         <div className="flex items-center justify-between ">
                             <div className="flex items-center gap-4">
-                                <h1 className="text-gray-400 font-bold text-base  font-poppins">{props.advertiserName} Assets</h1>
+                                <h1 className="text-gray-400 font-bold text-base  font-poppins">{props.type==="assetsList" ? (`${props.advertiserName} Assets`) : props.type==="adsList" ? (`Ads`) : null } </h1>
                                 <span className="rounded-full bg-gray-400 w-4 h-4 flex items-center justify-center text-white text-center font-roboto text-xs font-bold leading-normal tracking-tight">i</span>
                             </div>
                             <div className="border border-green-600 w-1/4 rounded-3xl bg-white h-10 flex items-center z-40" >
                                 <img src=""></img>
                                 <input className="w-full border border-green-600 rounded-3xl bg-white h-10 z-50 "/>
                              </div> 
-                            <div><span onClick={() => props.listAssets()} className="text-gray-500  w-full flex justify-end w-3.5 h-3.5 cursor-pointer"><RxCross2 /></span></div>
+                            <div>{props.type==="assetsList" ? (<span onClick={() => props.listAssets()}  className="text-gray-500  w-full flex justify-end w-3.5 h-3.5 cursor-pointer"><RxCross2 /></span>) : props.type==="adsList" ? (<span onClick={() => props.listAdsFunction()}  className="text-gray-500  w-full flex justify-end w-3.5 h-3.5 cursor-pointer"><RxCross2 /></span>): null}</div>
                         </div>
 
                         <div className="flex h-5/6 gap-6 flex-col items-center px-2 ">
+                            {props.type ==="assetsList" ? (
                             <div className="flex px-2 w-4/5 items-center">
                                 <h1 className="w-1/6 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Element ID</h1>
                                 <h1 className="w-1/5 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Type</h1>
@@ -143,8 +144,30 @@ const ListAssetsPopup = (props) => {
                                 <h1 className="w-1/5 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Thumbnail</h1>
                                 <h1 className="w-1/6 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold" >Action</h1>
                             </div>
+                            ) : props.type ==="adsList" ? (
+                                <div className="flex px-4 w-4/5 items-center">
+                                    <div className="w-1/6 flex items-center  text-gray-500 text-center font-poppins text-sm font-bold">
+                                        <input type="checkbox" className="w-1/8 border border-gray-400 rounded-1xl"/>
+                                        <h1 className="w-4/5 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Status</h1>
+                                    </div>
+                                    <h1 className="w-1/6 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Handle</h1>
+                                    <h1 className="w-5/12 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Email</h1>
+                                    <h1 className="w-1/6 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Day</h1>
+                                    <h1 className="w-1/12 flex items-center justify-center text-gray-500 text-center font-poppins text-sm font-bold">Action</h1>
+                                </div>
+                            ) : null}
                             <div className="flex w-4/5 justify-center items-center">
-                                <AssetsRow rowType="assets" />
+                                {props.type==="assetsList" ? (
+                                <AssetsRow rowType="assetsList" />
+                                ) : props.type==="adsList" ? (
+                                    <div className="w-full gap-4 flex flex-col">
+                                    {props.adsList.map((item) => (
+                                        <div key={item.id} className="w-full">
+                                            <AssetsRow rowType="adsList" item={item} />
+                                        </div>
+                                    ))}
+                                    </div>
+                                ): null }
                             </div>
                         </div>
                         <div className="flex items-center justify-center w-full">
@@ -156,7 +179,7 @@ const ListAssetsPopup = (props) => {
 
                     </div>
                 </div>
-ja a
+
 
         </div>
     )
@@ -164,6 +187,7 @@ ja a
 
 const AssetsRow = (props) => {
 
+    console.log(props)
     const [kebabPopupOpen, setKebabPopupOpen] = useState(false);
     
     const handleKebabPopup = () => {
@@ -173,41 +197,116 @@ const AssetsRow = (props) => {
 
     return (
         <div className="w-full">
-            {props.rowType === "assets" ? (
+            
             <div className="flex justify-between bg-white w-full rounded-full px-2 h-16 ">
             
-                    
+                {props.rowType ==="assetsList" ? (        
+                    <>
                         <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">1</span>
                         <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image</span>
                         <span className="w-1/3 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
                         <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
-                        <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold "  >
-                            <span className="relative text-gray-500 cursor-pointer"  ><GoKebabHorizontal onClick={() => {handleKebabPopup()}}  /> 
-                            {kebabPopupOpen && (
-                                <div className="absolute z-50 top-full left-full transform -translate-x-full bg-white shadow-md pl-2 pr-5 py-2 rounded-md">
-                                    <div className="w-full h-full flex flex-col text-left gap-2 ">
-                                        <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">View</span>
-                                        <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Edit</span>
-                                        <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Delete</span>
-                                    </div>
+                    </>
+                ) : props.rowType==="adsList" ? (
+                    <>
+                        <div className="w-1/6 pl-2 flex items-center  text-gray-500 text-center font-poppins text-xs font-bold">
+                            <input type="checkbox" className="w-1/8 border border-gray-400 rounded-1xl"/>
+                            <div className= {`w-4/5 flex items-center justify-center white-700 font-bold font-poppins text-xs `}><span className={`text-white font-bold font-poppins text-xs rounded-2xl w-3/5 min-w-min py-1 px-2 ${props.item.status ==="active" ? 'gradient ' : 'red-gradient'}`}>{props.item.status}</span></div>
+                            
+                        </div>
+                            <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.item.handle}</span>
+                            <span className="w-5/12 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.item.email}</span>
+                            <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.item.day}</span>
+                        
+                    </>
+                ) : null
+                
+                
+                }
+                 
+                    <span className={`${props.rowType === 'adsList' ? 'w-1/12' : 'w-1/6'} flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold`}  >
+                
+            
+                        <span className="relative text-gray-500 cursor-pointer"  ><GoKebabHorizontal onClick={() => {handleKebabPopup()}}  /> 
+                        {kebabPopupOpen && (
+                            <div className="absolute z-50 top-full left-full transform -translate-x-full bg-white shadow-md pl-2 pr-5 py-2 rounded-md">
+                                <div className="w-full h-full flex flex-col text-left gap-2 ">
+                                    <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">View</span>
+                                    <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Edit</span>
+                                    <span className="text-xs text-gray-500 font-poppins font-normal cursor-pointer">Delete</span>
                                 </div>
-                    
-                        )}</span>
+                            </div>
+                
+                    )}</span>
                         </span>
             </div>
-            ) : props.rowType === "ads" ? (
-            <div className="flex items-center bg-white w-full rounded-full px-8 h-16">
-                <div className="flex justify-between w-3/4 items-center">
-                    <span className="h-8 w-8 rounded-full gradient"></span>
-                    <span className="text-gray-400 text-center font-poppins text-sm font-bold">pantene</span>
-                    <span className="text-gray-400 text-center font-poppins text-sm font-base">pantene@gmail.com</span>
-                    <span className="text-gray-400 text-center font-poppins text-sm font-base">assetName</span>
-                </div>
-            </div>
-            ) : null
-            }
+            
+
+
         </div>
     )
 
 }
-export { CreateAdvertiserPopup, CreateHandlePopup, CreateAssetsPopup, AssetsRow, ListAssetsPopup };
+
+const AdsPageMiniPopups = (props) => {
+    console.log(props )
+    return (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center 	
+            bg-white bg-opacity-60 z-20">
+            <div className="w-1/2 min-w-min h-1/3 flex items-center justify-center bg-white border-2   z-30 shadow-2xl  rounded-3xl" >
+                <div className="flex flex-col h-full w-full  px-8 p-6 pb-4 justify-between items-center">
+                    <div className="flex justify-between w-full">
+                        <div className="w-1/4"></div>
+                        <h1 className="w-1/2 text-center font-poppins font-bold text-base text-gray-400">{props.type === "sendReport" && (
+                            <>
+                                <p>Send an automatic report of the monthly interactions</p>
+                                <p>to your sponsor</p>
+                            </>
+                        )} </h1>
+                        <span onClick={
+                            props.type === "sendReport"
+                            ? () => props.handleReportPopup()
+                            : props.type === "confirmCpms"
+                            ? () => props.handleConfirmCpmPopup()
+                            : null
+                        }className="text-gray-500  w-1/4 flex justify-end w-3.5 h-3.5 cursor-pointer"><RxCross2 /></span>
+
+                    </div>
+                    {props.type==="confirmCpms" ? (
+                        <div className="flex w-3/5 text-center justify-center">
+                            <h1 className="text-black font-bold text-2xl">Confirm new CPM’s</h1>
+
+                        </div>
+                    ) : null}
+                    {props.type==="sendReport" ? (
+                    <div className="flex flex-col justify-center w-2/5 gap-2">
+                        
+                        <label  className="text-gray-400 font-poppins text-base font-normal  tracking-wide">Choose a Sponsor</label>
+                        <select className="border border-gray-200 rounded-3xl text-base font-poppins border-1 text-gray-900 sm:text-sm  focus:ring-greenSqill-500 focus:border-greenSqill-500 block" >
+                            {props.adsList.map((item) => (
+                                       
+                                <option key={item.id}  className="font-poppins text-base font-normal text-gray-400 ">{item.sponsor}</option>
+        
+                            ))}
+                        </select>
+        
+                    </div>
+                    ) : props.type=== "confirmCpms" ? (
+                        <div className="flex justify-center items-center w-3/5 text-center text-base font-bold font-poppins text-gray-500">
+                            <p className="">After confirming the new values, today will be regarded as day one for the sponsors to use them.</p>
+
+
+                        </div>
+                    ) : null
+                    }
+
+                    <div className="w-full justify-center flex">
+                        <button className="w-1/5 min-w-min font-poppins text-xs font-normal  flex items-center w-40 h-11 gradient text-white bg-primary-600 hover:bg-primary-700  items-center justify-center rounded-3xl   text-white text-center font-poppins text-xs font-normal cursor-pointer ">Send </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export { CreateAdvertiserPopup, CreateHandlePopup, CreateAssetsPopup, AssetsRow, ListAssetsPopup, AdsPageMiniPopups };

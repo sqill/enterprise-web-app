@@ -51,6 +51,10 @@ button:disabled {
   background: linear-gradient(178.18deg, #25B086 -13.56%, #A4F4D7 158.3%);
 }
 
+.red-gradient {
+  background:  linear-gradient(178deg, #FF4B52 -13.56%, #FFF 158.3%)
+}
+
 
 /* @layer components {
   .btn {
