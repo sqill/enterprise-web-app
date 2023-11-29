@@ -46,9 +46,14 @@ const Email2Sponsor = (props) => {
 const Email2SponsorRow = (props) => {
 
     const [openRow, setOpenRow] = useState(false)
+    const [openCalendar, setOpenCalendar] = useState(false)
 
     const handleOpenRow = () => {
         setOpenRow(!openRow)
+    }
+
+    const handleOpenCalendar = () => {  
+        setOpenCalendar(!openCalendar)
     }
 
 
@@ -60,13 +65,23 @@ const Email2SponsorRow = (props) => {
                 <h1 className="text-sm font-base text-gray-400">{props.handle}</h1>
             </div>
             <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{props.type}</h1>
-            <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{props.day}</h1>
+            <h1 className="text-sm font-base text-gray-400 w-1/6 text-center" onClick={handleOpenCalendar}>{props.day}</h1>
             <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{props.quantity}</h1>
             <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{props.cpm}</h1>
         </div>
     )
 }
 
+
+const Email2SponsorCalendar = (props) => {
+
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center 	
+    bg-white bg-opacity-60 z-2">
+        <div className="flex flex-col w-full h-full p-4">
+            
+        </div>  
+    </div>
+}
 
 
 export default Email2Sponsor;
