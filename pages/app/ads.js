@@ -7,6 +7,7 @@ import CpmCard from '../../components/CpmCard';
 import { sendPaperPlane } from '../../public/images/send_paper_plane.svg'
 import { ListAssetsPopup } from '../../components/AdvertisersAdsPagesPopups';
 import { AdsPageMiniPopups } from '../../components/AdvertisersAdsPagesPopups';
+import { EmailConfirmationPopup,  BiddingConfirmation } from '../../components/BidPopups';
 
 import { GrSend } from "react-icons/gr";
 
@@ -43,6 +44,7 @@ const ads = () => {
     const [listAdsPopup, setListAdsPopup] = useState(false)
     const [sendReportPopup, setSendReportPopup] = useState(false)
     const [confirmCPMPopup, setConfirmCPMPopup] = useState(false)
+    const [testPopups, setTestPopups] = useState(false)
 
     const listAdsFunction = () => {
         setListAdsPopup(!listAdsPopup)	
@@ -56,12 +58,16 @@ const ads = () => {
         console.log("confirm cpm")
     }
 
+    const handleTestPopups = () => {
+        setTestPopups(!testPopups)
+    }
+
 
     return (
         <div>
         <DashboardLayout hideFooter selectedPage={"ads"}>
             <div className="flex flex-col gap-8 pr-10 pb-4">
-                <h2 className="text-gray-400 font-bold text-xs font-poppins">User Ads</h2>
+                <h2 className="text-gray-400 font-bold text-xs font-poppins" onClick={handleTestPopups}>User Ads</h2>
                 <div className="flex flex-col gap-8">
                     <div className="flex justify-between items-center">
                         <h1 className="text-gray-500 font-bold text-base font-poppins">Overview</h1>
@@ -141,6 +147,8 @@ const ads = () => {
         {listAdsPopup ? <ListAssetsPopup type="adsList" listAdsFunction={listAdsFunction} adsList={adsList}/> : null}
         {sendReportPopup ? <AdsPageMiniPopups handleReportPopup={handleReportPopup} adsList={adsList} type="sendReport"/> : null}
         {confirmCPMPopup ? <AdsPageMiniPopups handleConfirmCpmPopup={handleconfirmCpmPopup} type="confirmCpms"/> : null}
+        {testPopups ? <BiddingConfirmation /> : null}
+
          </div>
     )
 }
