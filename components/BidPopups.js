@@ -30,8 +30,8 @@ const BiddingConfirmation = (props) => {
     return (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center 	
         bg-white bg-opacity-60 z-20">
-            <div className="bg-white w-1/2 h-1/3 rounded-3xl flex flex-col justify-between p-10">
-                <div className="flex flex-col items-center h-full justify-between">
+            <div className="bg-white w-1/2 h-1/3 rounded-3xl flex flex-col justify-center  items-center">
+                <div className="flex flex-col items-center gap-6">
                     <img src="/images/cutLogo.png" className="w-16"></img>
                     <h1 className="text-2xl font-bold text-black font-poppins">Thank you for bidding</h1>
                     <div className="text-center text-base font-bold">

@@ -21,6 +21,7 @@
     "next": "^14.0.3",
     "nuka-carousel": "^5.2.0",
     "react": "^18.1.0",
+    "react-calendar": "^4.6.1",
     "react-country-flag": "^3.0.2",
     "react-dom": "^18.1.0",
     "react-icons": "^4.12.0",
@@ -29,6 +30,7 @@
     "react-select-country-list": "^2.2.3",
     "react-social-media-embed": "^2.2.2",
     "react-svg": "^11.2.3",
+    "yarn": "^1.22.21",
     "zustand": "^3.6.5"
   },
   "devDependencies": {
