@@ -5,37 +5,74 @@ import { CreateAdvertiserPopup,CreateHandlePopup, CreateAssetsPopup, ListAssetsP
 
 
 const Advertisers = () => {
-    //just for testing
-    const handleList= [{
-        "id": 1,
-        "name": "pantene",
-        "image": "https://i.imgur.com/Hq0R0gs.png",
-    }, {
-        "id": 2,
-        "name": "morangos com acucar",
-        "image": "https://i.imgur.com/ozR5nEb.png",
-    }]
+    
     const advertiserList = [{
         "id": 1,
         "name": "pantene",
         "image": "https://i.imgur.com/Hq0R0gs.png",
-        "email": "pantene@gmail.com"
+        "email": "pantene@gmail.com",
+        "handles": [
+            {
+                "id": 1,
+                "name": "morangos com acucar",
+                "image": "https://i.imgur.com/ozR5nEb.png",
+                "email": "morangos@gmail.com"
+            },
+            {
+                "id": 2,
+                "name": "somos portugal",
+                "image": "https://i.imgur.com/YcqRuEn.png",
+                "email": "somosportugal@gmail.com"
+            }
+
+        ],
+        "assets": [
+            {
+                "id": 1,
+                "name": "morangos com acucar",
+                "image": "https://i.imgur.com/ozR5nEb.png",
+                "email": "asset@gmail.com",
+                "type":"Logo",
+            }
+        
+        ]
     }, {
         "id": 2,
-        "name": "morangos com acucar",
-        "image": "https://i.imgur.com/ozR5nEb.png",
-        "email": "morangos@gmail.com"
+        "name": "loreal",
+        "image": "",
+        "email": "loreal@gmail.com",
+        "handles": [
+            {
+                "id": 1,
+                "name": "morangos com acucar",
+                "image": "https://i.imgur.com/ozR5nEb.png",
+                "email": ""
+            }
+        ],
+        "assets": [
+            {
+                "id": 1,
+                "name": "morangos com acucar",
+                "image": "https://i.imgur.com/ozR5nEb.png",
+                "email": "",
+            }
+        
+        ]
+
     }, {
         "id": 3,
-        "name": "pantene",
+        "name": "pantene2",
         "image": "https://i.imgur.com/Hq0R0gs.png",
-        "email": "pantene@gmail.com"
+        "email": "pantene2@gmail.com",
+        "handles":[],
+        "assets":[]
     }]
 
     const [createHandlePopup, setCreateHandlePopup] =useState(false)
     const [createAdvertiserPopup, setCreateAdvertiserPopup] = useState(false)
     const [createAssetsPopup, setCreateAssetsPopup] = useState(false)
     const [listAssetsPopup, setListAssetsPopup] = useState(false)
+    const [currentAdvertiserId, setCurrentAdvertiserId] = useState(null)
 
     const createHandle = () => {
         setCreateHandlePopup(!createHandlePopup)
@@ -43,8 +80,11 @@ const Advertisers = () => {
     const createAdvertiser = () => {
         setCreateAdvertiserPopup(!createAdvertiserPopup)
     }
-    const listAssetsFunction = () => {
+    const listAssetsFunction = (advertiserId) => {
+        setCurrentAdvertiserId(advertiserId)
         setListAssetsPopup(!listAssetsPopup)	
+        console.log("list assets")
+        console.log(advertiserId)
     }
 
     const createAssets = () => {
@@ -64,15 +104,15 @@ const Advertisers = () => {
                 <div className="flex flex-col gap-8">
                     <h1 className="text-gray-500 font-bold text-base font-poppins">Overview</h1>
                     <div className="flex flex-row gap-6">
-                        <AdvertiserTables tableSize = {"small"} tableName={"Handles"} list ={handleList} tableHeader={"Handles"} createHandle={createHandle} createAdvertiser={createAdvertiser} />
-                        <AdvertiserTables tableSize = {"big"} tableName={"Advertisers"} list ={advertiserList} tableHeader={"Advertisers"} createHandle={createHandle} createAdvertiser={createAdvertiser}/>
+                        <AdvertiserTables tableSize = {"small"} tableName={"Handles"} tableHeader={"Handles"} list ={advertiserList} createHandle={createHandle} createAdvertiser={createAdvertiser} />
+                        <AdvertiserTables tableSize = {"big"} tableName={"Advertisers"} tableHeader={"Advertisers"} list ={advertiserList}  createHandle={createHandle} createAdvertiser={createAdvertiser}/>
                     </div>
                     
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                     {advertiserList.map((item) => (
                         <div key={item.id} className=" ">
-                        <AdvertiserTables tableSize = {"medium"} tableName={"Assets"} tableHeader={item.name} list ={advertiserList} createAssets={createAssets} listAssets={listAssetsFunction} />
+                        <AdvertiserTables tableSize = {"medium"} tableName={"Assets"} tableHeader={item.name} list ={advertiserList} currentId={item.id} createAssets={createAssets} listAssets={listAssetsFunction} />
                         </div>
                     ))}
                 </div>
@@ -82,7 +122,7 @@ const Advertisers = () => {
          {createHandlePopup ? <CreateHandlePopup createHandle={createHandle} /> : null}
          {createAdvertiserPopup ? <CreateAdvertiserPopup  createAdvertiser= {createAdvertiser}/> : null}
          {createAssetsPopup ? <CreateAssetsPopup createAssets= {createAssets}/> : null}
-         {listAssetsPopup ? <ListAssetsPopup listAssets={listAssetsFunction} createAssets={createAssets} type="assetsList"/> : null}
+         {listAssetsPopup ? <ListAssetsPopup listAssets={listAssetsFunction} createAssets={createAssets} type="assetsList" advertiserList={advertiserList} currentAdvertiserId={currentAdvertiserId} /> : null}
          </div>
     )
 }

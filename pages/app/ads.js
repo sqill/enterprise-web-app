@@ -17,28 +17,54 @@ const ads = () => {
         "id": 1,
         "sponsor": "pantene",
         "email": "pantene@gmail.com",
-        "handle": "Morangos",
-        "image": "https://i.imgur.com/ozR5nEb.png",
         "day": "27/10/2023",
-        "status": "active"
+        "status": "active",
+        "handle" : [
+            {
+            "id":1,
+            "name": "morangos com acucar",
+            "image": "https://i.imgur.com/ozR5nEb.png",
+            "post_roll": 0.2,
+            "pre_roll": 0.2,
+            "logo": 0.2,
+            "layer":  0.2,
+            }
+        ]
     },
     {
         "id": 2,
         "sponsor": "loreal",
         "email": "loreal@gmail.com",
-        "handle": "big brother",
-        "image": "https://i.imgur.com/2mg1wfs.png",
         "day": "24/11/2023",
-        "status": "active"
+        "status": "active",
+        "handle" : [
+            {
+            "id":1,
+            "name": "big brother",
+            "image": "https://i.imgur.com/2mg1wfs.png",
+            "post_roll": 0.2,
+            "pre_roll": 0.2,
+            "logo": 0.2,
+            "layer":  0.2,
+            }
+        ]
     },
     {
         "id": 3,
-        "sponsor": "pantene",
+        "sponsor": "sony",
         "email": "sony@gmail.com",
-        "handle": "somos portugal",
-        "image": "https://i.imgur.com/YcqRuEn.png",
+        
         "day": "10/11/2023",
-        "status":"over"
+        "status":"over",
+        "handle" : [
+            {
+            "id":1,
+            "name": "somos portugal",
+            "image": "https://i.imgur.com/YcqRuEn.png",
+            "post_roll": 0.2,
+            
+            }
+        ]
     }
     ]
     const [listAdsPopup, setListAdsPopup] = useState(false)
@@ -84,12 +110,12 @@ const ads = () => {
                                     <div className="flex items-center bg-white w-full rounded-full px-8 h-16">
                                         <div className="flex w-full items-center">
                                             <div className="w-1/4 flex items-start">
-                                                <span className="h-8 w-8 rounded-full gradient"></span>
+                                                <span className={`  h-8 w-8 rounded-full  ${item.status ==="active" ? 'gradient ' : 'red-gradient'}`}></span>
                                             </div>
                                             <div className="w-3/4 flex">
                                                 <span className="w-1/3 flex items-start text-gray-400 text-center font-poppins text-sm font-bold">{item.sponsor}</span>
                                                 <span className="w-1/3 flex items-start text-gray-400 text-center font-poppins text-sm font-base">{item.email}</span>
-                                                <span className="w-1/3 flex items-start text- text-gray-400 text-center font-poppins text-sm font-base">{item.handle}</span>
+                                                <span className="w-1/3 flex items-start text- text-gray-400 text-center font-poppins text-sm font-base">{item.handle.name}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +131,7 @@ const ads = () => {
                         <div className="flex flex gap-4 w-full h-full">
                         {adsList.map((item) => (
                                 <div key={item.id} style={{width: "22%"}}>
-                                     <CpmCard cpmImage={item.image}/>
+                                     <CpmCard item={item}/>
                                 </div>
                             ))}
   

@@ -118,6 +118,15 @@ const CreateAssetsPopup = (props) => {
 
 
 const ListAssetsPopup = (props) => {
+    let currentAdvertiser
+
+    if ( props.type === "assetsList") {
+        currentAdvertiser = props.advertiserList.find(advertiser => advertiser.id === props.currentAdvertiserId);
+    }
+
+    console.log(currentAdvertiser)
+
+
     return (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center 	
             bg-white bg-opacity-60 z-20">
@@ -125,7 +134,7 @@ const ListAssetsPopup = (props) => {
                     <div className="flex flex-col gap-8 w-full h-full p-4 ">
                         <div className="flex items-center justify-between ">
                             <div className="flex items-center gap-4">
-                                <h1 className="text-gray-400 font-bold text-base  font-poppins">{props.type==="assetsList" ? (`${props.advertiserName} Assets`) : props.type==="adsList" ? (`Ads`) : null } </h1>
+                                <h1 className="text-gray-400 font-bold text-base  font-poppins">{props.type==="assetsList" ? (`${currentAdvertiser.name} Assets`) : props.type==="adsList" ? (`Ads`) : null } </h1>
                                 <span className="rounded-full bg-gray-400 w-4 h-4 flex items-center justify-center text-white text-center font-roboto text-xs font-bold leading-normal tracking-tight">i</span>
                             </div>
                             <div className="border border-green-600 w-1/4 rounded-3xl bg-white h-10 flex items-center z-40" >
@@ -158,7 +167,13 @@ const ListAssetsPopup = (props) => {
                             ) : null}
                             <div className="flex w-4/5 justify-center items-center">
                                 {props.type==="assetsList" ? (
-                                <AssetsRow rowType="assetsList" />
+                                    <div className="w-full">
+                                    {currentAdvertiser?.assets?.map((asset) => (
+                                        <div key={asset.id} className="w-full">
+                                            <AssetsRow rowType="assetsList" asset={asset} />
+                                        </div>
+                                    ))}
+                                    </div>
                                 ) : props.type==="adsList" ? (
                                     <div className="w-full gap-4 flex flex-col">
                                     {props.adsList.map((item) => (
@@ -202,10 +217,10 @@ const AssetsRow = (props) => {
             
                 {props.rowType ==="assetsList" ? (        
                     <>
-                        <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">1</span>
-                        <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image</span>
-                        <span className="w-1/3 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
-                        <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">Image 1</span>
+                        <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.asset.id}</span>
+                        <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.asset.type}</span>
+                        <span className="w-1/3 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.asset.name}</span>
+                        <span className="w-1/5 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold"><img className=" h-full" src={props.asset.image}></img></span>
                     </>
                 ) : props.rowType==="adsList" ? (
                     <>
@@ -214,7 +229,7 @@ const AssetsRow = (props) => {
                             <div className= {`w-4/5 flex items-center justify-center white-700 font-bold font-poppins text-xs `}><span className={`text-white font-bold font-poppins text-xs rounded-2xl w-3/5 min-w-min py-1 px-2 ${props.item.status ==="active" ? 'gradient ' : 'red-gradient'}`}>{props.item.status}</span></div>
                             
                         </div>
-                            <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.item.handle}</span>
+                            <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.item.handle[0].name}</span>
                             <span className="w-5/12 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.item.email}</span>
                             <span className="w-1/6 flex items-center justify-center text-gray-400 text-center font-poppins text-xs font-bold">{props.item.day}</span>
                         

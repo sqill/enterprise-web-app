@@ -1,4 +1,4 @@
-import react , { useState } from 'react'
+import react , { useState, useEffect } from 'react'
 import DashboardLayout from '../../components/Dashboard/Layout'
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
@@ -8,6 +8,104 @@ import { MdOutlineArrowBackIos } from "react-icons/md"
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 
 const Email2Sponsor = (props) => {
+
+    const adsList = [{
+        "id": 1,
+        "sponsor": "pantene",
+        "email": "pantene@gmail.com",
+        "day": "27/10/2023",
+        "status": "active",
+        "handle" : [
+            {
+            "id":1,
+            "name": "morangos com acucar",
+            "image": "https://i.imgur.com/ozR5nEb.png",
+                        
+            "category": [
+                {
+                    "id": 1,
+                    "type": "post-roll",
+                    "cpm": 0.2,
+                    "day": "27/10/2023",
+                },
+                {
+                    "id": 2,
+                    "type": "pre-roll",
+                    "cpm": 0.2,
+                    "day": "27/10/2023",
+                },
+                {
+                    "id": 3,
+                    "type": "logo",
+                    "cpm": 0.2,
+                    "day": "27/10/2023",
+                },
+                {
+                    "id": 4,
+                    "type": "layer",
+                    "cpm": 0.2,
+                    "day": "27/10/2023",
+                }
+            ]
+            
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "sponsor": "loreal",
+        "email": "loreal@gmail.com",
+        "day": "24/11/2023",
+        "status": "active",
+        "handle" : [
+            {
+            "id":1,
+            "name": "big brother",
+            "image": "https://i.imgur.com/2mg1wfs.png",
+            "category" : [
+                {
+                    "id": 1,
+                    "type": "post-roll",
+                    "cpm": 0.2,
+                    "day": "27/10/2023",
+                },
+                {
+                    "id": 2,
+                    "type": "pre-roll",
+                    "cpm": 0.2,
+                    "day": "27/10/2023",
+                },
+               
+            ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "sponsor": "sony",
+        "email": "sony@gmail.com",
+        
+        "day": "10/11/2023",
+        "status":"over",
+        "handle" : [
+            {
+            "id":1,
+            "name": "somos portugal",
+            "image": "https://i.imgur.com/YcqRuEn.png",
+            "category" : [
+                {
+                    "id": 1,
+                    "type": "post-roll",
+                    "cpm": 0.2,
+                    "day": "27/10/2023",
+                },
+                
+            ]	
+            
+            }
+        ]
+    }
+    ]
 
 
 
@@ -33,12 +131,19 @@ const Email2Sponsor = (props) => {
                     </div>
                 </div>
                 <div className="w-4/5 flex-col gap-4 flex mb-4">
-                    <Email2SponsorRow handle="Media Capital" type="Instagram" day="1" quantity="1" cpm="3.5"/>
-                    <Email2SponsorRow handle="Media Capital" type="Instagram" day="1" quantity="1" cpm="3.5"/>
-                    <Email2SponsorRow handle="Media Capital" type="Instagram" day="1" quantity="1" cpm="3.5"/>
+
+                    {adsList.map((item) => (
+                        <div key={item.id}>
+                            <Email2SponsorRow item={item}/>
+                        </div>
+                    ))}
+
+
+
+                 
                     
                 </div>    
-                <button className="flex items-center mb-12 w-11 h-11 gradient text-white bg-primary-600 hover:bg-primary-700  items-center justify-center rounded-full text-center cursor-pointer text-2xl ">+</button>    
+                <button className="flex items-center mb-12 px-4 py-2 gradient text-white bg-primary-600 hover:bg-primary-700  items-center justify-center rounded-full text-center cursor-pointer text-2xl ">+</button>    
 
                 <span className="font-poppins text-base font-bold text-gray-500 mb-3">Global estimation of reach of cost</span>
                 <span className="font-poppins text-base font-medium text-black mb-1">100.00 Reach</span>
@@ -54,8 +159,10 @@ const Email2Sponsor = (props) => {
 
 const Email2SponsorRow = (props) => {
 
+    const item = props.item
     const [openRow, setOpenRow] = useState(false)
     const [openCalendar, setOpenCalendar] = useState(false)
+    const [isMultiple, setIsMultiple] = useState(false)
 
     const handleOpenRow = () => {
         setOpenRow(!openRow)
@@ -66,30 +173,58 @@ const Email2SponsorRow = (props) => {
         setOpenCalendar(!openCalendar)
     }
 
+    useEffect(() => {
+        if (item.handle[0].category.length > 1) {
+            setIsMultiple(true);
+        }
+    }, []);
 
 
     return (
         <div className="flex flex-col justify-between items-center w-full px-4 py-2 min-w-min min-h-min rounded-3xl border border-gray-400" onClick={handleOpenRow}>
+            {!openRow ?  (
             <div className="flex justify-between items-center w-full ">
                 <span className="w-1/12 ">
                 {openRow ? (<IoIosArrowDown className="text-base text-gray-400"/> ) : (<IoIosArrowUp className="text-base text-gray-400"/>)}</span>
-                <h1 className="w-1/6 text-sm font-base text-gray-400 text-center">{props.handle}</h1>
+                <h1 className="w-1/6 text-sm font-base text-gray-400 text-center">{item.handle[0].name}</h1>
+                {isMultiple ? (<h1 className="text-sm font-base text-black w-1/6 text-center">Multiple</h1>) : 
+                (<h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{item.handle[0].category[0].type}</h1>)}
 
-                <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{props.type}</h1>
-                <h1 className="text-sm font-base text-gray-400 w-1/6 text-center relative" onClick={(e) => {e.stopPropagation(); // Stop the event propagation
-                                                                                                handleOpenCalendar();
-                                                                                                }}>{props.day}</h1>
-                <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{props.quantity}</h1>
-                <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{props.cpm}</h1>
+                {isMultiple ? (<h1 className="text-sm font-base text-black w-1/6 text-center">Multiple</h1>) : 
+                (<h1 className="text-sm font-base text-gray-400 w-1/6 text-center relative" onClick={(e) => {e.stopPropagation(); // Stop the event propagation
+                                                                                                    handleOpenCalendar();
+                                                                                                    }}>{item.handle[0].category[0].day}</h1>)}
+                {isMultiple ? (<h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{item.handle[0].category.length}</h1>) : 
+                (<h1 className="text-sm font-base text-gray-400 w-1/6 text-center">1</h1>)}
+                 {isMultiple ? (<h1 className="text-sm font-base text-black w-1/6 text-center">Multiple</h1>) : 
+                (<h1 className="text-sm font-base text-black w-1/6 text-center">{item.handle[0].category[0].cpm} €</h1>)}
+              
+            
             </div>
-            {openRow ?  (<div className="h-20 ">
-                <div> </div>
-                <div> </div>
-                <div> </div>
-                <div> </div>
+                        
+            ) : (
+            <div className="min-h-min w-full flex flex-col">
+                <div className="w-full flex justify-between items-center">
+                    <span className="w-1/12 ">{openRow ? (<IoIosArrowDown className="text-base text-gray-400"/> ) : (<IoIosArrowUp className="text-base text-gray-400"/>)}</span>
+                    <h1 className="w-1/6 text-sm font-base text-gray-400 text-center">{item.handle[0].name}</h1>
+                    <span className="w-1/6"></span>
+                    <span className="w-1/6"></span>
+                    <span className="w-1/6"></span>
+                    <span className="w-1/6"></span>
+                </div>
+                {item.handle[0].category.map((category) => (
+                    <div className="w-full flex justify-between items-center">
+                        <span className="w-1/12"></span>
+                        <span className="w-1/6"></span>
+                        <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{category.type}</h1>
+                        <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{category.day}</h1>
+                        <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">1</h1>
+                        <h1 className="text-sm font-base text-gray-400 w-1/6 text-center">{category.cpm} €</h1>
+                    </div>
+                ))}
 
-            </div>) : null
-            }
+
+            </div>       )}
             
             {openCalendar ? (<Email2SponsorCalendar handleOpenCalendar={handleOpenCalendar} />) : null}
         </div>

@@ -6,27 +6,30 @@ import TablesHeader from "./TablesHeader";
 export const AdvertiserTables = (props) => {
 
     console.log(props)
+
     
+
     const list = props.list
     
     return (
         <div className={`z-10 rounded-lg border border-solid border-gray-200 bg-gray-100  h-96 p-5 flex flex-col justify-between ${props.tableName=="Assets" ? 'cursor-pointer' : ''} ${props.tableSize=="small" ? 'w-1/3' : props.tableSize=="big" ? "w-2/3" : props.tableSize=="medium" ? "w-2/2" : null}`}
             onClick={() => {
                 if (props.tableName== "Assets") {
-                    props.listAssets()
+                    props.listAssets(props.currentId)
                 }
             }}>
-           <div className="flex flex-col gap-4 ">
+           <div className="flex flex-col gap-4 h-full">
             <div>
-                <TablesHeader title={props.tableName}/>
+                <TablesHeader title={props.tableHeader}/>
             </div>
             { props.tableName=="Handles" ? (
-            <div className="flex flex-wrap">
-                {list.map((item) => (
-                 
-                        <div key={item.id} className="flex items-center gap-4 w-1/2">
-                            <img src={item.image} className=" rounded-3xl" />
-                        </div>
+            <div className="flex flex-wrap h-4/5 ">
+                {list.map((advertiser) =>
+                advertiser.handles.map((handle) => (
+                    <div key={handle.id} className="flex justify-center items-center gap-4 w-1/3 h-1/2 ">  {/*Aqui tambem pode ser w-1/2 */}
+                    <img src={handle.image} className="rounded-3xl h-5/6 w-5/6 " />
+                    </div>
+                )
                 ))}
             </div>
             )   : props.tableName=="Advertisers" ? (
