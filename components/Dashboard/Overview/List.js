@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import MdcTrashCanOutline from '@meronex/icons/mdc/MdcTrashCanOutline';
 import BiLinkExternal from '@meronex/icons/bi/BiLinkExternal';
@@ -18,6 +18,34 @@ import SubtitleForm from '../../SubtitleColorFrom';
 import { updateCompany } from '../../../api'
 import { userAgent } from 'next/server';
 
+// function to get the font ( give a font url )
+const fetchFont = async (fontUrl, setFontLoaded) => {
+  try {
+    const response = await fetch(fontUrl);
+    const fontData = await response.blob();
+    const fontUrlObject = URL.createObjectURL(fontData);
+
+    // Create a new style element to hold @font-face rule
+    const style = document.createElement('style');
+    style.appendChild(
+      document.createTextNode(`
+        @font-face {
+          font-family: 'customFontFamily';
+          src: url(${fontUrlObject});
+        }
+      `)
+    );
+    document.head.appendChild(style);
+
+    setFontLoaded(true);
+
+    // Return the fontUrlObject
+    return fontUrlObject;
+  } catch (error) {
+    console.error('Error loading font:', error);
+    return null;
+  }
+};
 
 
 function UpdateForm({ asset, setEditAsset, update }) {
@@ -134,31 +162,72 @@ function SubtitleColorsListRow({ color, onRemove, onEdit, fontFamily }) {
   )
 }
 
+function FontRow({ id, name, font_url, onRemove, fontUrl }) {
+  const [fontLoaded, setFontLoaded] = useState(false);
 
-function FontRow({ id, name, font_url, onRemove, fontFamily }) {
+  useEffect(() => {
+    let fontUrlObject = null; // Initialize fontUrlObject variable
+
+    fetchFont(fontUrl, setFontLoaded)
+      .then((urlObject) => {
+        fontUrlObject = urlObject; // Store the fontUrlObject
+      })
+      .catch((error) => console.error('Error loading font:', error));
+
+    // Cleanup function
+    return () => {
+      // Clean up created URL object
+      if (fontUrlObject) {
+        URL.revokeObjectURL(fontUrlObject);
+      }
+    };
+  }, [fontUrl]);
+
   return (
     <div className="hover:bg-gray-100 pt-5 pl-5 flex justify-left">
-      <div className="whitespace-nowrap font-normal rounded" style={{ fontFamily: fontFamily }}> {name}
-      </div>
+      {fontLoaded && (
+        <div className="whitespace-nowrap font-normal rounded" style={{ fontFamily: 'customFontFamily' }}>
+          {name}
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-function FontListRow({ id, name, font_url, onRemove, fontFamily }) {
+function FontListRow({ id, name, font_url, onRemove, fontUrl }) {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    let fontUrlObject = null; // Initialize fontUrlObject variable
+
+    fetchFont(fontUrl, setFontLoaded)
+      .then((urlObject) => {
+        fontUrlObject = urlObject; // Store the fontUrlObject
+      })
+      .catch((error) => console.error('Error loading font:', error));
+
+    // Cleanup function
+    return () => {
+      // Clean up created URL object
+      if (fontUrlObject) {
+        URL.revokeObjectURL(fontUrlObject);
+      }
+    };
+  }, [fontUrl]);
+
   return (
     <div className="max-w-5xl hover:border-greenSqill-300 border-2 border-transparent py-4 my-2 flex justify-center content-center items-center rounded-full bg-white">
       <div className="text-xs font-bold text-textGray w-1/3">
         {id}
       </div>
       <div className="w-1/3 flex justify-center">
-        <div className="whitespace-nowrap text-xs font-normal text-textGray rounded" style={{ fontFamily: fontFamily }}>{name}
-        </div>
+        <div className="whitespace-nowrap text-xs font-normal text-textGray rounded" style={{ fontFamily: 'customFontFamily' }}>{name}</div>
       </div>
       <div className="w-1/3 text-xs font-normal text-containerGray flex justify-center">
-        <button onClick={() => onRemove(id)} > X</button>
+        <button onClick={() => onRemove(id)}>X</button>
       </div>
     </div>
-  )
+  );
 }
 
 function ColorRow({ id, name, font_url, onRemove }) {
@@ -229,13 +298,10 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
   const [editAsset, setEditAsset] = React.useState(null)
   const [editSubtitle, setEditSubtitle] = React.useState(null)
   const [loadedFonts, setLoadedFonts] = React.useState([]);
-  const [fontFamilies, setFontFamilies] = React.useState([]);
+  
   const [colors, setColors] = React.useState(company.colors);
 
-  const getFontFamily = (fontURL) => {
-    const fontInfo = fontFamilies.find((item) => item.fontURL === fontURL);
-    return fontInfo ? fontInfo.fontName : null;
-  };
+  
 
   useEffect(() => {
     fontList.map(sponsor => {
@@ -291,6 +357,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
 
   
 
+
   return (
     <React.Fragment>
       <UpdateForm asset={editAsset} update={assetEdit} setEditAsset={setEditAsset} />
@@ -308,12 +375,12 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             handleCreate={fontCreate}
             renderRows={fonts => fonts.map(sponsor =>
             (
-              <FontRow key={sponsor.id} {...sponsor} onRemove={handleFontRemove} fontFamily={getFontFamily(sponsor.font_url)} />
+              <FontRow key={sponsor.id} {...sponsor} onRemove={handleFontRemove} fontUrl={sponsor.font_url} />
             )
             )}
             renderList={fonts => fonts.map(sponsor =>
             (
-              <FontListRow key={sponsor.id} {...sponsor} onRemove={handleFontRemove} fontFamily={getFontFamily(sponsor.font_url)} />
+              <FontListRow key={sponsor.id} {...sponsor} onRemove={handleFontRemove} fontUrl={sponsor.font_url}/>
             )
             )}
             columns={["Element ID", "Name", "Delete"]}
