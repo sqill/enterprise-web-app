@@ -138,7 +138,7 @@ function SubtitleColorsListRow({ color, onRemove, onEdit, fontFamily }) {
 function FontRow({ id, name, font_url, onRemove, fontFamily }) {
   return (
     <div className="hover:bg-gray-100 pt-5 pl-5 flex justify-left">
-      <div className="whitespace-nowrap font-normal rounded" style={{ fontFamily: fontFamily }}>{name}
+      <div className="whitespace-nowrap font-normal rounded" style={{ fontFamily: fontFamily }}> {name}
       </div>
     </div>
   )
@@ -289,6 +289,8 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
     setEditSubtitle(subtitle)
   }
 
+  
+
   return (
     <React.Fragment>
       <UpdateForm asset={editAsset} update={assetEdit} setEditAsset={setEditAsset} />
@@ -388,7 +390,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             handleEdit={handleEdit}
             handleCreate={assetCreate}
             renderRows={assets => assets.map(asset => (
-              <OverlayRow key={asset.id} asset={asset} onRemove={handleAssetRemove} onEdit={handleEdit} />
+              <AssetRow key={asset.id} asset={asset} onRemove={handleAssetRemove} onEdit={handleEdit} />
             ))}
             renderList={assets => assets.map(asset => (
               <AssetListRow key={asset.id} asset={asset} onRemove={handleAssetRemove} onEdit={handleEdit} />
@@ -396,7 +398,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             columns={["Element ID", "Name", "Thumbnail", "Delete"]}
             FormComponent={AssetForm}
             formProps={{ type: 'overlay', format: 'image' }} 
-            containerClass={"overflow-x-auto h-80 grid grid-rows-1 grid-flow-col gap-4 content-start"}
+            containerClass={"py-5 overflow-x-auto h-80 grid grid grid-rows-2 grid-flow-col gap-4 content-start"}
             parentClass={''}
           />
         </div>

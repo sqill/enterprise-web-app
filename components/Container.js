@@ -14,6 +14,11 @@ function ContainerComponent({ title, list, handleRemove, handleEdit, handleCreat
     setIsOpen(true);
   }
 
+  if ( title === "Fonts" ) {
+    console.log("oi")
+    
+  }
+  1
   return (
     <React.Fragment>
       <div onClick={(e) => { if (e.target.onclick !== null && e.target.id !== "container") return; toggleExpand(); }}

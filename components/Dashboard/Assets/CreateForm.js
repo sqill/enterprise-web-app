@@ -156,13 +156,18 @@ export default function CreateForm({ create, onSuccess, formProps : {type, forma
           <div className="mb-6">
             <Field name="image">
               {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
-                <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />
+                <input name="asset" accept="image/*" type="file" multiple={true} onChange={e => {
+                  if (e.target.files.length > 1) {
+                    setFieldValue("assets", e.target.files);
+                  } else {
+                    setFieldValue("asset", e.target.files[0]);
+                  }
+                }} />
               ) : (
-                <input name="asset" accept="image/*" type="file" multiple onChange={e => setFieldValue("assets", e.target.files)} />
+                null
               )}
             </Field>
           </div>
-
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
           <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center max-w-20" type="submit">
