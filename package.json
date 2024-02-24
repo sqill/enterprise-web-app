@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@meronex/icons": "^4.0.0",
-    "@netlify/plugin-nextjs": "^4.27.3",
+    "@netlify/plugin-nextjs": "^4.41.3",
     "@themesberg/flowbite": "^1.1.1",
     "@tippyjs/react": "^4.2.6",
     "@weareredlight/denormalize_json_api": "^0.2.2",
