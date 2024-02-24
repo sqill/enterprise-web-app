@@ -61,6 +61,17 @@ export default function Sidebar({ opened = false }) {
 
               <li>
                 <Link
+                  href="/app/sponsors"
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10" >
+
+                  <MdcTagOutline className="text-gray-900" />
+                  <span className="ml-3 flex-1 whitespace-nowrap">Sponsors</span>
+
+                </Link>
+              </li>
+
+              <li>
+                <Link
                   href="/app/settings"
                   className="text-xs text-gray-900  font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10"
                 >

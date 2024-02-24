@@ -34,8 +34,6 @@ const BUNDLE_TYPES = [
 
 
 export default function UpdateForm({ asset, update, onSuccess }) {
-  const { folders } = assetsStore()
-  const foldersDropdown = folders.map(f => ({ label: f.name, value: f.name }));
 
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
@@ -67,9 +65,19 @@ export default function UpdateForm({ asset, update, onSuccess }) {
               IconClass={MdcFormatTitle}
             />
           </div>
+          <div className="mb-6 mx-10">
+            <Field
+              name="bundle_type"
+              title="Bundle type"
+              required={true}
+              component={CustomSelectComponent}
+              options={BUNDLE_TYPES}
+              IconClass={MdcShapeOutline}
+            />
+          </div>
           {values.asset_type === "animation" && (
             <>
-              <div className="mb-6 mx-10">
+            <div className="mb-6 mx-10">
                 <Field
                   name="fps"
                   component={CustomInputComponent}
@@ -79,7 +87,7 @@ export default function UpdateForm({ asset, update, onSuccess }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 mx-10">
                 <Field
                   name="loop"
                   component={CustomCheckboxComponent}
@@ -120,11 +128,13 @@ export default function UpdateForm({ asset, update, onSuccess }) {
             </>
           )}
 
-          <Field
-            name="replaceAsset"
-            component={CustomCheckboxComponent}
-            title="Replace asset?"
-          />
+          <div>
+            <Field
+              name="replaceAsset"
+              component={CustomCheckboxComponent}
+              title="Replace asset?"
+            />
+          </div>
 
           {values.replaceAsset && (
             <div className="mb-6">

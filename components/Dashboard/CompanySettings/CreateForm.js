@@ -17,7 +17,6 @@ export default function CreateForm({ company, create, onSuccess }) {
 
     async function handleFormSubmit(values, { setSubmitting, setStatus }) {
         values.colors.push(values.color);
-        console.log(values);
         setSubmitting(true)
         const res = await create({ company: { ...values } })
         setSubmitting(false)

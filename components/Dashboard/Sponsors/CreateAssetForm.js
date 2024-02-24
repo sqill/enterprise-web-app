@@ -40,13 +40,13 @@ const ASSET_TYPES = [
   { label: "Animation", value: "animation" }
 ]
 
-export default function CreateForm({ create, onSuccess }) {
+export default function CreateForm({ create, onSuccess, sponsor }) {
   const { folders } = assetsStore()
   const foldersDropdown = folders.map(f => ({ label: f.name, value: f.name }));
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
     setSubmitting(true)
-    const res = await create({ video_asset: { ...values, folder: values.folder == "" ? null : values.folder } })
+    const res = await create({ video_asset: { ...values} })
     setSubmitting(false)
     if (res?.success) {
       onSuccess()
@@ -68,36 +68,15 @@ export default function CreateForm({ create, onSuccess }) {
         rows: null,
         loop: false,
         uploadTilesheet: false,
-        folder: ""
+        folder: "",
+        sponsor_id: sponsor.id,
       }}
       validate={validateForm}
       onSubmit={handleFormSubmit}
     >
       {({ status, isValid, isSubmitting, setFieldValue, values }) => (
         <Form>
-          <div className="mb-6 grid grid-cols-6 gap-6">
-            {(values.folder == "" || folders.some(f => f.name == values.folder)) && (
-              <div className="col-span-6 sm:col-span-3">
-                <Field
-                  name="folder"
-                  placeholder="Folder"
-                  component={CustomSelectComponent}
-                  options={foldersDropdown}
-                  IconClass={MdcFolderImage}
-                />
-              </div>
-            )}
-            <div className="col-span-6 sm:col-span-3">
-              <Field
-                name="folder"
-                placeholder="New Folder Name"
-                component={CustomInputComponent}
-                required={false}
-                IconClass={MdcFolderImage}
-              />
-            </div>
-          </div>
-          <div className="mb-6">
+          <div className="mb-6 mx-10">
             <Field
               name="name"
               component={CustomInputComponent}
@@ -106,7 +85,7 @@ export default function CreateForm({ create, onSuccess }) {
               IconClass={MdcFormatTitle}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-6 mx-10">
             <Field
               name="asset_type"
               placeholder="Asset type"
@@ -116,7 +95,7 @@ export default function CreateForm({ create, onSuccess }) {
               IconClass={MdcShapeOutline}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-6 mx-10">
             <Field
               name="bundle_type"
               placeholder="Bundle type"
@@ -128,14 +107,14 @@ export default function CreateForm({ create, onSuccess }) {
           </div>
           {values.asset_type === "animation" && (
             <>
-              <div className="mb-6">
+          <div className="mb-6 mx-10">
                 <Field
                   name="uploadTilesheet"
                   component={CustomCheckboxComponent}
                   title="Upload prebuilt tilesheet?"
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 mx-10">
                 <Field
                   name="fps"
                   component={CustomInputComponent}
@@ -145,7 +124,7 @@ export default function CreateForm({ create, onSuccess }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 mx-10">
                 <Field
                   name="loop"
                   component={CustomCheckboxComponent}
@@ -156,7 +135,7 @@ export default function CreateForm({ create, onSuccess }) {
           )}
           {values["uploadTilesheet"] && (
             <>
-              <div className="mb-6">
+          <div className="mb-6 mx-10">
                 <Field
                   name="columns"
                   component={CustomInputComponent}
@@ -166,7 +145,7 @@ export default function CreateForm({ create, onSuccess }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 mx-10">
                 <Field
                   name="rows"
                   component={CustomInputComponent}
@@ -176,7 +155,7 @@ export default function CreateForm({ create, onSuccess }) {
                   min="1"
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 mx-10">
                 <Field
                   name="count"
                   component={CustomInputComponent}
@@ -189,7 +168,7 @@ export default function CreateForm({ create, onSuccess }) {
               </div>
             </>
           )}
-          <div className="mb-6">
+          <div className="mb-6 mx-10">
             <Field name="image">
               {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
                 <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />
@@ -201,7 +180,7 @@ export default function CreateForm({ create, onSuccess }) {
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
 
-          <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full" type="submit">
+          <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center max-w-20" type="submit">
             Create
           </button>
         </Form>
