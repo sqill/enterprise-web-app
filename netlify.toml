@@ -1,9 +1,2 @@
 [build]
 publish = ".next"
-
-[[plugins]]
-  package = "@sentry/netlify-build-plugin"
-
-  [plugins.inputs]
-    sentryOrg = "sqill"
-    sentryProject = "enterprise-app"
