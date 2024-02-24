@@ -14,7 +14,7 @@ export default function AdPosts() {
   }, [])
 
   return (
-    <DashboardLayout hideFooter>
+    <DashboardLayout hideFooter >
       <AdPostsHeader create={create} />
       <AdPostsList list={list} remove={remove} />
     </DashboardLayout>

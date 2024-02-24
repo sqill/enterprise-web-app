@@ -19,7 +19,7 @@ export default function CuratedDatabase() {
   }, [])
 
   return (
-    <DashboardLayout hideFooter>
+    <DashboardLayout hideFooter selectedPage={"inspiration"}>
       <CuratedPostsList categories={categories} />
     </DashboardLayout>
   )
