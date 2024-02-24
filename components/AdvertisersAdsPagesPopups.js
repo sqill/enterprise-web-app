@@ -23,9 +23,7 @@ const CreateHandlePopup = (props) => {
                             {chosenHandleImage !== null ? (
                                 <img src={chosenHandleImage} alt="Your Alt Text" className="rounded-full" />
                             ) : (
-                               
                                     <span className="text-gray-500 font-poppins text-xs text-center"> {props.type === "assets" ? "Add New Asset"   : "Add New Handle" }</span>
-                              
                             )}
                         </span>
                         <h1 className="text-sm font-poppins text-gray-400 font-bold">{props.type === "assets" ? "Add a New Asset"   : "Add a New Handle" }</h1>
@@ -43,7 +41,7 @@ const CreateHandlePopup = (props) => {
                                     <label className="text-gray-400 font-poppins text-base font-normal  tracking-wide">Engagement Potential</label>
                                     <div className="flex gap-2 w-full flex justify-between">
                                     <div className="flex gap-2 items-center" >
-                                        <label className="text-gray-400 font-poppins text-base font-normal  tracking-tighter"for="minValue">Min</label>
+                                        <label className="text-gray-400 font-poppins text-base font-normal  tracking-tighter" form="minValue">Min</label>
                                         <select className=" border border-gray-200 rounded-3xl border-1 text-gray-900 sm:text-sm  focus:ring-greenSqill-500 focus:border-greenSqill-500 block" id="minValue">             
                                             <option className="font-poppins text-base font-normal"  value="0">0</option>
                                             <option className="font-poppins text-base font-normal"  value="5000">5000</option>
@@ -53,7 +51,7 @@ const CreateHandlePopup = (props) => {
                                         </div>
 
                                         <div className="flex items-center gap-2">
-                                        <label className="text-gray-400 font-poppins text-base font-normal  tracking-tighter" for="maxValue">Max</label>
+                                        <label className="text-gray-400 font-poppins text-base font-normal  tracking-tighter" form="maxValue">Max</label>
                                         <select className="border border-gray-200 rounded-3xl text-base font-poppins border-1 text-gray-900 sm:text-sm  focus:ring-greenSqill-500 focus:border-greenSqill-500 block" id="maxValue">     
                                             <option className="font-poppins text-base font-normal" value="0">0</option>
                                             <option className="font-poppins text-base font-normal"  value="10000">10000</option>
