@@ -16,9 +16,11 @@ import { BsMegaphone } from "react-icons/bs";
 
 export default function Sidebar({ opened = false, ...props } ) {
   const className = cx(
-    "fixed z-10 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75",
+    "fixed z-10 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75 z-50",
     { "hidden": !opened }
   );
+
+
 
   const selectedPage = props.selectedPage;
 
