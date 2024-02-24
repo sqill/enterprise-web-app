@@ -12,25 +12,15 @@ const moduleExports = {
       }
     ]
   },
-  async redirects() {
-    return [
-      {
-        source: '/app',
-        destination: '/app/users',
-        permanent: true,
-      },
-    ]
-  },
-  sentry: {
-    hideSourceMaps: true,
-  }
 }
+
+module.exports = moduleExports
 
 // Injected content via Sentry wizard below
 
-const { withSentryConfig } = require("@sentry/nextjs");
+// const { withSentryConfig } = require("@sentry/nextjs");
 
-module.exports = withSentryConfig(
+/* module.exports = withSentryConfig(
   module.exports,
   {
     // For all available options, see:
@@ -67,4 +57,4 @@ module.exports = withSentryConfig(
     // https://vercel.com/docs/cron-jobs
     automaticVercelMonitors: true,
   }
-);
+); */
