@@ -29,7 +29,7 @@ export default function Send2Sqill() {
   }
 
   return (
-    <DashboardLayout hideFooter>
+    <DashboardLayout hideFooter selectedPage={"video&image"}>
       {comp}
     </DashboardLayout>
   )

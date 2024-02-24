@@ -25,7 +25,7 @@ export default function Cockpit() {
   }, [])
 
   return (
-    <DashboardLayout hideFooter>
+    <DashboardLayout hideFooter selectedPage={"cockpit"}>
       <OverviewList company={user.entity.company} updateCompany={updateCompany}
         assetlist={assetlist} assetCreate={createAsset} assetRemove={removeAsset} assetEdit={editAsset}
         fontList={fontList} fontCreate={createFont} fontRemove={removeFont}
