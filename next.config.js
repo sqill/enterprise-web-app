@@ -13,6 +13,15 @@ const moduleExports = {
       }
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/app',
+        destination: '/app/users',
+        permanent: true,
+      },
+    ]
+  },
   sentry: {
     hideSourceMaps: true,
   }
