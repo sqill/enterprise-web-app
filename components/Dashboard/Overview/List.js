@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import MdcTrashCanOutline from '@meronex/icons/mdc/MdcTrashCanOutline';
 import BiLinkExternal from '@meronex/icons/bi/BiLinkExternal';
@@ -18,7 +18,33 @@ import SubtitleForm from '../../SubtitleColorFrom';
 import { updateCompany } from '../../../api'
 import { userAgent } from 'next/server';
 
+const fetchFont = async (fontUrl, setFontLoaded) => {
+  try {
+    const response = await fetch(fontUrl);
+    const fontData = await response.blob();
+    const fontUrlObject = URL.createObjectURL(fontData);
 
+    // Create a new style element to hold @font-face rule
+    const style = document.createElement('style');
+    style.appendChild(
+      document.createTextNode(`
+        @font-face {
+          font-family: 'customFontFamily';
+          src: url(${fontUrlObject});
+        }
+      `)
+    );
+    document.head.appendChild(style);
+
+    setFontLoaded(true);
+
+    // Return the fontUrlObject
+    return fontUrlObject;
+  } catch (error) {
+    console.error('Error loading font:', error);
+    return null;
+  }
+};
 
 function UpdateForm({ asset, setEditAsset, update }) {
   return (
@@ -135,30 +161,72 @@ function SubtitleColorsListRow({ color, onRemove, onEdit, fontFamily }) {
 }
 
 
-function FontRow({ id, name, font_url, onRemove, fontFamily }) {
+function FontRow({ id, name, font_url, onRemove, fontUrl }) {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    let fontUrlObject = null; // Initialize fontUrlObject variable
+
+    fetchFont(fontUrl, setFontLoaded)
+      .then((urlObject) => {
+        fontUrlObject = urlObject; // Store the fontUrlObject
+      })
+      .catch((error) => console.error('Error loading font:', error));
+
+    // Cleanup function
+    return () => {
+      // Clean up created URL object
+      if (fontUrlObject) {
+        URL.revokeObjectURL(fontUrlObject);
+      }
+    };
+  }, [fontUrl]);
+
   return (
     <div className="hover:bg-gray-100 pt-5 pl-5 flex justify-left">
-      <div className="whitespace-nowrap font-normal rounded" style={{ fontFamily: fontFamily }}>{name}
-      </div>
+      {fontLoaded && (
+        <div className="whitespace-nowrap font-normal rounded" style={{ fontFamily: 'customFontFamily' }}>
+          {name}
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-function FontListRow({ id, name, font_url, onRemove, fontFamily }) {
+function FontListRow({ id, name, font_url, onRemove, fontUrl }) {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    let fontUrlObject = null; // Initialize fontUrlObject variable
+
+    fetchFont(fontUrl, setFontLoaded)
+      .then((urlObject) => {
+        fontUrlObject = urlObject; // Store the fontUrlObject
+      })
+      .catch((error) => console.error('Error loading font:', error));
+
+    // Cleanup function
+    return () => {
+      // Clean up created URL object
+      if (fontUrlObject) {
+        URL.revokeObjectURL(fontUrlObject);
+      }
+    };
+  }, [fontUrl]);
+
   return (
     <div className="max-w-5xl hover:border-greenSqill-300 border-2 border-transparent py-4 my-2 flex justify-center content-center items-center rounded-full bg-white">
       <div className="text-xs font-bold text-textGray w-1/3">
         {id}
       </div>
       <div className="w-1/3 flex justify-center">
-        <div className="whitespace-nowrap text-xs font-normal text-textGray rounded" style={{ fontFamily: fontFamily }}>{name}
-        </div>
+        <div className="whitespace-nowrap text-xs font-normal text-textGray rounded" style={{ fontFamily: 'customFontFamily' }}>{name}</div>
       </div>
       <div className="w-1/3 text-xs font-normal text-containerGray flex justify-center">
-        <button onClick={() => onRemove(id)} > X</button>
+        <button onClick={() => onRemove(id)}>X</button>
       </div>
     </div>
-  )
+  );
 }
 
 function ColorRow({ id, name, font_url, onRemove }) {
@@ -306,12 +374,12 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             handleCreate={fontCreate}
             renderRows={fonts => fonts.map(sponsor =>
             (
-              <FontRow key={sponsor.id} {...sponsor} onRemove={handleFontRemove} fontFamily={getFontFamily(sponsor.font_url)} />
+              <FontRow key={sponsor.id} {...sponsor} onRemove={handleFontRemove} fontUrl={sponsor.font_url} />
             )
             )}
             renderList={fonts => fonts.map(sponsor =>
             (
-              <FontListRow key={sponsor.id} {...sponsor} onRemove={handleFontRemove} fontFamily={getFontFamily(sponsor.font_url)} />
+              <FontListRow key={sponsor.id} {...sponsor} onRemove={handleFontRemove} fontUrl={sponsor.font_url}/>
             )
             )}
             columns={["Element ID", "Name", "Delete"]}
@@ -327,11 +395,11 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             handleRemove={handleAssetRemove}
             handleEdit={handleEdit}
             handleCreate={updateCompany}
-            renderRows={colors => colors.map((color, index) => (
+            renderRows={colors => colors?.map((color, index) => (
               <ColorRow key={index} name={color} onRemove={handleColorRemove} onEdit={handleEdit} />
             ))}
             renderList={
-              colors => colors.map((color, index) => (
+              colors => colors?.map((color, index) => (
                 <ColorListRow key={index} id={index} name={color} onRemove={handleColorRemove} onEdit={handleEdit} />
               ))}
             columns={["Element ID", "Hex", "Preview", "Delete"]}
@@ -388,7 +456,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             handleEdit={handleEdit}
             handleCreate={assetCreate}
             renderRows={assets => assets.map(asset => (
-              <OverlayRow key={asset.id} asset={asset} onRemove={handleAssetRemove} onEdit={handleEdit} />
+              <AssetRow key={asset.id} asset={asset} onRemove={handleAssetRemove} onEdit={handleEdit} />
             ))}
             renderList={assets => assets.map(asset => (
               <AssetListRow key={asset.id} asset={asset} onRemove={handleAssetRemove} onEdit={handleEdit} />
@@ -396,7 +464,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             columns={["Element ID", "Name", "Thumbnail", "Delete"]}
             FormComponent={AssetForm}
             formProps={{ type: 'overlay', format: 'image' }} 
-            containerClass={"overflow-x-auto h-80 grid grid-rows-1 grid-flow-col gap-4 content-start"}
+            containerClass={"py-5 overflow-x-auto h-80 grid grid grid-rows-2 grid-flow-col gap-4 content-start"}
             parentClass={''}
           />
         </div>
