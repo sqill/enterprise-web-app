@@ -192,9 +192,15 @@ export default function CreateForm({ create, onSuccess }) {
           <div className="mb-6">
             <Field name="image">
               {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
-                <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />
-              ) : (
-                <input name="asset" accept="image/*" type="file" multiple onChange={e => setFieldValue("assets", e.target.files)} />
+                  <input name="asset" accept="image/*" type="file" multiple={true} onChange={e => {
+                    if (e.target.files.length > 1) {
+                      setFieldValue("assets", e.target.files);
+                    } else {
+                      setFieldValue("asset", e.target.files[0]);
+                    }
+                  }} />
+                ) : (
+                  null
               )}
             </Field>
           </div>
