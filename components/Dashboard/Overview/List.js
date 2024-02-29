@@ -20,7 +20,7 @@ import { userAgent } from 'next/server';
 
 const fetchFont = async (fontUrl, setFontLoaded) => {
   try {
-    const response = await fetch(fontUrl);
+    const response = await fetch(fontUrl, { credentials: "include" });
     const fontData = await response.blob();
     const fontUrlObject = URL.createObjectURL(fontData);
 
@@ -463,7 +463,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             ))}
             columns={["Element ID", "Name", "Thumbnail", "Delete"]}
             FormComponent={AssetForm}
-            formProps={{ type: 'overlay', format: 'image' }} 
+            formProps={{ type: 'overlay', format: 'image' }}
             containerClass={"py-5 overflow-x-auto h-80 grid grid grid-rows-2 grid-flow-col gap-4 content-start"}
             parentClass={''}
           />
@@ -508,7 +508,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
           ))}
           columns={["Element ID", "Name", "Thumbnail", "Delete"]}
           FormComponent={AssetForm}
-          formProps={{ type: 'effects', format: 'animation' }} 
+          formProps={{ type: 'effects', format: 'animation' }}
           containerClass={"overflow-x-auto h-80 grid grid-rows-1 grid-flow-col gap-4 content-start"}
           parentClass={''}
         />
