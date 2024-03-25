@@ -11,6 +11,8 @@ import CustomSelectComponent from '../../Select'
 import assetsStore from '../../../stores/video_assets'
 
 function validateForm({ name, bundle_type, asset, asset_type, assets, fps, uploadTilesheet, rows, columns, count }) {
+  
+
   const errors = {};
   if (!name) errors.name = 'Required'
   if (!bundle_type) errors.bundle_type = 'Required'
@@ -24,6 +26,8 @@ function validateForm({ name, bundle_type, asset, asset_type, assets, fps, uploa
     if (!asset) errors.asset = 'Required'
     if (!count) errors.count = 'Required'
   }
+
+
 
   return errors;
 }
@@ -51,14 +55,48 @@ export default function CreateForm({ create, onSuccess, formProps : {type, forma
   }
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
-    setSubmitting(true)
-    const res = await create({ video_asset: { ...values, folder: values.folder == "" ? null : values.folder } })
-    setSubmitting(false)
-    if (res?.success) {
-      onSuccess()
+    console.log(values); // Log the values for debugging
+    setSubmitting(true);
+  
+    try {
+      if (values.asset instanceof File) {
+        // Single file upload case
+        const res = await create({
+          video_asset: { ...values, folder: values.folder === "" ? null : values.folder }
+        });
+        if (res?.success) {
+          
+          onSuccess();
+        } else {
+          setStatus(res?.error || "An error occurred");
+        }
+      } else if (values.asset instanceof FileList) {
+        // Multiple files upload case
+        
+        for (let i = 0; i < values.asset.length; i++) {
+          const file = values.asset[i];
+          const res = await create({
+            video_asset: { ...values, asset: file, folder: values.folder === "" ? null : values.folder }
+          });
+          if (!res?.success) {
+            setStatus(res?.error || "An error occurred");
+            return; // Exit the loop on error
+          }
+        }
+        onSuccess(); // Call onSuccess after all files are uploaded successfully
+      } else {
+        // Handle other cases if needed
+        setStatus("Invalid asset type");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+      setStatus("An error occurred while processing the form");
     }
-    else setStatus(res?.error || "An error occurred")
+  
+    setSubmitting(false);
   }
+  
+
 
   return (
     <Formik
@@ -154,11 +192,17 @@ export default function CreateForm({ create, onSuccess, formProps : {type, forma
             </>
           )}
           <div className="mb-6">
-            <Field name="image">
+          <Field name="image">
               {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
-                <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />
-              ) : (
-                <input name="asset" accept="image/*" type="file" multiple onChange={e => setFieldValue("assets", e.target.files)} />
+                  <input name="asset" accept="image/*" type="file" multiple={true} onChange={e => {
+                    if (e.target.files.length > 1) {
+                      setFieldValue("asset", e.target.files);
+                    } else {
+                      setFieldValue("asset", e.target.files[0]);
+                    }
+                  }} />
+                ) : (
+                  null
               )}
             </Field>
           </div>

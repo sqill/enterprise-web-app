@@ -130,8 +130,18 @@ export default function UpdateForm({ asset, update, onSuccess }) {
             <div className="mb-6">
               <p className="mb-2 text-xs text-red-600">Warning! All templates using this asset will be updated with the new uploaded asset</p>
               <Field name="image">
-                {() => <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />}
-              </Field>
+              {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
+                  <input name="asset" accept="image/*" type="file" multiple={true} onChange={e => {
+                    if (e.target.files.length > 1) {
+                      setFieldValue("assets", e.target.files);
+                    } else {
+                      setFieldValue("asset", e.target.files[0]);
+                    }
+                  }} />
+                ) : (
+                  null
+              )}
+            </Field>
             </div>
           )}
 
