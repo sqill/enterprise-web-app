@@ -24,12 +24,15 @@ const fetchFont = async (fontUrl, setFontLoaded) => {
     const fontData = await response.blob();
     const fontUrlObject = URL.createObjectURL(fontData);
 
-    // Create a new style element to hold @font-face rule
+    // Generate a unique font family name
+    const fontName = `customFont_${Math.random().toString(36).substring(7)}`;
+
+    // Create a new style element with @font-face rule using the unique font family name
     const style = document.createElement('style');
     style.appendChild(
       document.createTextNode(`
         @font-face {
-          font-family: 'customFontFamily';
+          font-family: '${fontName}';
           src: url(${fontUrlObject});
         }
       `)
@@ -38,13 +41,14 @@ const fetchFont = async (fontUrl, setFontLoaded) => {
 
     setFontLoaded(true);
 
-    // Return the fontUrlObject
-    return fontUrlObject;
+    // Return the fontUrlObject and the generated font family name
+    return { fontUrlObject, fontName };
   } catch (error) {
     console.error('Error loading font:', error);
     return null;
   }
 };
+
 
 function UpdateForm({ asset, setEditAsset, update }) {
   return (
@@ -160,22 +164,21 @@ function SubtitleColorsListRow({ color, onRemove, onEdit, fontFamily }) {
   )
 }
 
-
 function FontRow({ id, name, font_url, onRemove, fontUrl }) {
   const [fontLoaded, setFontLoaded] = useState(false);
+  const [fontFamily, setFontFamily] = useState('');
 
   useEffect(() => {
-    let fontUrlObject = null; // Initialize fontUrlObject variable
+    let fontUrlObject = null;
 
     fetchFont(fontUrl, setFontLoaded)
-      .then((urlObject) => {
-        fontUrlObject = urlObject; // Store the fontUrlObject
+      .then(({ fontUrlObject, fontName }) => {
+        fontUrlObject = fontUrlObject;
+        setFontFamily(fontName); // Set the generated font family name
       })
       .catch((error) => console.error('Error loading font:', error));
 
-    // Cleanup function
     return () => {
-      // Clean up created URL object
       if (fontUrlObject) {
         URL.revokeObjectURL(fontUrlObject);
       }
@@ -185,7 +188,7 @@ function FontRow({ id, name, font_url, onRemove, fontUrl }) {
   return (
     <div className="hover:bg-gray-100 pt-5 pl-5 flex justify-left">
       {fontLoaded && (
-        <div className="whitespace-nowrap font-normal rounded" style={{ fontFamily: 'customFontFamily' }}>
+        <div className="whitespace-nowrap font-normal rounded" style={{ fontFamily: fontFamily }}>
           {name}
         </div>
       )}
@@ -195,19 +198,19 @@ function FontRow({ id, name, font_url, onRemove, fontUrl }) {
 
 function FontListRow({ id, name, font_url, onRemove, fontUrl }) {
   const [fontLoaded, setFontLoaded] = useState(false);
+  const [fontFamily, setFontFamily] = useState('');
 
   useEffect(() => {
-    let fontUrlObject = null; // Initialize fontUrlObject variable
+    let fontUrlObject = null;
 
     fetchFont(fontUrl, setFontLoaded)
-      .then((urlObject) => {
-        fontUrlObject = urlObject; // Store the fontUrlObject
+      .then(({ fontUrlObject, fontName }) => {
+        fontUrlObject = fontUrlObject;
+        setFontFamily(fontName); // Set the generated font family name
       })
       .catch((error) => console.error('Error loading font:', error));
 
-    // Cleanup function
     return () => {
-      // Clean up created URL object
       if (fontUrlObject) {
         URL.revokeObjectURL(fontUrlObject);
       }
@@ -220,7 +223,7 @@ function FontListRow({ id, name, font_url, onRemove, fontUrl }) {
         {id}
       </div>
       <div className="w-1/3 flex justify-center">
-        <div className="whitespace-nowrap text-xs font-normal text-textGray rounded" style={{ fontFamily: 'customFontFamily' }}>{name}</div>
+        <div className="whitespace-nowrap text-xs font-normal text-textGray rounded" style={{ fontFamily: fontFamily }}>{name}</div>
       </div>
       <div className="w-1/3 text-xs font-normal text-containerGray flex justify-center">
         <button onClick={() => onRemove(id)}>X</button>
@@ -228,6 +231,7 @@ function FontListRow({ id, name, font_url, onRemove, fontUrl }) {
     </div>
   );
 }
+
 
 function ColorRow({ id, name, font_url, onRemove }) {
   const colorStyle = {
