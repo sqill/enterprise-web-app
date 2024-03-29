@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import MdcFormatTitle from '@meronex/icons/mdc/MdcFormatTitle';
 import MdcShapeOutline from '@meronex/icons/mdc/MdcShapeOutline';
 import MdcFolderImage from '@meronex/icons/mdc/MdcFolderImage';
+import LoadingFilesCounter from './LoadingFiles';
 
 import CustomInputComponent from '../../Input'
 import CustomCheckboxComponent from '../../Checkbox'
@@ -43,62 +44,67 @@ const ASSET_TYPES = [
   { label: "Image", value: "image" },
   { label: "Animation", value: "animation" }
 ]
-
-export default function CreateForm({ create, onSuccess, formProps : {type, format}  }) {
-  const { folders } = assetsStore()
-  const foldersDropdown = folders.map(f => ({ label: f.name, value: f.name }));
+export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, create, onSuccess, formProps: { type, format } }) {
+  const { folders } = assetsStore();
+  const foldersDropdown = folders.map((f) => ({ label: f.name, value: f.name }));
   const [previewUrl, setPreviewUrl] = useState('');
-
-
-  function handleOnChange(e) {
-
-  }
+   // State for controlling popup visibility
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
-    console.log(values); // Log the values for debugging
     setSubmitting(true);
-  
+
     try {
       if (values.asset instanceof File) {
         // Single file upload case
         const res = await create({
-          video_asset: { ...values, folder: values.folder === "" ? null : values.folder }
+          video_asset: { ...values, folder: values.folder === '' ? null : values.folder },
         });
         if (res?.success) {
-          
+          setSuccessfulUploads(1);
           onSuccess();
         } else {
-          setStatus(res?.error || "An error occurred");
+          setFailedUploads(1);
+          setStatus(res?.error || 'An error occurred');
+          setLoadedFilesErrors([res?.error || 'An error occurred']);
         }
       } else if (values.asset instanceof FileList) {
+        setShowLoadingPopup(true)
+        setUploads({ ...uploads, totalFiles: values.asset.length })
         // Multiple files upload case
-        
         for (let i = 0; i < values.asset.length; i++) {
           const file = values.asset[i];
           const res = await create({
-            video_asset: { ...values, asset: file, folder: values.folder === "" ? null : values.folder }
+            video_asset: { ...values, asset: file, folder: values.folder === '' ? null : values.folder },
           });
-          if (!res?.success) {
-            setStatus(res?.error || "An error occurred");
-            return; // Exit the loop on error
+          if (res) {
+            if (res?.success) {
+              setUploads({ ...uploads, successfulUploads: uploads.successfulUploads + 1 });
+            } else {
+              setUploads({ ...uploads, failedUploads: uploads.failedUploads + 1 });
+              setUploads({ ...uploads, loadedFilesErrors: [...uploads.loadedFilesErrors, i ]});
+            }
           }
         }
+        
+        setShowLoadingPopup(false);
         onSuccess(); // Call onSuccess after all files are uploaded successfully
       } else {
         // Handle other cases if needed
-        setStatus("Invalid asset type");
+        setStatus('Invalid asset type');
       }
     } catch (error) {
-      console.error("Error occurred:", error);
-      setStatus("An error occurred while processing the form");
+      console.error('Error occurred:', error);
+      setStatus('An error occurred while processing the form');
     }
-  
+
     setSubmitting(false);
+    // Hide loading popup when done
   }
   
 
-
   return (
+    <>
+ 
     <Formik
       initialValues={{
         name: '',
@@ -208,12 +214,14 @@ export default function CreateForm({ create, onSuccess, formProps : {type, forma
           </div>
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
-
+          
           <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center max-w-20" type="submit">
             Create
           </button>
         </Form>
       )}
     </Formik>
+    
+    </>
   )
 }
