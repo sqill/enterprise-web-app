@@ -48,7 +48,6 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
   const { folders } = assetsStore();
   const foldersDropdown = folders.map((f) => ({ label: f.name, value: f.name }));
   const [previewUrl, setPreviewUrl] = useState('');
-   // State for controlling popup visibility
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
     setSubmitting(true);
@@ -60,12 +59,9 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
           video_asset: { ...values, folder: values.folder === '' ? null : values.folder },
         });
         if (res?.success) {
-          setSuccessfulUploads(1);
           onSuccess();
         } else {
-          setFailedUploads(1);
           setStatus(res?.error || 'An error occurred');
-          setLoadedFilesErrors([res?.error || 'An error occurred']);
         }
       } else if (values.asset instanceof FileList) {
         setShowLoadingPopup(true)
@@ -76,20 +72,26 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
           const res = await create({
             video_asset: { ...values, asset: file, folder: values.folder === '' ? null : values.folder },
           });
+          
           if (res) {
             if (res?.success) {
-              setUploads({ ...uploads, successfulUploads: uploads.successfulUploads + 1 });
+              setUploads((prevUploads) => ({
+                ...prevUploads,
+                filesUploaded: [...prevUploads.filesUploaded, res?.data],
+              }));
             } else {
-              setUploads({ ...uploads, failedUploads: uploads.failedUploads + 1 });
-              setUploads({ ...uploads, loadedFilesErrors: [...uploads.loadedFilesErrors, i ]});
-            }
+                setUploads({ ...uploads, uploadErrorIndex: [...uploads.uploadsErrorIndex, i]});
+                setUploads((prevUploads) => ({
+                  ...prevUploads,
+                  filesUploaded: [...prevUploads.filesUploaded, file],
+                }));
+                setUploads({ ...uploads, uploadErrorType: [...uploads.upload.errorType, res?.error]});
+              }
           }
         }
-        
-        setShowLoadingPopup(false);
-        onSuccess(); // Call onSuccess after all files are uploaded successfully
+        onSuccess(); 
       } else {
-        // Handle other cases if needed
+       
         setStatus('Invalid asset type');
       }
     } catch (error) {
@@ -98,7 +100,7 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
     }
 
     setSubmitting(false);
-    // Hide loading popup when done
+   
   }
   
 

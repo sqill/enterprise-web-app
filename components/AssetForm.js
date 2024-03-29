@@ -13,11 +13,12 @@ function AssetForm({ isOpen, setIsOpen, create, formProps : {type, format} }) {
     effects: 'Effect'
   };
 
-  const [uploads, setUpload] = useState({
-    totalFiles: 10,
-    successfulUploads: 5,
-    failedUploads: 0,
-    loadedFilesErrors: []
+  const [uploads, setUploads] = useState({
+    totalFiles: 0,
+    filesUploaded: [],  // all the files that are being uploaded
+    uploadErrorIndex: [], // index of the files that failed to upload
+    uploadErrorType: [], // type of error that occurred during upload
+    
   });
   
   const [showLoadingPopup, setShowLoadingPopup] = useState(false);
@@ -33,7 +34,7 @@ function AssetForm({ isOpen, setIsOpen, create, formProps : {type, format} }) {
             Add a new {labels[type]}
           </h3>
 
-          <Form uploads={uploads} setShowLoadingPopup={setShowLoadingPopup} setUpload={setUpload} create={create} onSuccess={() => setIsOpen(false)} formProps={{type, format}} />
+          <Form uploads={uploads} setShowLoadingPopup={setShowLoadingPopup} setUploads={setUploads} create={create} onSuccess={() => setIsOpen(false)} formProps={{type, format}} />
         </div>
       
       </Modal>
