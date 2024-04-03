@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from './Modal'
 import Form from './Dashboard/Assets/CreateForm'
 import LoadingFilesCounter from './Dashboard/Assets/LoadingFiles';
@@ -20,10 +20,20 @@ function AssetForm({ isOpen, setIsOpen, create, formProps : {type, format} }) {
     uploadErrorType: [], // type of error that occurred during upload
     
   });
-  
   const [showLoadingPopup, setShowLoadingPopup] = useState(false);
 
   
+  useEffect(() => {
+    if (!showLoadingPopup) {
+      setUploads({
+        totalFiles: 0,
+        filesUploaded: [],
+        uploadErrorIndex: [],
+        uploadErrorType: []
+      })
+    }
+  }, [showLoadingPopup])
+
   return (
     <>
     {!showLoadingPopup ? (

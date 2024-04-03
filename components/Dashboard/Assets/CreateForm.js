@@ -14,8 +14,12 @@ import assetsStore from '../../../stores/video_assets'
 function validateForm({ name, bundle_type, asset, asset_type, assets, fps, uploadTilesheet, rows, columns, count }) {
   
 
+  console.log(asset.length)
   const errors = {};
-  if (!name) errors.name = 'Required'
+  if (!asset.length > 1) {
+    if (!name) errors.name = 'Required'
+  }
+  
   if (!bundle_type) errors.bundle_type = 'Required'
   if (!asset && asset_type === "image") errors.asset = 'Required'
   if (!assets && asset_type === "animation") errors.assets = 'Required'
@@ -48,9 +52,11 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
   const { folders } = assetsStore();
   const foldersDropdown = folders.map((f) => ({ label: f.name, value: f.name }));
   const [previewUrl, setPreviewUrl] = useState('');
+  const [loadingMultipleFiles, setLoadingMultipleFiles] = useState(false);
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
     setSubmitting(true);
+    
 
     try {
       if (values.asset instanceof File) {
@@ -69,8 +75,10 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
         // Multiple files upload case
         for (let i = 0; i < values.asset.length; i++) {
           const file = values.asset[i];
+      
+          
           const res = await create({
-            video_asset: { ...values, asset: file, folder: values.folder === '' ? null : values.folder },
+            video_asset: { ...values, name: file.name, asset: file, folder: values.folder === '' ? null : values.folder },
           });
           
           if (res) {
@@ -80,6 +88,7 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
                 filesUploaded: [...prevUploads.filesUploaded, res?.data],
               }));
             } else {
+                console.log(res?.error)
                 setUploads({ ...uploads, uploadErrorIndex: [...uploads.uploadsErrorIndex, i]});
                 setUploads((prevUploads) => ({
                   ...prevUploads,
@@ -91,7 +100,6 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
         }
         onSuccess(); 
       } else {
-       
         setStatus('Invalid asset type');
       }
     } catch (error) {
@@ -100,7 +108,6 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
     }
 
     setSubmitting(false);
-   
   }
   
 
@@ -120,14 +127,16 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
         rows: null,
         loop: false,
         uploadTilesheet: false,
-        folder: ""
+        folder: "",
       }}
       validate={validateForm}
       onSubmit={handleFormSubmit}
     >
       {({ status, isValid, isSubmitting, setFieldValue, values }) => (
         <Form>
+          {!loadingMultipleFiles && (
           <div className="mb-6 mx-10">
+          
             <Field
               name="name"
               component={CustomInputComponent}
@@ -136,6 +145,7 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
               IconClass={MdcFormatTitle}
             />
           </div>
+          )}
           {values.asset_type === "animation" && (
             <>
               <div className="mb-6">
@@ -205,6 +215,8 @@ export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, c
                   <input name="asset" accept="image/*" type="file" multiple={true} onChange={e => {
                     if (e.target.files.length > 1) {
                       setFieldValue("asset", e.target.files);
+                      setLoadingMultipleFiles(true);
+
                     } else {
                       setFieldValue("asset", e.target.files[0]);
                     }

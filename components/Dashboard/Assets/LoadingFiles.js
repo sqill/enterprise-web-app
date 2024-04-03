@@ -9,7 +9,7 @@ const LoadingFilesCounter = ({ uploads, setShowLoadingPopup }) => {
     const percentage = (uploads.filesUploaded.length / uploads.totalFiles) * 100;
 
 
-    console.log(uploads)
+    
 
     return (
     <div className="fixed w-screen bg-gray-500 bg-opacity-10 z-50 inset-x-0 top-0 bottom-0 transition-opacity flex items-center justify-center ">
@@ -18,14 +18,14 @@ const LoadingFilesCounter = ({ uploads, setShowLoadingPopup }) => {
             <div className="relative inline-flex ">
                 <CircularProgress variant="determinate" value={percentage} style={{color: "#9BDFC1"}} size={160} />
                 <div className="absolute flex flex-col items-center justify-center w-full h-full top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4">
-                    <p className="font-semibold text-lg">{uploads.filesUploaded.length} / {uploads.totalFiles}</p>
-                    <p className="font-semibold text-sm">Files Uploaded</p>
+                    <p className="font-semibold text-lg font-poppins">{uploads.filesUploaded.length} / {uploads.totalFiles}</p>
+                    <p className="font-semibold text-sm text-black font-poppins">Files Uploaded</p>
                 </div>
             </div>
             <div className="flex justify-center">
-                <h3 className="font-bold text-lg">Loading Logos</h3>
+                <h3 className="font-bold text-lg text-black font-poppins">Loading Logos</h3>
                 {errorCount > 0 && (
-                <p className="text-sm text-textGray font-bold mb-6">{errorCount} files failed to upload</p>
+                <p className="text-base text-textGray font-bold mb-6 font-poppins">{errorCount} files failed to upload</p>
                 )}
             </div>
         </div>
@@ -41,8 +41,9 @@ const LoadingFilesCounter = ({ uploads, setShowLoadingPopup }) => {
 
 const LoadingFilesList = ({ loadedFiles, setShowLoadingPopup }) => {
 
+    
     const filesWithStatus = loadedFiles.filesUploaded.map((file, index) => {
-        console.log(file)
+     
         if (loadedFiles.uploadErrorIndex.includes(index)) {
             let indexOfError = loadedFiles.uploadErrorIndex.indexOf(index)
             let error = loadedFiles.uploadErrorType[indexOfError]
@@ -54,7 +55,6 @@ const LoadingFilesList = ({ loadedFiles, setShowLoadingPopup }) => {
                 
             }
         } else {
-            console.log(file.data.asset_thumb_url)
             return {
                 id: index,
                 status: "active",
@@ -84,13 +84,11 @@ const LoadingFilesList = ({ loadedFiles, setShowLoadingPopup }) => {
                                     <span className={`  h-8 w-8 rounded-full  ${item.status ==="active" ? 'gradient ' : 'red-gradient'}`}></span>
                                 </div>
                                 <div className="w-5/6 flex items-center ">
-                                    <span className="w-1/3 flex items-center justify-center text-gray-400 text-center font-poppins text-sm ont-bold">{item.error || "uploaded"}</span>
-                                    <span className="w-1/3 flex items-center justify-center text-gray-400 text-center font-poppins text-sm font-base">{item.name}</span>
-                                    <span className="w-1/3 flex items-center justify-center">
-                                        <img src={item.image} alt="uploaded-logo" style={{width:"inherit"}} />
+                                    <span className="w-1/4 flex items-center justify-center text-gray-400 text-center font-poppins text-sm font-bold">{item.error || "uploaded"}</span>
+                                    <span className="w-1/2 flex items-center justify-center text-gray-400 text-center font-poppins text-sm font-base">{item.name}</span>
+                                    <span className="w-1/4 flex items-center justify-center">
+                                        <img src={item.image} alt="uploaded-logo" className="h-10" style={{maxWidth: "4rem"}} />
                                     </span>
-
-
                                 </div>
                             </div>
                         </div>
