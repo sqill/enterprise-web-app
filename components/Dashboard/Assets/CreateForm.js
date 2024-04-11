@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import MdcFormatTitle from '@meronex/icons/mdc/MdcFormatTitle';
 import MdcShapeOutline from '@meronex/icons/mdc/MdcShapeOutline';
 import MdcFolderImage from '@meronex/icons/mdc/MdcFolderImage';
+import LoadingFilesCounter from './LoadingFiles';
 
 import CustomInputComponent from '../../Input'
 import CustomCheckboxComponent from '../../Checkbox'
@@ -11,8 +12,14 @@ import CustomSelectComponent from '../../Select'
 import assetsStore from '../../../stores/video_assets'
 
 function validateForm({ name, bundle_type, asset, asset_type, assets, fps, uploadTilesheet, rows, columns, count }) {
+  
+
+  console.log(asset.length)
   const errors = {};
-  if (!name) errors.name = 'Required'
+  if (!asset.length > 1) {
+    if (!name) errors.name = 'Required'
+  }
+  
   if (!bundle_type) errors.bundle_type = 'Required'
   if (!asset && asset_type === "image") errors.asset = 'Required'
   if (!assets && asset_type === "animation") errors.assets = 'Required'
@@ -24,6 +31,8 @@ function validateForm({ name, bundle_type, asset, asset_type, assets, fps, uploa
     if (!asset) errors.asset = 'Required'
     if (!count) errors.count = 'Required'
   }
+
+
 
   return errors;
 }
@@ -39,28 +48,72 @@ const ASSET_TYPES = [
   { label: "Image", value: "image" },
   { label: "Animation", value: "animation" }
 ]
-
-export default function CreateForm({ create, onSuccess, formProps : {type, format}  }) {
-  const { folders } = assetsStore()
-  const foldersDropdown = folders.map(f => ({ label: f.name, value: f.name }));
+export default function CreateForm({ uploads, setShowLoadingPopup, setUploads, create, onSuccess, formProps: { type, format } }) {
+  const { folders } = assetsStore();
+  const foldersDropdown = folders.map((f) => ({ label: f.name, value: f.name }));
   const [previewUrl, setPreviewUrl] = useState('');
-
-
-  function handleOnChange(e) {
-
-  }
+  const [loadingMultipleFiles, setLoadingMultipleFiles] = useState(false);
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
-    setSubmitting(true)
-    const res = await create({ video_asset: { ...values, folder: values.folder == "" ? null : values.folder } })
-    setSubmitting(false)
-    if (res?.success) {
-      onSuccess()
+    setSubmitting(true);
+    
+
+    try {
+      if (values.asset instanceof File) {
+        // Single file upload case
+        const res = await create({
+          video_asset: { ...values, folder: values.folder === '' ? null : values.folder },
+        });
+        if (res?.success) {
+          onSuccess();
+        } else {
+          setStatus(res?.error || 'An error occurred');
+        }
+      } else if (values.asset instanceof FileList) {
+        setShowLoadingPopup(true)
+        setUploads({ ...uploads, totalFiles: values.asset.length })
+        // Multiple files upload case
+        for (let i = 0; i < values.asset.length; i++) {
+          const file = values.asset[i];
+      
+          
+          const res = await create({
+            video_asset: { ...values, name: file.name, asset: file, folder: values.folder === '' ? null : values.folder },
+          });
+          
+          if (res) {
+            if (res?.success) {
+              setUploads((prevUploads) => ({
+                ...prevUploads,
+                filesUploaded: [...prevUploads.filesUploaded, res?.data],
+              }));
+            } else {
+                console.log(res?.error)
+                setUploads({ ...uploads, uploadErrorIndex: [...uploads.uploadsErrorIndex, i]});
+                setUploads((prevUploads) => ({
+                  ...prevUploads,
+                  filesUploaded: [...prevUploads.filesUploaded, file],
+                }));
+                setUploads({ ...uploads, uploadErrorType: [...uploads.upload.errorType, res?.error]});
+              }
+          }
+        }
+        onSuccess(); 
+      } else {
+        setStatus('Invalid asset type');
+      }
+    } catch (error) {
+      console.error('Error occurred:', error);
+      setStatus('An error occurred while processing the form');
     }
-    else setStatus(res?.error || "An error occurred")
+
+    setSubmitting(false);
   }
+  
 
   return (
+    <>
+ 
     <Formik
       initialValues={{
         name: '',
@@ -74,14 +127,16 @@ export default function CreateForm({ create, onSuccess, formProps : {type, forma
         rows: null,
         loop: false,
         uploadTilesheet: false,
-        folder: ""
+        folder: "",
       }}
       validate={validateForm}
       onSubmit={handleFormSubmit}
     >
       {({ status, isValid, isSubmitting, setFieldValue, values }) => (
         <Form>
+          {!loadingMultipleFiles && (
           <div className="mb-6 mx-10">
+          
             <Field
               name="name"
               component={CustomInputComponent}
@@ -90,6 +145,7 @@ export default function CreateForm({ create, onSuccess, formProps : {type, forma
               IconClass={MdcFormatTitle}
             />
           </div>
+          )}
           {values.asset_type === "animation" && (
             <>
               <div className="mb-6">
@@ -154,22 +210,32 @@ export default function CreateForm({ create, onSuccess, formProps : {type, forma
             </>
           )}
           <div className="mb-6">
-            <Field name="image">
+          <Field name="image">
               {() => values.asset_type === "image" || values["uploadTilesheet"] ? (
-                <input name="asset" accept="image/*" type="file" onChange={e => setFieldValue("asset", e.target.files[0])} />
-              ) : (
-                <input name="asset" accept="image/*" type="file" multiple onChange={e => setFieldValue("assets", e.target.files)} />
+                  <input name="asset" accept="image/*" type="file" multiple={true} onChange={e => {
+                    if (e.target.files.length > 1) {
+                      setFieldValue("asset", e.target.files);
+                      setLoadingMultipleFiles(true);
+
+                    } else {
+                      setFieldValue("asset", e.target.files[0]);
+                    }
+                  }} />
+                ) : (
+                  null
               )}
             </Field>
           </div>
 
           {status && <p className="text-center mb-2 text-sm text-red-600">{status}</p>}
-
+          
           <button disabled={!isValid || isSubmitting} className="gradient text-white hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center max-w-20" type="submit">
             Create
           </button>
         </Form>
       )}
     </Formik>
+    
+    </>
   )
 }
