@@ -81,7 +81,7 @@ function UpdateSubtitleForm({ subtitle, setEditAsset, update }) {
 
 function AssetRow({ asset, onRemove, onEdit }) {
   const { id, name, bundle_type, asset_type, asset_url, asset_thumb_url, company_id, is_default, folder } = asset;
-
+  
   return (
 
     <div className="hover:bg-gray-100  min-w-max p-5 flex-row flex items-center justify-center">
