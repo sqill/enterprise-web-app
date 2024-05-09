@@ -124,11 +124,6 @@ export const removeSubtitleColor = (id) => request('DELETE', `enterprise/subtitl
 export const getCuratedCategories = () => request('GET', 'enterprise/curated_categories')
 
 
-export const getPlayer = id => request('GET', `v0/players/${id}`)
-
-export const searchPlayers = (filters) => request('POST', 'v0/players/search', filters)
-export const autocompletePlayers = (q) => request('GET', 'search-players', { q })
-
 
 // ##################################
 // ##
@@ -155,13 +150,6 @@ export const generateDraftS3Upload = (id, filename) =>
 
 export const getCountryByIP = () => request('GET', 'v0/ip2country')
 
-export const getDistricts = countryId => request('GET', `v0/districts?country=${countryId}`)
-
-// FIXME: hardcoded sportId to 1 which is Football
-export const getClubs = (sportId = 1, name) => request('GET', `v0/sports/${sportId}/clubs`, { name })
-
-// FIXME: hardcoded sportId to 1 which is Football
-export const getSportDetails = (sportId = 1) => request('GET', `v0/sports/${sportId}`)
 
 // ##################################
 // ##

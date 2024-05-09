@@ -20,7 +20,7 @@ import { userAgent } from 'next/server';
 
 const fetchFont = async (fontUrl, setFontLoaded) => {
   try {
-    const response = await fetch(fontUrl);
+    const response = await fetch(fontUrl, { mode: "cors", credentials: "include" });
     const fontData = await response.blob();
     const fontUrlObject = URL.createObjectURL(fontData);
 
@@ -81,7 +81,7 @@ function UpdateSubtitleForm({ subtitle, setEditAsset, update }) {
 
 function AssetRow({ asset, onRemove, onEdit }) {
   const { id, name, bundle_type, asset_type, asset_url, asset_thumb_url, company_id, is_default, folder } = asset;
-  
+
   return (
 
     <div className="hover:bg-gray-100  min-w-max p-5 flex-row items-center justify-center">
@@ -467,7 +467,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             ))}
             columns={["Element ID", "Name", "Thumbnail", "Delete"]}
             FormComponent={AssetForm}
-            formProps={{ type: 'overlay', format: 'image' }} 
+            formProps={{ type: 'overlay', format: 'image' }}
             containerClass={"py-5 overflow-x-auto h-80 grid grid grid-rows-2 grid-flow-col gap-4 content-start"}
             parentClass={''}
           />
@@ -512,7 +512,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
           ))}
           columns={["Element ID", "Name", "Thumbnail", "Delete"]}
           FormComponent={AssetForm}
-          formProps={{ type: 'effects', format: 'animation' }} 
+          formProps={{ type: 'effects', format: 'animation' }}
           containerClass={"overflow-x-auto h-80 grid grid-rows-1 grid-flow-col gap-4 content-start"}
           parentClass={''}
         />
