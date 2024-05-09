@@ -84,7 +84,7 @@ function AssetRow({ asset, onRemove, onEdit }) {
 
   return (
 
-    <div className="hover:bg-gray-100  min-w-max p-5 flex-row items-center justify-center">
+    <div className="hover:bg-gray-100  min-w-max p-5 flex-row flex items-center justify-center">
       <div className="flex justify-center items-center">
         {asset_thumb_url &&
           <img onClick={() => onEdit(asset)} className="max-h-20" src={asset_thumb_url} alt="thumbnail" />

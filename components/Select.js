@@ -13,7 +13,7 @@ export default function SelectComponent({ field, form: { touched, errors }, opti
       <div className="mt-1 relative">
         <select className={inputClassName} {...field} {...props}>
           <option value="" disabled default>Choose {props.placeholder}</option>
-          {options.map(({ label, value }) => (
+          {options?.map(({ label, value }) => (
             <option key={value} value={value}>{label}</option>
           ))}
         </select>
