@@ -60,9 +60,10 @@ export const updateCompany = params => request('PATCH', 'enterprise/company', pa
 
 // ##################################
 // ##
-// ##     Finders
+// ##     Users
 // ##
-export const getFinders = id => request('GET', 'enterprise/finders')
+// returns users for the current company
+export const getUsers = id => request('GET', 'enterprise/company/users')
 
 
 // ##################################

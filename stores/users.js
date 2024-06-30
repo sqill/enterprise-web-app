@@ -1,11 +1,11 @@
 import create from 'zustand'
 
-import { getFinders } from '../api'
+import { getUsers } from '../api'
 
 async function fetchUsers(set) {
   set({ loading: true })
 
-  const { success, data } = await getFinders()
+  const { success, data } = await getUsers()
 
   const state = { loading: false }
 
