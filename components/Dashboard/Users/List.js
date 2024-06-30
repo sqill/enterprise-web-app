@@ -2,7 +2,7 @@ import MdcTrashCanOutline from '@meronex/icons/mdc/MdcTrashCanOutline';
 import CountryFlag from '../../CountryFlag';
 import React from 'react';
 
-function UserRow({ avatar, user, full_name, finder_type, country_code, company_role }) {
+function UserRow({ avatar, user, full_name, country_code, current_company_company_role }) {
   return (
     <div className="p-2 ml-5 bg-white rounded-xl w-52 h-52 flex flex-col justify-center text-center items-center content-center">
       {avatar && <img className="h-20 w-20 my-3 rounded-full" src={avatar.thumb} alt="Name avatar" />}
@@ -10,7 +10,7 @@ function UserRow({ avatar, user, full_name, finder_type, country_code, company_r
         <div className="font-bold text-containerGray">{full_name}</div>
         <div className="text-sm font-ligth text-containerGray">{user?.email}</div>
       </div>
-      <div className="p-2 mt-1 whitespace-nowrap text-base font-bold text-containerGray">{company_role}</div>
+      <div className="p-2 mt-1 whitespace-nowrap text-base font-bold text-containerGray">{current_company_company_role}</div>
     </div>
   )
 }
@@ -62,7 +62,7 @@ export default function UsersList({ list, avatar, company }) {
                 <h2 className="text-sm pl-5 flex items-center font-medium text-containerGray">Users</h2>
               </div>
               <div className={"py-5 overflow-x-auto h-full grid grid grid-rows-2 grid-flow-col gap-4 gap-x-1 text-center items-center content-start"}>
-                {list?.map(finder => <UserRow key={finder.id} {...finder} />)}
+                {list?.map(user => <UserRow key={user.id} {...user} />)}
               </div>
             </div>
           </div>

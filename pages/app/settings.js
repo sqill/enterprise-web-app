@@ -20,7 +20,7 @@ export default function Settings() {
   return (
     <DashboardLayout hideFooter>
       {/* <UsersHeader /> */}
-      <UsersList list={list} avatar={user.entity.avatar?.thumb} company={user.entity.company} />
+      <UsersList list={list} avatar={user.entity.avatar?.thumb} company={user.current_company} />
       <UsersFooter list={list} />
     </DashboardLayout>
   )
