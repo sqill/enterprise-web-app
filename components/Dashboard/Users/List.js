@@ -2,7 +2,7 @@ import MdcTrashCanOutline from '@meronex/icons/mdc/MdcTrashCanOutline';
 import CountryFlag from '../../CountryFlag';
 import React from 'react';
 
-function UserRow({ avatar, user, full_name, country_code, current_company_company_role }) {
+function UserRow({ avatar, user, full_name, country_code, current_company_role }) {
   return (
     <div className="p-2 ml-5 bg-white rounded-xl w-52 h-52 flex flex-col justify-center text-center items-center content-center">
       {avatar && <img className="h-20 w-20 my-3 rounded-full" src={avatar.thumb} alt="Name avatar" />}
@@ -10,7 +10,7 @@ function UserRow({ avatar, user, full_name, country_code, current_company_compan
         <div className="font-bold text-containerGray">{full_name}</div>
         <div className="text-sm font-ligth text-containerGray">{user?.email}</div>
       </div>
-      <div className="p-2 mt-1 whitespace-nowrap text-base font-bold text-containerGray">{current_company_company_role}</div>
+      <div className="p-2 mt-1 whitespace-nowrap text-base font-bold text-containerGray">{current_company_role}</div>
     </div>
   )
 }
