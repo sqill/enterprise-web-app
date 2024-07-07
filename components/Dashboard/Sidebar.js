@@ -58,6 +58,14 @@ export default function Sidebar({ opened = false }) {
 
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/app/creators_sync"
+                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
+                  
+                  <span className="ml-3 flex-1 whitespace-nowrap">Creators Sync</span>
+                </Link>
+              </li>
 
               <li>
                 <Link

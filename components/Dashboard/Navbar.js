@@ -13,7 +13,7 @@ function Drop({ user, onLogout }) {
     <div className="block bg-white text-base list-none divide-y divide-gray-100 rounded shadow">
       <div className="px-4 py-3">
         <span className="block text-sm font-medium text-gray-900 font-bold">Company</span>
-        <span className="block text-sm">{user.entity.company.name}</span>
+        <span className="block text-sm">{user.entity.company?.name}</span>
       </div>
       <div className="px-4 py-3">
         <span className="block text-sm">{user.entity.full_name}</span>

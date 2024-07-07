@@ -302,7 +302,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
   const [editSubtitle, setEditSubtitle] = React.useState(null)
   const [loadedFonts, setLoadedFonts] = React.useState([]);
   const [fontFamilies, setFontFamilies] = React.useState([]);
-  const [colors, setColors] = React.useState(company.colors);
+  const [colors, setColors] = React.useState(company?.colors);
 
   const getFontFamily = (fontURL) => {
     const fontInfo = fontFamilies.find((item) => item.fontURL === fontURL);
