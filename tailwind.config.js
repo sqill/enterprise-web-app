@@ -38,6 +38,18 @@ module.exports = {
       Height: {
         '200': '700px'
       },
+      width: {
+        '1/10': '10%',
+        '2/10': '20%',
+        '3/10': '30%',
+        '4/10': '40%',
+        '5/10': '50%',
+        '6/10': '60%',
+        '7/10': '70%',
+        '8/10': '80%',
+        '9/10': '90%',
+      },
+      
       colors:
       {
         'accent-1': '#333',
@@ -72,8 +84,8 @@ module.exports = {
         containerGray: '#8a8a8e',
         secondWhite: '#E3E3E3',
         background: '#121212',
-        backgroundLight: '#F9F9F9'
-
+        backgroundLight: '#F9F9F9',
+        placeholder:"#7E7E7E"
       },
     },
     // container: {
