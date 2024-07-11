@@ -85,8 +85,15 @@ module.exports = {
         secondWhite: '#E3E3E3',
         background: '#121212',
         backgroundLight: '#F9F9F9',
-        placeholder:"#7E7E7E"
+        placeholder:"#7E7E7E",
       },
+      backgroundImage: {
+        'yellow-gradient': 'linear-gradient(180deg, #FFD00D, #FFF6D0)',
+        'green-gradient': 'linear-gradient(180deg, #25B086, #A4F4D7)',
+        'blue-gradient': 'linear-gradient(180deg, #281AC8, #A7D1E9)',
+        'black-gradient': 'linear-gradient(180deg, #98989F, #2C2C2E)',
+      }
+
     },
     // container: {
     //   screens: {
