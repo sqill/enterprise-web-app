@@ -300,7 +300,7 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
   const [loadedFonts, setLoadedFonts] = React.useState([]);
   const [fontFamilies, setFontFamilies] = React.useState([]);
   
-  const [colors, setColors] = React.useState(company.colors);
+  const [colors, setColors] = React.useState(company?.colors);
 
   
 
@@ -397,11 +397,11 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             handleRemove={handleAssetRemove}
             handleEdit={handleEdit}
             handleCreate={updateCompany}
-            renderRows={colors !== null ? colors => colors.map((color, index) => (
+            renderRows={colors !== null ? colors => colors?.map((color, index) => (
               <ColorRow key={index} name={color} onRemove={handleColorRemove} onEdit={handleEdit} />
             )) : null }
             renderList={
-              colors !== null ? colors => colors.map((color, index) => (
+              colors !== null ? colors => colors?.map((color, index) => (
                 <ColorListRow key={index} id={index} name={color} onRemove={handleColorRemove} onEdit={handleEdit} />
               )) : null}
             columns={["Element ID", "Hex", "Preview", "Delete"]}
@@ -479,10 +479,10 @@ export default function OverviewList({ company, updateCompany, assetlist, assetC
             handleRemove={handleSubtitleRemove}
             handleEdit={handleSubtitleEdit}
             handleCreate={subtitleCreate}
-            renderRows={colors => colors.map(sub => (
+            renderRows={colors => colors?.map(sub => (
               <SubtitleColorsRow key={sub.id} color={sub} onRemove={handleSubtitleRemove} onEdit={handleSubtitleEdit} fontFamily={getFontFamily(sub.company_font.font_url)} />
             ))}
-            renderList={colors => colors.map(sub => (
+            renderList={colors => colors?.map(sub => (
               <SubtitleColorsListRow key={sub.id} color={sub} onRemove={handleSubtitleRemove} onEdit={handleSubtitleEdit} fontFamily={getFontFamily(sub.company_font.font_url)} />
             ))}
             columns={["Element ID", "Caption Preview", "Delete"]}

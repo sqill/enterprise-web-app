@@ -32,7 +32,7 @@ export default function UsersList({ list, avatar, company }) {
               <div className='flex flex-col items-center p-5'>
                 <img className='w-40 border-4 border-greenSqill-500  rounded-full' src={avatar}></img>
                 <div className='pt-4 font-bold text-containerGray'>
-                  {company.name}
+                  {company?.name}
                 </div>
                 <div className='text-sm font-ligth text-containerGray'>
                   {company.email}

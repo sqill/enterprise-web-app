@@ -56,7 +56,7 @@ export default function UpdateForm({ company }) {
             render={arrayHelpers => (
               <div>
                 {values.colors && values.colors.length > 0 &&
-                  values.colors.map((color, index) => (
+                  values.colors?.map((color, index) => (
                     <div key={index}>
                       <div className="flex flex-row">
                         <Field placeholder="#123456" component={CustomInputComponent} name={`colors.${index}`} />

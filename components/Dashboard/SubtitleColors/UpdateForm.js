@@ -27,7 +27,7 @@ export default function UpdateForm({ color, update, onSuccess }) {
 
   const fontsDropdown = list.map(f => ({ label: f.name, value: f.id }));
 
-  const colorsDropdown = user.entity.company.colors.map(color => (({ label: color, value: color })));
+  const colorsDropdown = user.entity.company.colors?.map(color => (({ label: color, value: color })));
 
 
   async function handleFormSubmit(values, { setSubmitting, setStatus }) {
