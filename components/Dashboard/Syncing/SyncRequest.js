@@ -136,7 +136,6 @@ const Calendar = () => {
 };
 
 const TextInput = ({background, inputBackground,width, current, change, placeholder, title ,inputWidth}) => {
-
     return (
         <div className={`w-${width} flex flex-col justify-center items-start rounded-2xl gap-4`} >
             <h5 className="font-normal text-xl text-gray-400">{title}</h5>
@@ -169,9 +168,6 @@ const TextArea = ({background, inputBackground,width, current, change, placehold
 
 const BoxSelector = ({width, title, boxWidth, boxes }) => {
     
-    console.log(boxes)
-
-
     return (
         <div className={`w-${width} flex flex-col justify-center items-start rounded-2xl gap-4`} >
             <h5 className="font-normal text-xl text-gray-400">{title}</h5>
