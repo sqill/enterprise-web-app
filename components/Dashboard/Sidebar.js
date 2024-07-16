@@ -23,8 +23,7 @@ export default function Sidebar({ opened = false }) {
   const router = useRouter();
   const currentPath = router.pathname;
 
-
-
+  console.log(currentPath);
 
   return (
     <aside id="sidebar" className={className} >
@@ -35,7 +34,7 @@ export default function Sidebar({ opened = false }) {
               <li>
                 <Link
                   href="/app/users"
-                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
+                  className={`text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10 ${currentPath==="/app/users" ? 'bg-greenSqill-500 gradient' : ''} `}>
 
                   <BsHouseDoor className="text-gray-900" />
                   <span className="ml-3 flex-1 whitespace-nowrap"> Cockpit </span>
@@ -45,7 +44,7 @@ export default function Sidebar({ opened = false }) {
               <li>
                 <Link
                   href="/app/send2sqill"
-                  className="text-xs font-light text-gray-900  hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
+                  className={`text-xs font-light text-gray-900  hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10 ${currentPath==="/app/send2sqill" ? 'bg-greenSqill-500 gradient' : ''} `}>
 
                   <BsUpload className="text-gray-900" />
                   <span className="ml-3 flex-1 whitespace-nowrap">Video & Image</span>
@@ -56,7 +55,7 @@ export default function Sidebar({ opened = false }) {
               <li>
                 <Link
                   href="/app/curated_database"
-                  className="text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10">
+                  className={`text-xs text-gray-900 font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10 ${currentPath==="/app/curated_database" ? 'bg-greenSqill-500 gradient' : ''} `}>
 
                   <BsHeart className="text-gray-900" />
                   <span className="ml-3 flex-1 whitespace-nowrap">Inspiration</span>
@@ -67,7 +66,7 @@ export default function Sidebar({ opened = false }) {
               <li>
                 <Link
                   href="/app/settings"
-                  className="text-xs text-gray-900  font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10"
+                  className={`text-xs text-gray-900  font-light hover:bg-greenSqill-200 flex items-center group px-5 py-3 pl-10 ${currentPath==="/app/settings" ? 'bg-greenSqill-500 gradient' : ''} `}
                 >
 
                   <AiOutlineSetting className="text-gray-900" />
