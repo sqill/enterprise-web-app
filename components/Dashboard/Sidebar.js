@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import cx from "classnames";
 
 import GoFileMedia from '@meronex/icons/go/GoFileMedia';
@@ -18,6 +19,10 @@ export default function Sidebar({ opened = false }) {
     "fixed z-10 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75",
     { "hidden": !opened }
   );
+
+  const router = useRouter();
+  const currentPath = router.pathname;
+
 
 
 
