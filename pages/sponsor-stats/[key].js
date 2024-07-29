@@ -75,3 +75,5 @@ export async function getServerSideProps(context) {
 
   return { props: { adPosts: postsData.data, company: dataCompany.data, sponsor: sponsorData.data } }
 }
+
+export const runtime = 'experimental-edge';
