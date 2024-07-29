@@ -42,7 +42,7 @@ function PopupList({ isOpen, setIsOpen, list, renderRows, columns, title, create
                     </div>
 
                     <div className={`flex max-w-5xl py-2 justify-center`}>
-                        {columns.map((column) => (
+                        {columns?.map((column) => (
                             <h3 className={`w-1/${columns.length} text-xs font-medium text-textGray`} key={column}>{column}</h3>
                         ))}
                     </div>
